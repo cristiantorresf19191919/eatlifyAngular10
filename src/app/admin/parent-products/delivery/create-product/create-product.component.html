@@ -1,0 +1,87 @@
+<app-loading-global [loadingState]="loading"></app-loading-global>
+<div class="tp-container">
+  <mat-card class="card-title">Add Products</mat-card>
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input
+      matInput
+      [(ngModel)]="name_CreateProduct"
+      placeholder="Product Name"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Price</mat-label>
+    <span matPrefix>$&nbsp;</span>
+    <input
+      matInput
+      [(ngModel)]="price_CreateProduct"
+      placeholder="Product Price"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <input
+      matInput
+      [(ngModel)]="description_CreateProduct"
+      placeholder="Product Description"
+    />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Category" [(ngModel)]="category_CreateProduct">
+      <mat-option *ngFor="let cat of categories" [value]="cat.name">{{
+        cat.name
+      }}</mat-option>
+      <mat-option (click)="addNewCategory()">Add new Category </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div>
+    <mat-slide-toggle [(ngModel)]="topProduct"
+      >Producto Destacado?</mat-slide-toggle
+    >
+  </div>
+
+  <div class="column">
+    <input
+      #imageInput
+      id="imageInput"
+      type="file"
+      style="visibility: hidden; opacity: 0;"
+      class="formulario__input-product"
+      placeholder="Upload Image"
+      (change)="onFileSelected(imageInput)"
+    />
+  </div>
+</div>
+<label *ngIf="imgUrl" for="imageInput" class="d-flex-main-column"
+><i class="fas fa-camera" style="font-size: 2rem;"></i> 
+Cambiar Imagen</label
+>
+<div class="parent-flex">
+  <div class="no-picture" *ngIf="!imgUrl">   
+    <h1 >
+      <label for="imageInput" class="d-flex-main-column"
+        ><i class="fas fa-camera" style="font-size: 2rem;"></i> Subir
+        Imagen</label
+      >
+    </h1>
+  </div>
+   <!-- si esta dentro de un if no se accede al elementRef -->
+   <!-- aca con javascript elementRef nativeElement style.backgorundImage -->
+   <!-- y classList.add("") -->
+   <!-- agrego clase y estilos -->
+    <div id="yesPicture" #pictureContainer >
+    </div>
+
+      
+ 
+    
+</div>
+<div style="display: flex; justify-content: center;">
+  <button mat-raised-button color="primary" (click)="registrar()">
+    Registrar
+  </button>
+</div>

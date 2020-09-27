@@ -1,0 +1,39 @@
+
+  @mixin side-bar {
+    background-color: #242526;
+    display: flex;
+    background-image: linear-gradient(to right, #242526, #3e4142);
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.3rem;
+    line-height: 5rem;
+    position: fixed;
+    z-index: 55;
+    width: 23rem;
+    height: 90rem;
+    padding: 9px;
+    padding-top: 3%;
+    //mandar el sidebar hacia la izquierda total
+    transform: translateX(0);
+    transition: all 0.2s ease-in;
+    border: 2px solid #333;
+    grid-column: 1 / 2;
+    grid-row: 1 / -1;
+    z-index: 0;  
+    position: fixed;
+    overflow: hidden;
+    &::before{
+      content: " ";
+      position: absolute;
+      top: -8rem;
+      left: 54px;
+      opacity: 0.4;
+      height: 67%;
+      width: 8rem;
+      background: linear-gradient(rgba(255, 255, 255, 0.24), rgba(39, 34, 34, 0.08));
+      transform: rotate(-27deg);
+      filter: blur(15px);
+    }
+  
+    
+  }

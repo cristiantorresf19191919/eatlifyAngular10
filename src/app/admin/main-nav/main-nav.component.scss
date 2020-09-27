@@ -1,0 +1,193 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 300px;
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
+@media (min-width: 500px) {
+  .sidenav {
+    display: none;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+
+.mat-toolbar a {
+  display: inline-block;
+  margin: 0 1rem;
+  color: white;
+  text-decoration: none;
+}
+
+.logout {
+  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.text-white{
+  color: white !important;
+}
+
+.text-yellow {
+  color: #2d88ff !important;
+  transform: scale(1.09) translateY(0.5px);
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.657);
+  transition: all 0.2s;
+}
+
+.main-menu {
+  display: block;
+}
+.hand_pointer{
+  cursor: pointer;
+}
+@media screen and(max-width:550px) {
+  .main-menu {
+    display: none !important;
+  }
+  .dashboard-title {
+    font-size: 1rem !important;
+    
+  }
+}
+
+.icon-chicken {
+  transition: all 0.3s ease;
+  font-size: 4rem;
+
+  margin-top: 2rem;
+  animation-name: chicken-animation;
+  animation-duration: 2s;
+  animation-fill-mode: backwards;
+  animation-iteration-count: infinite;
+  perspective: 100px;
+  backface-visibility: hidden;
+}
+
+.mat-toolbar  {
+  background: #242526;
+  color: white;
+  height: 76px;
+  border-bottom: 2px solid #393a3b;
+  background-image: linear-gradient(to bottom, #242526,#323335);
+  transition: all .3s ease;
+  position: relative;
+ 
+  &::before{
+    content: '';
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: calc(100% - 4px);
+  height: 50%;
+  border-radius: 3px;
+box-shadow: 0px 1px 4px -2px rgb(59, 59, 59);
+text-shadow: 0px -1px #333;
+	background: linear-gradient(rgba(255, 255, 255, 0.301), rgba(255, 255, 255, 0.075));
+  }
+  
+
+ 
+}
+
+@keyframes chicken-animation {
+  0% {
+    transform: rotate3d(0, 0, 2, 10deg) scale(1) skew(0);
+  }
+  100% {
+    animation-timing-function: ease-in-out;
+    transform: rotate3d(0, 0, 10, 1deg) scale(1.2) skew(6deg);
+  }
+}
+.cuchillo {
+  transform: scale(0.91);
+  transform-origin: 50px 50px 0px;
+  animation: 1.11111s linear -0.833333s infinite normal forwards running animacionCuchillo;
+}
+
+.tenedor {
+  transform: scale(0.91);
+  transform-origin: 50px 50px 0px;
+  animation: 1.11111s linear -1.11111s infinite normal forwards running animacionTenedor;
+}
+@keyframes animacionTenedor {
+  0% {
+    animation-timing-function: cubic-bezier(0.9647, 0.2413, -0.0705, 0.7911);
+    transform: scale(0.9099999999999999);
+  }
+  51% {
+    animation-timing-function: cubic-bezier(0.9226, 0.2631, -0.0308, 0.7628);
+    transform: scale(1.02994);
+  }
+  100% {
+    transform: scale(0.9099999999999999);
+  }
+}
+@keyframes animacionCuchillo {
+  0% {
+    animation-timing-function: cubic-bezier(0.9647, 0.2413, -0.0705, 0.7911);
+    transform: scale(0.9099999999999999);
+  }
+  51% {
+    animation-timing-function: cubic-bezier(0.9226, 0.2631, -0.0308, 0.7628);
+    transform: scale(1.02994);
+  }
+  100% {
+    transform: scale(0.9099999999999999);
+  }
+}
+
+.main-menu{
+
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.cr-spacer{
+  flex: 1 1 auto;
+}
+
+.spacer{
+  flex:1 1 33%;
+}
+.right-menu-icon {
+  font-size: 40px;
+}
+
+.active-route-css{
+  border-bottom: 2px solid #2d88ff;
+  color: #2d88ff !important;
+}
+
+::ng-deep .custom-tooltip{
+  padding: 10px;
+  color: white !important;
+  font-size: 15px;
+  font-weight: 700;
+
+}

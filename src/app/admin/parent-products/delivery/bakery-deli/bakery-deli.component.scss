@@ -1,0 +1,94 @@
+.item {
+	transition: all .2s;
+	position: relative;
+	transform: all .2s;
+	perspective: 50rem;
+	-moz-perspective: 70rem;
+	border-radius: 5px;
+	transform: all 3s;
+	position: relative;
+	height: 20rem;
+	width: 100%;
+	background-color: #273688b6;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-end;
+	&:active {
+		cursor: pointer;
+	}
+	&:hover {
+		background: #4e62d3;
+		transform: scale(1.03);
+  }
+  h2{
+    z-index: 9;
+    transition: all .3s ease-in;
+  }
+	.imagen-container {
+		position: absolute;
+		left: 0;
+		top: 0;
+		overflow: hidden;
+    width: 100%;
+    background: #33333338;
+    height: 100%;
+    transition: all .3s ease-in;
+    &:hover{
+      background: none;
+    }
+		.imagen-producto {
+			position: absolute;
+			left: 0;
+			top: 0;
+			z-index: -1;
+			width: 100%;
+      height: 100%;
+      transition: all .3s ease-in;
+
+		}
+  }
+  .item-details-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+	padding: 0 1.5rem;
+	background: #00000073;
+    width: 100%;
+
+  }
+  .imagen-container:hover ~ h2{
+    color: black;
+    background: white;
+  }
+  .imagen-container:hover .imagen-producto{
+    filter: brightness(110%) contrast(120%);
+  }
+  .imagen-container:hover + .item-details-container {
+    background-color: rgba(51, 51, 51, 0.685);
+  }
+  .imagen-container:active > .imagen-producto{
+    transform: translateY(-20rem);
+  }
+}
+.parent {
+	display: grid;
+	padding: .7rem;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 10px 30px;
+	border: 2px solid white;
+	position: relative;
+}
+
+@keyframes bounceOutUp {
+	from {
+		-webkit-transform: translate3d(0, -10px, 0);
+		transform: translate3d(0, -10px, 0);
+		opacity: .8;
+	}
+	to {
+		opacity: .1;
+		-webkit-transform: translate3d(0, -2000px, 0);
+		transform: translate3d(0, -2000px, 0) rotateX(180deg);
+	}
+}

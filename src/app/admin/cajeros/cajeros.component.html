@@ -1,0 +1,127 @@
+<h1 style="color: #2d88ff; font-size: 30px;margin: 0 auto; text-align: center; ">ADMINISTRA CAJEROS</h1>
+
+<!-- <div class = "tp-container">
+    <mat-form-field appearance = "standard">
+       <input matInput placeholder = "Input">
+       <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+       <mat-hint>Sample Hint</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance = "fill">
+       <textarea matInput placeholder = "Textarea"></textarea>
+    </mat-form-field>
+    <mat-form-field appearance = "outline">
+       <mat-select placeholder = "Select">
+          <mat-option value = "A">A</mat-option>
+          <mat-option value = "B">B</mat-option>
+          <mat-option value = "C">C</mat-option>
+       </mat-select>
+    </mat-form-field>
+ </div>
+ -->
+
+
+ <div class="tp-container">
+    <mat-card class="card-title">Add Cashier</mat-card>
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput [formControl]="name" placeholder="Name">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Enter your email</mat-label>
+      <input matInput placeholder="Enter  email" [formControl]="email" required>
+      <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Enter your password</mat-label>
+      <input matInput placeholder="Enter password" [type]="hide ? 'password' : 'text'" [formControl]="password" required>
+      <button mat-icon-button matSuffix (click)="hide = !hide"> <mat-icon>{{hide ? 'visibility_off':'visibility'}}</mat-icon>  </button>
+    </mat-form-field>
+
+        <mat-label>Privilegios</mat-label>
+        <mat-radio-group
+          class="radio-group"
+          [formControl]="isadmin"
+        >
+        <mat-radio-button class="radio-button" [value]="true">Admin</mat-radio-button>
+        <mat-radio-button class="radio-button" [value]="false" [checked]="isadmin.value === false">Regular</mat-radio-button>
+        <div class="privileges-msg">
+          <b>{{name.value || 'Cashier'}}  {{!isadmin.value ? 'No tiene privilegios' : 'Tiene Privilegios'}}</b>
+
+        </div>
+        </mat-radio-group>
+        <button mat-raised-button color="primary" (click)="registrar()">Registrar</button>
+  </div>
+
+  <div class="allcajeros-container">
+    <mat-accordion class="mat-accordion-el" *ngFor="let cajero of cajerosRegistrados; let i = index">
+      <mat-expansion-panel
+        (opened)="panelOpenState=true"
+        (closed)="panelOpenState=false"
+        >
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div *ngIf="!editionmode && currentIndex !== i">{{cajero.name}}</div>
+            </mat-panel-title>
+            <mat-panel-description>
+              {{panelOpenState && currentIndex !== i  ? 'Cerrar' : 'Ver Mas'}} Usuario #{{i}}
+            </mat-panel-description>
+            <div class="linea-sutil"></div>
+           
+          </mat-expansion-panel-header>
+          <div class="cajero-description-container">   
+           <!-- name  -->
+            <div class="item">
+              <mat-label>Name</mat-label>  <mat-label *ngIf="!editionmode" > {{cajero.name}} </mat-label>
+              <input class="input-edit" *ngIf="editionmode && currentIndex === i" type="text" placeholder="email cajero" [(ngModel)]="cajero.name">
+  
+            </div>
+            <!-- email -->
+            <div class="item">
+              <mat-label>E-mail</mat-label>  <mat-label *ngIf="!editionmode" > {{cajero.email}} </mat-label>
+              <input class="input-edit" *ngIf="editionmode && currentIndex === i" type="text" placeholder="email cajero" [(ngModel)]="cajero.email">
+            </div> 
+            <!-- password -->
+            <div class="item">
+              <mat-label>Password</mat-label>  <mat-label *ngIf="!editionmode" > {{'xxxxxxxxxxx'}} </mat-label>
+              <input class="input-edit" *ngIf="editionmode && currentIndex === i" type="text" placeholder="password cajero" [(ngModel)]="cajero.password">
+            </div>
+  
+            <!-- roles -->
+            <div class="item">
+              <mat-label>Roles</mat-label> <mat-label *ngIf="!editionmode">{{cajero.admin ? "Administrador" : "Regular"}}</mat-label>
+              <mat-radio-group
+                class="radio-group"
+                [(ngModel)]="cajero.admin"
+                *ngIf="editionmode && currentIndex === i"
+              >
+              <mat-radio-button class="radio-button" [value]="true">Admin</mat-radio-button>
+              <mat-radio-button class="radio-button" [value]="false" [checked]="isadmin.value === false">Regular</mat-radio-button>
+              <div class="privileges-msg">              
+              </div>
+              </mat-radio-group>
+            </div>        
+            <!-- mensaje del usuario con privilegios -->
+            <div class="item flex-center">
+              <b>{{cajero.name || 'Cashier'}} {{!cajero.admin ? 'No tiene privilegios' : 'Tiene Privilegios'}}</b>
+            </div>
+            <!-- botones -->
+            <div class="item space-around">            
+              <button mat-raised-button color="accent" [ngStyle]="{'background':editionmode && currentIndex == i ? 'orange' : ''  }" (click)="editionmode = !editionmode;currentIndex=i">{{editionmode && currentIndex == i ? 'Cancelar Editar' : 'Editar'}}</button>
+              <button  *ngIf="editionmode && currentIndex === i" mat-raised-button color="primary" class="boton" (click)="update(cajero)">Guardar Edicion</button>
+              <button mat-raised-button color="warn" class="boton" (click)="delete(cajero)">Eliminar</button>
+            </div>
+          <b>current index es {{currentIndex}} y {{i}}</b>
+          </div>
+      </mat-expansion-panel>
+      <br>    
+    </mat-accordion>
+
+  </div>
+
+ 
+ 
+
+
+

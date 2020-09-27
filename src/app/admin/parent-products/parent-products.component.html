@@ -1,0 +1,115 @@
+<div class="container">
+  <input
+    type="radio"
+    class="radio-products"
+    id="toggleProducts"
+    name="toggle"
+  />
+  <input
+    type="radio"
+    class="radio-categories"
+    id="toggleCategories"
+    name="toggle"
+  />
+  <input
+    type="radio"
+    class="radio-activate-side-bars"
+    id="toggleSideBarsOn"
+    name="toggleSideBars"
+  />
+  <input
+    type="radio"
+    class="radio-activate-side-bars"
+    id="toggleSideBarsOff"
+    name="toggleSideBars"
+  />
+  <input
+    type="radio"
+    class="radio-products"
+    id="toggleProducts"
+    name="toggle"
+  />
+  <input
+    type="radio"
+    class="radio-categories"
+    id="toggleCategories"
+    name="toggle"
+  />
+  <input
+    type="radio"
+    class="radio-activate-side-bars"
+    id="toggleSideBarsOn"
+    name="toggleSideBars"
+  />
+  <input
+    type="radio"
+    class="radio-activate-side-bars"
+    id="toggleSideBarsOff"
+    name="toggleSideBars"
+  />
+  <div class="container__iconbox">
+    <label for="toggleSideBarsOn">
+      <i class="fas fa-bars" id="barsicons"></i>
+    </label>
+  </div>
+
+  <div class="side-bar" #sidebar>
+    <div class="side-bar__iconBox">
+      <label for="toggleSideBarsOff">
+        <i class="fas fa-times"></i>
+      </label>
+    </div>
+
+    <div class="side-bar__element"> 
+      <a [routerLink]="['products']" mat-raised-button style="background-color: transparent; padding: 7px; width: 20rem;  ">
+
+      <mat-icon>shopping_basket</mat-icon>   <label for="toggleProducts" class="side-bar__label" router
+      ><a class="link" >Productos Tabla</a></label>
+      </a>
+      </div>
+      
+
+    <div class="side-bar__element"> 
+      <a [routerLink]="['categories']" mat-raised-button style="background-color: transparent; padding: 7px; width: 20rem;  ">
+
+      <mat-icon>category</mat-icon>    <label for="toggleCategories" class="side-bar__label"
+      ><a class="link" >Categorias</a></label
+    >
+      </a>
+      </div>
+
+    <div class="side-bar__element"> 
+      <a [routerLink]="['delivery']" mat-raised-button style="background-color: transparent; padding: 7px; width: 20rem;  ">
+
+      <mat-icon>shopping_basket</mat-icon>    
+      <label for="toggleCategories" class="side-bar__label"
+        ><a class="link">Productos</a></label
+      >
+      </a>  
+      </div>
+
+      <mat-divider></mat-divider>
+<mat-divider></mat-divider>
+    
+    <div class="side-bar__element"> 
+      
+       
+      <a [routerLink]="['/dashboard/ventas']" mat-raised-button style="background-color: transparent; padding: 7px; width: 20rem; ">
+        <mat-icon>web</mat-icon>  
+        <label for="toggleCategories" class="side-bar__label"
+      ><a class="link">Ventas</a></label
+    >
+      
+      </a>
+    
+      </div>
+
+
+    
+ 
+  
+   
+  </div>
+</div>
+
+<router-outlet></router-outlet>

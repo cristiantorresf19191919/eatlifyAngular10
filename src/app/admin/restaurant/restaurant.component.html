@@ -1,0 +1,250 @@
+<mat-progress-bar
+  class="top-fixed"
+  *ngIf="loading"
+  mode="{{ loading_text }}"
+></mat-progress-bar>
+<div class="container">
+  <div class="side-bar" #sidebar>
+    <div class="side-bar__element">
+      <a
+        [routerLink]="['products']"
+        mat-raised-button
+        style="background-color: transparent; padding: 7px; width: 20rem"
+      >
+        <mat-icon>shopping_basket</mat-icon>
+        <label for="toggleProducts" class="side-bar__label" router
+          ><a class="link">Productos Tabla</a></label
+        >
+      </a>
+    </div>
+
+    <div class="side-bar__element">
+      <a
+        [routerLink]="['categories']"
+        mat-raised-button
+        style="background-color: transparent; padding: 7px; width: 20rem"
+      >
+        <mat-icon>category</mat-icon>
+        <label for="toggleCategories" class="side-bar__label"
+          ><a class="link">Categorias</a></label
+        >
+      </a>
+    </div>
+
+    <div class="side-bar__element">
+      <a
+        [routerLink]="['delivery']"
+        mat-raised-button
+        style="background-color: transparent; padding: 7px; width: 20rem"
+      >
+        <mat-icon>shopping_basket</mat-icon>
+        <label for="toggleCategories" class="side-bar__label"
+          ><a class="link">Productos</a></label
+        >
+      </a>
+    </div>
+
+    <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
+
+    <div class="side-bar__element">
+      <a
+        [routerLink]="['/dashboard/ventas']"
+        mat-raised-button
+        style="background-color: transparent; padding: 7px; width: 20rem"
+      >
+        <mat-icon>web</mat-icon>
+        <label for="toggleCategories" class="side-bar__label"
+          ><a class="link">Ventas</a></label
+        >
+      </a>
+    </div>
+  </div>
+
+
+  <div class="restaurant-body" *ngIf="restaurantDataHasLongName  || !onedit">
+    <mat-card class="example-card" *ngIf="restaurantData" style="width: 60rem;">
+      <mat-card-header>
+        <mat-card-title>{{ restaurantData.name }}</mat-card-title>
+      </mat-card-header>
+     
+      <ng-container *ngIf="restaurantData.image; else elseTemplate">
+        <img
+        *ngIf="restaurantData.image.url"
+        mat-card-image
+        src="{{ restaurantData.image.url }}"
+        style="height: 29rem;"
+        alt="Foto Restaurante "
+      />
+
+      </ng-container>
+      <ng-template #elseTemplate>
+        <h5>no tiene foto</h5>
+        <p>actualiza para incluir tu foto asi tus clientes se interesaran mas en comprar</p>
+      </ng-template>
+      
+  
+      <mat-card-content class="column-flex">
+
+        <div class="child">
+          <mat-icon>description</mat-icon>
+          <mat-label>
+            {{ restaurantData.description }}</mat-label
+          >
+          <mat-divider class="divider"></mat-divider>
+        </div>
+
+        <div class="child">
+          <mat-icon>location_on</mat-icon>
+          <mat-label> {{ restaurantData.address }}</mat-label>
+          <mat-divider class="divider"></mat-divider>
+        </div>
+
+        <div class="child">
+          <mat-icon>phone</mat-icon>
+          <mat-label> {{ restaurantData.phone }}</mat-label>
+          <mat-divider class="divider"></mat-divider>
+        </div>
+
+        <div
+          class="ventas-restaurante"
+          *ngIf="restaurantData"
+        ></div>
+        <mat-card-actions>
+          <button (click)="editRestaurante()" mat-button>EDITAR</button>
+          <button (click)="deleteRestaurante()" mat-button>ELIMINAR</button>
+        </mat-card-actions>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
+  <div class="restaurant-body" *ngIf="!restaurantDataHasLongName || onedit">
+
+   <!--  <button 
+      (click)="increment()"
+      mat-raised-button
+      color="primary"
+    >
+      Increment
+    </button>
+
+    <div>
+      <h3>current Count: {{count$ | async}}</h3>
+    </div>
+
+    <button 
+      (click)="decrement()"
+      mat-raised-button
+      color="accent"
+    >
+      Decrement
+    </button>
+
+    <button 
+    (click)="reset()"
+    mat-raised-button
+    color="accent"
+  >
+    Reset Counter
+  </button> -->
+
+    <h1 style="color: #2d88ff; text-align: center">Datos de Restaurante</h1>
+
+    <mat-card class="example-card" style="background-color: #303030;
+    box-shadow: 1px 2px 1px #222;" >
+      <mat-card-header>
+        <mat-card-title>Completa información </mat-card-title>
+        <mat-card-subtitle
+          >Tus clientes sabran mas de tu restaurante
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div>
+          
+          <p>{{name}}</p>
+          <mat-form-field appearance="outline" class="form-field">
+            
+            <mat-label>Nombre</mat-label>
+            <input matInput [(ngModel)]="name" />
+            <mat-icon matSuffix>label</mat-icon>
+            <mat-hint>BBQ & grill</mat-hint>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Dirección</mat-label>
+            <input matInput [(ngModel)]="address" />
+            <mat-icon matSuffix>location_on</mat-icon>
+            <mat-hint>32-23 45st 11256 </mat-hint>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Phone number</mat-label>
+            <!-- <example-tel-input required></example-tel-input> -->
+            <input matInput [(ngModel)]="phone" />
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-hint>Include area code</mat-hint>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Descripción</mat-label>
+            <input matInput value="test" [(ngModel)]="description" />
+            <mat-icon matSuffix>description</mat-icon>
+            <mat-hint>Clientes sabran mas de tu negocio </mat-hint>
+          </mat-form-field>
+
+          <label for="imageInput" *ngIf="!selectedImage" class="form-field img-container">
+            <mat-icon>photo_camera</mat-icon> <br />
+            <h4>Subir Imagen</h4>
+          </label>
+          <label 
+          for="imageInput" *ngIf="selectedImage && imgUrl" 
+          class="form-field img-container"
+          [ngStyle]="{'background': 'url('+imgUrl +')'}"
+          >
+            
+            <div class="bg-dark">
+              <mat-icon>photo_camera</mat-icon> <br />
+              foto seleccionada...
+            </div>
+           
+          </label>
+
+          <input
+            #imageInput
+            id="imageInput"
+            type="file"
+            style="visibility: hidden; opacity: 0"
+            class="formulario__input-product"
+            placeholder="Upload Image"
+            (change)="onFileSelected(imageInput)"
+          />
+          <div class="center-child">
+            <button
+            *ngIf="!onedit"
+              (click)="registrarRestaurante()"
+              mat-raised-button
+              color="primary"
+            >
+              Registrar
+            </button>
+            <button
+            *ngIf="onedit"
+              (click)="updateRestaurant()"
+              mat-raised-button
+              color="primary"
+            >
+              Actualizar
+            </button>
+            <button
+            *ngIf="onedit"
+              (click)="onedit = !onedit"
+              mat-raised-button
+              color="primary"
+            >
+              Cancelar
+            </button>
+
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

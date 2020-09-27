@@ -1,0 +1,135 @@
+@import "../../../sass/sidebar";
+@mixin iconoSideBarbox($position) {
+  position: absolute;
+  top: 0;
+  #{$position}: 0;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  i {
+    font-size: 2rem;
+  }
+}
+
+.container {
+  display: grid;
+  //   grid-template-columns: 23rem repeat(8, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-rows: min-content min-content;
+  grid-gap: 1rem;
+  position: relative;
+  input[type="radio"] {
+    opacity: 0;
+  }
+
+  &__iconbox {
+    @include iconoSideBarbox(left);
+  }
+  .side-bar {
+    @include side-bar();
+    &__iconBox {
+      @include iconoSideBarbox(right);
+    }
+
+    &__label {
+      font-size: 2rem;
+      font-weight: 600;
+      transition: all 0.3s ease-in;
+      &:hover {
+        color: #2d88ff;
+        text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.657);
+      }
+      &:active {
+        color: #2d88ff;
+        text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.657);
+      }
+    }
+  }
+
+  .radio-products,
+  .radio-categories {
+    display: none;
+  }
+  .categoriasComponent {
+    transition: all 0.3s;
+    text-align: center;
+    padding: 1rem;
+    width: 100%;
+    height: 85vh;
+    background-color: #1e1e1e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  .products-component {
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.3s ease-in;
+    grid-column: 2 / -1;
+  }
+  .radio-products:checked ~ .categoriasComponent {
+    visibility: hidden;
+  }
+
+  #toggleSideBarsOn:checked ~ .side-bar {
+    transform: translateX(0) skewX(0) matrix(1, 0, 0, 1, 0, 0);
+  }
+  #toggleSideBarsOn:checked ~ .container__iconbox > label > i {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  #toggleSideBarsOff:checked ~ .side-bar {
+    visibility: hidden;
+    transform: translateX(-500px) skewX(15deg) translateX(0) matrix(2, 1, 0, 1, 10, 34);
+    opacity: 0;
+  }
+
+  .radio-products:checked ~ .products-component {
+    visibility: visible;
+  }
+  .radio-categories:checked ~ .categoriasComponent {
+    visibility: visible;
+    opacity: 1;
+    grid-column: 2 / -1;
+    grid-row: 1 / -1;
+  }
+  .radio-categories:checked ~ .products-component {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  
+}
+
+.mat-icon {
+  
+  margin-right: 2%;
+}
+
+
+.a:hover > *{
+  color: #2d88ff;
+}
+
+.link{
+  color: white;
+  font-size: 15px;
+}
+
+.side-bar__element{
+  margin: 2% 0;
+}
+
+.side-bar__element a:hover{
+
+  color: #2d88ff !important;
+
+  transform: scale(1.1);
+}
+
+.side-bar__element a:hover .link{
+  color: #2d88ff !important;
+}

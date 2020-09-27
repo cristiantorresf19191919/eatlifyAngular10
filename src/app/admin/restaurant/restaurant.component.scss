@@ -1,0 +1,97 @@
+@import "../../../sass/sidebar";
+.container{
+    display: grid;
+  grid-template-columns: 23rem repeat(8, 1fr);
+  grid-gap: 1rem;
+    
+}
+
+.restaurant-body{
+    visibility: visible;
+    opacity: 1;
+    transition: all .3s ease-in;
+    grid-column: 2 / 10;
+    grid-row: 1 / -1;
+
+  }
+
+
+  .side-bar {
+   
+    @include side-bar();
+
+    .a:hover > *{
+        color: #2d88ff;
+      }
+      
+      .link{
+        color: white;
+      }
+      
+      .side-bar__element{
+        margin: 2% 0;
+      }
+      
+      .side-bar__element a:hover{
+      
+        color: #2d88ff !important;
+      
+        transform: scale(1.1);
+      }
+      
+      .side-bar__element a:hover .link{
+        color: #2d88ff !important;
+      }
+
+   
+  }
+
+  .example-card {
+        
+    margin: 0 auto;
+  }
+
+  .form-field{
+    margin: 2% auto;
+display: block;
+text-align: center;
+font-size: 15px;
+
+  }
+
+
+.img-container{
+border: 3px dashed gray;
+height: 13rem;
+border-radius: 10px;
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+@media (min-width: 400px){
+  .example-card{
+    width: 800px;
+    padding: 20px;
+  }
+  .form-field{
+    width: 70%;
+  }
+
+  .divider{
+    width: 70% !important;
+    margin: 0 auto;
+  }
+}
+
+.child{
+  padding: 5px;
+margin: 2% 0;
+}
+
+.form-field{
+  background-image: top;
+  background-size: cover;
+}
+

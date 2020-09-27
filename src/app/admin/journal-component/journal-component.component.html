@@ -1,0 +1,28 @@
+
+<div style="display: flex;justify-content: flex-end;width: 100%;margin-top: -4rem;margin-right:-6rem;">
+</div>
+<h1 class="title">Journal Component</h1>
+<div *ngIf="allItems.length>0" style="width: 100%;">
+  <div [ngClass]="{'animated slideInLeft':item}" [@bounceOutUpOnLeave] class="item-container" *ngFor="let item of allItems">
+    <p  (click)="onItemClickEvent(item)"   class="item-element">{{item.quantity}} {{item.name}} </p>
+    <p class="item-element"><b>${{item.price}}</b>
+    <button pButton class="addItemButton" type="button" icon="pi pi-plus" (click)="addElement(item)"></button> <button pButton class="deleteItemButton" type="button" icon="pi pi-times" (click)="DeleteElement(item)"></button></p>
+  </div>
+  <hr>
+  <h1 class="title-feedback">total <b>{{totalPrice}}</b></h1>
+  <input type="number" class="input-received" placeholder="change" (change)="onChangeQuantity($event)" (input)="onChangeQuantity($event)" (keydown)="onChangeQuantity($event)" (keyup)="onChangeQuantity($event)" [(ngModel)]="moneyRecieved" autofocus>
+  <h1 class="title-feedback" *ngIf="change">Change {{change}}</h1>
+
+
+</div>
+<div class="cleanBtnContainer">
+  <button class="cleanBtn" (click)="cleanData()">Ready</button>
+
+</div>
+
+<!-- <div *ngIf="itemObject">
+  <h1>{{itemObject.name}}</h1>
+  <h1>{{itemObject.price}}</h1>
+
+</div> -->
+

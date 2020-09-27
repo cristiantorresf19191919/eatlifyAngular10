@@ -1,0 +1,227 @@
+<div class="container">
+  
+  <div style="grid-column: 2 / 10;">    
+  </div>
+  
+  <input type="radio" class="radio-resumen" name="toggle" id="resumenToggle">
+  <input type="radio" class="radio-chart" name="toggle" id="graficosToggle">
+  <input type="radio" class="radio-linechart" name="toggle" id="linechartToggle">
+
+  <div class="side-bar" #sidebar>
+
+
+  
+    <div style="display: grid; grid-template-columns: max-content max-content; justify-content: center; align-items: center; width: 100%; padding: 0 2%;"> <mat-icon>assessment</mat-icon>   <label for="resumenToggle" class="side-bar__label"> Resumen</label>
+    </div>
+    <div style="display: grid; grid-template-columns: max-content max-content; justify-content: center; align-items: center; width: 100%; padding: 0 2%;">   <mat-icon>bar_chart</mat-icon> <label for="graficosToggle" class="side-bar__label">Barras</label>
+    </div>
+    <div style="display: grid; grid-template-columns: max-content max-content; justify-content: center; align-items: center; width: 100%; padding: 0 2%;">   <mat-icon>show_chart</mat-icon>  <label for="linechartToggle" class="side-bar__label">Lineas</label>
+    </div>
+    
+
+
+  </div>
+
+  <div class="linechart-body">
+
+    <p-chart type="line" [data]="data"></p-chart>
+
+  </div>
+
+<div class="chart-body">
+    <p-chart type="bar" [data]="data"></p-chart>
+    <div class="productos_most_sold_container" *ngIf="productsMostSold">
+      <mat-chip-list *ngFor="let product of productsMostSold">
+        <mat-chip color="primary" selected>  <i class="fas fa-caret-right"> </i>   {{product.product_name}}</mat-chip>
+        <br>
+        <mat-chip color="accent" selected>{{product.product_quantity }}units   </mat-chip>
+      </mat-chip-list>
+
+
+    </div>
+    <h3>Productos mas vendidos</h3>
+</div>
+
+
+  <!-- body container solo para darle padding -->
+<div class="resumen-body">
+  <h1 style="color: #2d88ff; font-size: 30px;margin: 0 auto; text-align: center; ">RESUMEN DE VENTAS POR DIA</h1>
+
+
+  <!-- Products Sold -->
+  <div class="delete-collection-container">
+    <ul (click)="deleteAllSales()">
+      <li><span>Delete All Sales<i class="fas fa-radiation alert-icon"></i> </span></li>
+
+    </ul>
+  </div>
+  <div *ngIf="summarysales">
+
+
+
+
+  <div *ngIf="summarysales.length >= 1; else nosales">
+
+  <!-- iterando todas las ventas por fechas -->
+  <div *ngFor="let venta of summarysales" style=" margin-bottom: 2%; padding: 20px;">
+    <mat-card style="border-top: 4px solid #2d88ff;" >
+
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{venta.cajero}}</mat-card-title>
+        <mat-card-subtitle>{{venta.date | date:'short' }}</mat-card-subtitle>
+      </mat-card-header>
+  
+      <mat-card-content>
+  
+        <p-table
+        #tony
+        [columns]="cols"
+        [value]="venta.productos"
+        dataKey="_id" [paginator]="true"
+        [rows]="10">
+       <ng-template pTemplate="caption">
+  
+         <h2>total sales {{venta.totalventa}}</h2>
+         <mat-icon style="margin:4px 4px 0 0">search</mat-icon>
+         <input type="text" class="busqueda-global" pInputText size="50"
+           placeholder="Busqueda Global"
+           (input)="tony.filterGlobal($event.target.value, 'contains')"
+           style="width:auto"><br>
+         <button type="button" pButton icon="pi pi-file-excel" iconPos="left"
+           label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;"
+           class="ui-button-success"></button>
+       </ng-template>
+       <ng-template pTemplate="header" let-columns>
+  
+         <tr>
+           <th
+           *ngFor="let col of columns"
+           [pSortableColumn]="col.field"
+           >
+             {{col.header}}
+           </th>
+  
+         </tr>
+  
+         <!-- otra row -->
+         <tr>
+           <th style="width:100px;" *ngFor="let col of columns" [ngSwitch]="col.field">
+  
+             <input *ngSwitchCase="'product_name'" style="width: 132px;" type="text" pInputText (input)="tony.filter($event.target.value, col.field, col.filterMatchMode)">
+  
+             <input *ngSwitchCase="'product_quantity'" style="width: 132px;" type="text" pInputText (input)="tony.filter($event.target.value, col.field, col.filterMatchMode)">
+  
+             <div style="width: 214px;" *ngSwitchCase="'product_category'">
+               <p-dropdown [options]="categorias" [style]="{'width':'86%'}"
+               (onChange)="tony.filter($event.value, col.field, 'equals')"></p-dropdown>
+             </div>
+             <input *ngSwitchCase="'product_total'" type="text" style="width:50%" (input)="tony.filter($event.target.value, col.field, col.filterMatchMode)" >
+  
+           </th>
+  
+  
+         </tr>
+  
+  
+  
+  
+  
+         <!-- <tr >
+           <th [pSortableColumn]="'product_name'" class="table-row" style="width:100px;">Product
+             <br> <input style="width: 132px;" pInputText type="text"
+               (input)="tony.filter($event.target.value, 'product_name', {field: 'product_name',
+               header: 'product_name'}.filterMatchMode)">
+           </th>
+           <th [pSortableColumn]="'product_quantity'" style="width: 100px;">Quantity
+               <br> <input pInputText style="width:50%" type="text"
+                 (input)="tony.filter($event.target.value, 'product_quantity', {field:
+                 'product_quantity', header: 'product_quantity'}.filterMatchMode)">
+             </th>
+           <th [pSortableColumn]="'product_total'" style="width:100px;">Total
+             <br> <input pInputText type="text" style="width: 132px;"
+               (input)="tony.filter($event.target.value, 'product_total', {field: 'product_total',
+               header: 'product_total'}.filterMatchMode)">
+  
+           </th>
+           <th [pSortableColumn]="'product_category'" style="width: 214px;">Category
+             <p-dropdown [options]="categorias" [style]="{'width':'40%'}"
+               (onChange)="tony.filter($event.value, 'product_category', 'equals')"></p-dropdown>
+           </th>
+  
+  
+  
+         </tr> -->
+       </ng-template>
+       <ng-template pTemplate="body" let-columns="columns" let-producto
+         let-ri="rowIndex">
+         <tr>
+           <!-- <td>
+              {{producto.product_name}}
+           </td>
+           <td>
+             {{producto.product_category}}
+          </td>
+           <td>
+               {{producto.product_quantity}}
+            </td>
+           <td>
+              {{producto.product_total}}
+           </td> -->
+           <td
+           *ngFor="let col of columns">
+           {{producto[col.field]}}
+           </td>
+  
+  
+         </tr>
+       </ng-template>
+       <ng-template pTemplate="summary" style="display: flex; justify-content:
+         space-around;">
+       </ng-template>
+     </p-table>
+  
+        
+       </mat-card-content>
+  
+      
+  
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+  
+      </mat-card> <!-- card -->
+      <mat-divider></mat-divider>
+
+  </div>
+
+
+
+
+  </div>
+
+</div>
+  <!-- <button type="button" pButton icon="pi pi-file-excel" iconPos="left"
+  label="PROBAR ARREGLOS" (click)="probar()" style="margin-right: 0.5em;"
+  class="ui-button-success"></button> -->
+
+  <ng-template #nosales>
+  <H5 style="color: rgb(255, 255, 255); font-size: 18px;margin: 0 auto; text-align: center; ">NO SE HAY RESUMEN DE VENTAS EN EL MOMENTO DIRIGETE A VENTAS Y CREA UN CIERRE DE CAJA</H5>
+
+  </ng-template>
+
+
+
+
+
+
+
+  </div>
+  <!-- fin del resumen body -->
+
+
+</div>
+
+
+

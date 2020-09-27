@@ -1,0 +1,15 @@
+<h1 style="
+    color: #2d88ff;
+    font-size: 30px;
+    margin: 0 auto;
+    text-align: center; ">MODULO REALTIME EN CONSTRUCCION</h1>
+
+    <div class="sidenav">
+      <span (click)="newDoc()">New Document</span>
+      <span (click)="whatsgoingon()">whatsgoingon</span>
+      <span
+        [class.selected]="docId === currentDocId"
+        (click)="loadDoc(docId)"
+        *ngFor="let docId of documents | async"> {{docId}} </span>
+    </div>
+

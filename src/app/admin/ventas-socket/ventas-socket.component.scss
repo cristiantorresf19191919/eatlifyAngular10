@@ -1,0 +1,55 @@
+@mixin tableta {
+  @media (max-width:1030px){
+    @content;
+  }
+
+}
+
+.parent {
+	border: 2px solid white;
+	height: 50rem;
+	width: 90%;
+	background-image: linear-gradient(to top, #cfd9dfe5 0%, #e2ebf0ef 100%);
+	color: black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 2rem;
+	border-radius: 3rem;
+	box-shadow: 5px 2px 3px #333;
+  z-index: 90;
+  margin: 0 auto;
+}
+.parent-grid-each-element{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-gap: 5rem;
+  width: 100%;
+  margin-bottom: 2rem;
+  margin: 0 auto;
+  text-align: center;
+  h1{
+    border-right: 2px solid #444;
+
+  }
+}
+
+.summary{
+  justify-self: flex-end;
+  display: flex;
+  justify-content: space-between;
+  width: 73%;
+  margin-top: 5%;
+  border-bottom: 1px solid #333 ;
+}
+
+
+.ventasName{
+  @include tableta{
+     max-height: 32px;
+  overflow: hidden;
+  text-align: left;
+
+  }
+
+}

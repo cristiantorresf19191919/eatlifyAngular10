@@ -1,0 +1,23 @@
+<div *ngIf="loading; else parent">
+  <img src="/assets/img/spinner.gif" alt="" class="spinner" />
+</div>
+<ng-template #parent>
+  <p>booleano que cambia para organizar = {{ cambieGridBoolean.toString() }}</p>
+  <p>
+    booleano bakery cat es igual a <b>{{ bakeryCatBoolean.toString() }}</b>
+  </p>
+  <div class="parent" *ngIf="productos.length > 0">
+    <div
+      class="item"
+      *ngFor="let item of productos"
+      (click)="productoSeleccionado(item)"
+    >
+      <div *ngIf="item.image !== undefined" class="imagen-container">
+        <img class="imagen-producto" src="{{ item.image.url }}" alt="" />
+      </div>
+      <div class="item-details-container">
+        <h2>{{ item.name }}</h2>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,51 @@
+<div class="main-order-background"  >
+
+  <mat-grid-list cols="4" rows="5" rowHeight="40px">
+
+    <mat-grid-tile [colspan]="4" >
+      <h1 >New order received</h1>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="4" [rowspan]="3">
+      <mat-icon class="order-icon">store</mat-icon>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="4">
+     <h1> ${{amount$ | async}}</h1>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="4" [rowspan]="9" style="overflow-y: scroll;" >
+      <div class="products-grid">
+        <mat-card *ngFor="let item of products$ | async; index as i">
+          <mat-card-header>
+
+            <div mat-card-avatar style="background-size: cover;" [ngStyle]="{'background-image': 'url('+item.imgUrl+')'}"></div>
+            <mat-card-title>{{item.title}}</mat-card-title>
+            <mat-card-subtitle>$ {{item.price}} X {{item.quantity}}</mat-card-subtitle>
+
+
+          </mat-card-header>
+          <img mat-card-image src={{item.imgUrl}}>
+          <mat-card-content>
+            <p>
+              aqui va una descripcion del producto
+            </p>
+          </mat-card-content>
+
+      
+        </mat-card>
+      </div>
+    
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="4">
+      <h1 >Tab anywhere to accept</h1> 
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="4">
+      <button mat-raised-button color="warn" (click)="closePopup()">DECLINE</button>
+    </mat-grid-tile>
+    
+    
+  </mat-grid-list>
+  
+</div>

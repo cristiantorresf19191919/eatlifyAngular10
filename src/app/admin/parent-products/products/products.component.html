@@ -1,0 +1,175 @@
+<div class="products-component">
+  <div class="tp-container">
+    <mat-card class="card-title">Add Products</mat-card>
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="name" placeholder="Product Name" >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Price</mat-label>
+      <span matPrefix>$&nbsp;</span>
+      <input matInput [(ngModel)]="price" placeholder="Product Price" >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+
+      <input matInput [(ngModel)]="description" placeholder="Product Description" >
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select placeholder="Category" [(ngModel)]="category">
+          <mat-option *ngFor="let cat of categories" [value]="cat.name">{{cat.name}}</mat-option>
+          <mat-option (click)="addCategory()">Create New Category</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      
+        <mat-checkbox [(ngModel)]="topProduct">Producto Destacado?</mat-checkbox>
+        
+        <button mat-raised-button color="primary" (click)="registrar();">Registrar</button>
+        <p *ngIf="!info">{{name}}</p>
+  </div>
+
+
+  <div *ngIf="categorias">
+    <div class="table-container" *ngIf='categorias.length > 1' style="padding: 20px;" >
+      <p-table #tt [columns]="cols" [value]="products" dataKey="_id" editMode="row" [paginator]="switchPaginator" [rows]="10" >
+          <ng-template pTemplate="caption">
+              <mat-icon style="margin:4px 4px 0 0">search</mat-icon>
+              <input type="text" class="busqueda-global" pInputText size="50" placeholder="Busqueda Global" (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+              <p style="color:white"><b>Exportar todos los productos a excel</b></p><br>
+            <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button>
+            <button class="mat-raised-button mat-button-base mat-accent" (click)="switchPaginator = !switchPaginator">{{switchPaginator ? 'See All' : 'Paginator'}}</button>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+            <!-- primera fila del header -->
+            <tr>
+              <th
+              *ngFor="let col of columns"
+              style="width:100px;"
+              [pSortableColumn]="col.field"
+              >
+                {{col.header}}
+              </th>
+              <th style="width:8em"></th>
+            </tr>
+
+            <!-- segunda fila del header -->
+
+            <tr>
+              <th *ngFor="let col of columns" [ngSwitch]="col.field">
+
+                <input *ngSwitchCase="'name'" style="width: 132px;" pInputText type="text" (input)="tt.filter($event.target.value, col.field, col.filterMatchMode)">
+
+                <input *ngSwitchCase="'price'" pInputText type="text" style="width: 132px;" (input)="tt.filter($event.target.value, col.field, col.filterMatchMode)">
+
+                <div *ngSwitchCase="'category'" style="width: 214px;" >
+                  <p-dropdown [options]="categorias" [style]="{'width':'86%'}" (onChange)="tt.filter($event.value, col.field, 'equals')"></p-dropdown>
+                </div>
+
+                <div *ngSwitchCase="'description'" tyle="width: 214px;">
+                  <input pInputText style="width:50%" type="text" (input)="tt.filter($event.target.value, col.field, col.filterMatchMode)">
+                </div>
+
+              </th>
+
+            </tr>
+
+          </ng-template>
+          <!-- <ng-template pTemplate="header">
+            <tr>
+                <th [pSortableColumn]="'name'" style="width:100px;">Name
+                    <br> <input style="width: 132px;" pInputText type="text" (input)="tt.filter($event.target.value, 'name', {field: 'name', header: 'name'}.filterMatchMode)">
+                </th>
+                <th [pSortableColumn]="'price'" style="width:100px;">Price
+                    <br> <input pInputText type="text" style="width: 132px;" (input)="tt.filter($event.target.value, 'price', {field: 'price', header: 'price'}.filterMatchMode)">
+
+                </th>
+                <th [pSortableColumn]="'category'" style="width: 214px;">Category
+                    <p-dropdown [options]="categorias" [style]="{'width':'86%'}" (onChange)="tt.filter($event.value, 'category', 'equals')"></p-dropdown>
+                </th>
+
+                <th [pSortableColumn]="'description'" style="width: 214px;">Description
+                    <br> <input pInputText style="width:50%" type="text" (input)="tt.filter($event.target.value, 'description', {field: 'description', header: 'description'}.filterMatchMode)">
+
+                </th>
+                <th style="width:8em"></th>
+            </tr>
+        </ng-template> -->
+
+          <ng-template pTemplate="body" let-producto let-editing="editing" let-ri="rowIndex">
+              <tr [pEditableRow]="producto">
+                  <td>
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input style="width: 132px;" pInputText type="text" [(ngModel)]="producto.name">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{producto.name}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+
+                  <td>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input style="width: 132px;" pInputText type="text" [(ngModel)]="producto.price">
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{producto.price}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+
+                  <td>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                          <p-dropdown style="width: 200px;" [options]="categorias" [(ngModel)]="producto.category" [style]="{'width':'100%'}"></p-dropdown>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{producto.category}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+
+                  <td>
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input pInputText style="width: 100%;" type="text" [(ngModel)]="producto.description">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{producto.description}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+                    <td style="text-align:center">
+                        <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil" class="ui-button-info" style="margin-right: .5em" (click)="onRowEditInit(producto)"></button>
+                        <button *ngIf="!editing" pButton type="button" pCancelEditableRow icon="pi pi-times" class="ui-button-danger" (click)="deleteProduct(producto)"></button>
+                        <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check" class="ui-button-success" style="margin-right: .5em" (click)="onRowEditSave(producto)"></button>
+                        <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times" class="ui-button-danger" (click)="onRowEditCancel(producto, ri)"></button>
+                    </td>
+
+              </tr>
+
+          </ng-template>
+      </p-table>
+
+  </div>
+
+  </div>
+
+
+
+</div>
+
+
+
+
+
+ <!-- message service using toast -->
+ <p-toast></p-toast>
+
+
+

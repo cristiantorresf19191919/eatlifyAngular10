@@ -1,0 +1,173 @@
+<app-loading-global [loadingState]="loading"></app-loading-global>
+
+
+<div id="appDelivery" class="delivery-component">
+  <h1
+    id="title"
+    style="color: #2d88ff; font-size: 30px; margin: 0 auto; text-align: center;"
+  >
+    MODULO DELIVERY EN CONSTRUCCION
+  </h1>
+  <div class="title-box">
+    <h1 (click)="popUpActive = !popUpActive">Create Product</h1>
+  </div>
+  <div
+    class="darkbackground"
+    (click)="popUpActive = !popUpActive"
+    [ngClass]="{ vissibiliyOn: popUpActive, vissibiliyOff: !popUpActive }"
+  ></div>
+  <div
+    class="popupCreateProduct"
+    [ngClass]="{ normal: popUpActive, efectoRotado: !popUpActive }"
+  >
+    <app-create-product
+      (CerrarPopUp)="onCerrarPopUpFromChild($event)"
+    ></app-create-product>
+  </div>
+  <div class="formulario" *ngIf="dataSelected">
+    <p> id {{ dataSelected._id }}</p> 
+
+    <div class="parent-grid">
+      <div class="column">
+        <h4>Nombre del producto</h4>
+      </div>
+      <div class="column">
+        <p *ngIf="!onEdit">{{ dataSelected.name }}</p>
+        <input
+          *ngIf="onEdit"
+          type="text"
+          [(ngModel)]="dataSelected.name"
+          class="formulario__input-product"
+          placeholder="Nombre Producto"
+        />
+      </div>
+    </div>
+
+    <div class="parent-grid">
+      <div class="column">
+        <h4>Price</h4>
+      </div>
+      <div class="column">
+        <p *ngIf="!onEdit">{{ dataSelected.price }}</p>
+        <input
+          *ngIf="onEdit"
+          type="text"
+          [(ngModel)]="dataSelected.price"
+          class="formulario__input-product"
+          placeholder="Price"
+        />
+      </div>
+    </div>
+
+    <div class="parent-grid">
+      <div class="column">
+        <h4>Description</h4>
+      </div>
+      <div class="column">
+        <p *ngIf="!onEdit">{{ dataSelected.description }}</p>
+        <input
+          *ngIf="onEdit"
+          type="text"
+          [(ngModel)]="dataSelected.description"
+          class="formulario__input-product"
+          placeholder="Description"
+        />
+      </div>
+    </div>
+
+    <div class="parent-grid">
+      <div class="column">
+        <h4>Category</h4>
+      </div>
+      <div class="column">
+        <p *ngIf="!onEdit">{{ dataSelected.category }}</p>
+        <select
+          name="category_CreateProduct"
+          [compareWith]="compararCategoria" 
+          placeholder="Category"
+          [(ngModel)]="dataSelected.category"
+        >       
+        <option  *ngFor="let cat of categoriesArray" [value]="cat.name">{{ cat.name }}</option>
+        <option (click)="crearMuevaCategoria()" >Add new Category</option>
+      
+      
+      </select>
+
+     
+      </div>
+    </div>
+
+    <div class="parent-grid">
+      <div class="column">
+        <h4>Imagen</h4>
+      </div>
+      <div class="column">
+        <i class="fas fa-camera" style="font-size: 30px;"></i>
+        <input
+          type="file"
+          id="imageInputFuncione"
+          style="visibility: hidden; opacity: 0;"
+          #imageInput
+          *ngIf="onEdit"
+          placeholder="suba imagen"
+          (change)="onFileSelected(imageInput, dataSelected)"
+        />
+      </div>
+    </div>
+    <!-- (change)="onFileSelected(imageInput,dataSelected)" -->
+    <div class="parent-flex">
+      <div class="no-picture" *ngIf="onEdit">
+        <h1 *ngIf="!dataSelected.image">
+          <label for="imageInputFuncione">Upload Image</label>
+        </h1>
+        <h1 *ngIf="dataSelected.image">
+          <label for="imageInputFuncione">Change Image</label>
+        </h1>
+      </div>
+      <div class="picture-container" *ngIf="imgUrl">
+        <img class="picture-container__picture" src="{{ imgUrl }}" alt="" />
+      </div>
+      <div class="picture-container" *ngIf="dataSelected.image">
+        <img
+          class="picture-container__picture"
+          src="{{ dataSelected.image.url }}"
+          alt=""
+        />
+      </div>
+    </div>
+
+    <div class="formulario__buttons">
+      <button
+        class="formulario__editButton"
+        (click)="onEdit = !onEdit"
+        [ngStyle]="{
+          'background-color': onEdit ? 'rgb(119, 18, 18)' : '#324cdd'
+        }"
+      >
+        {{ onEdit ? "Cancel" : "Edit" }}
+      </button>
+      <button
+        class="formulario__saveButton"
+        *ngIf="onEdit"
+        (click)="updateProduct(dataSelected)"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+  <div>
+    <nav *ngIf="categoriesArray">
+      <ul>
+        <li *ngFor="let cat of categoriesArray">
+          <a (click)="onCategorySelected(cat)">{{ cat.name }}</a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+ 
+  <div class="parent" id="parentContainer">
+   
+    <app-bakery-deli></app-bakery-deli>
+  </div>
+</div>

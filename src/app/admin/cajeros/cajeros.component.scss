@@ -1,0 +1,129 @@
+@mixin mobile {
+	@media (max-width:450px){
+		@content;
+	}
+	
+}
+
+$color-primario : rgb(63, 81, 181);
+
+.tp-container {
+	display: flex;
+	width: 50%;
+	margin: 2rem auto;
+	flex-direction: column;
+	// border: 1px solid white;
+	font-size: 1.7rem;
+	// transform: scale(1.4);
+}
+
+.tp-container > * {
+	width: 100%;
+}
+
+
+
+.radio-group {
+	display: flex;
+	flex-direction: column;
+	margin: 15px 0;
+}
+
+.radio-button {
+	margin: 5px;
+}
+
+.mat-card,
+.privileges-msg {
+	text-align: center;
+}
+
+.boton {
+	margin-left: 2rem;
+}
+
+.input-edit {
+	background-color: #1d1d1d;
+	margin: 0;
+	font-size: 1.8rem;
+	width: 33%;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	padding: 1rem;
+	color: white;
+	height: 35px;
+text-align: center;
+}
+
+.info-p{
+  margin: 1rem 0;
+	font-size: 1.8rem;
+
+}
+
+.mat-accordion-el{
+  margin-bottom: 1rem !important;
+}
+
+
+mat-label{
+	font-size: 19px;
+
+}
+
+.cajero-description-container{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	& > .item{
+		&:nth-child(1){
+			margin-top: 1%;
+		}
+		// border: 1px solid lightgrey;
+		margin-bottom: 1%;
+		width: 60%;
+		display: flex;
+		padding: 5px 0;
+		justify-content: space-between;
+		@include mobile(){
+			width: 100%;
+		}
+	}
+}
+
+.space-around{
+	justify-content: space-around !important;
+}
+
+.flex-center{
+	justify-content: center !important;
+}
+
+.no-margin{
+	margin: 0 !important;
+}
+
+
+
+
+mat-expansion-panel-header{
+	position: relative !important;
+}
+.linea-sutil{
+	border: 1px solid $color-primario;
+	height: 1px;
+	width: 100%;
+	position: absolute;
+	bottom: 1px;
+	left: 0;
+	right: 0;
+
+}
+
+@media (min-width:500px){
+	.allcajeros-container{
+		padding: 0 80px;
+	}
+}

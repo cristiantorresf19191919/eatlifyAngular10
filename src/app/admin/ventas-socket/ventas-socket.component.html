@@ -1,0 +1,39 @@
+<p>ventas-socket works!</p>
+<h1 style="
+    color: #2d88ff;
+    font-size: 30px;
+    margin: 0 auto;
+    text-align: center; ">MODULO VENTAS SOCKET EN CONSTRUCCION</h1>
+
+<div *ngIf="arregloVentas" class="parent" >
+  <div class="parent-grid-each-element">
+    <h1 style="display: block;">Nombre</h1>
+    <h1 style="display: block;">Cantidad</h1>
+    <h1 style="display: block;">Precio</h1>
+
+  </div>
+  <div  *ngFor="let venta of arregloVentas" class="parent-grid-each-element" [@bounceOutUpOnLeave] [@bounceInDownOnEnter]>
+    <div>
+      <h1 class="ventasName"><i class="pi pi-check" style="color: green;"></i> {{venta.name}} </h1>
+
+    </div>
+    <div>
+      <h1> {{venta.quantity}}</h1>
+
+    </div>
+    <div>
+      <h1> {{venta.price}} </h1>
+    </div>
+
+  </div>
+  <div class="summary" [@fadeInDownOnEnter]  *ngIf="arregloVentas.length>1">
+    <h1>TOTAL</h1>
+    <h1>{{totalSummaryPrice}}</h1>
+  </div>
+</div>
+
+<audio id="cashAudio">
+  <source src="./assets/audio/cash.ogg" type="audio/ogg">
+  <source src="./assets/audio/cash.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>

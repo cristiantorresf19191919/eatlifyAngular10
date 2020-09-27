@@ -1,0 +1,55 @@
+@mixin iconoSideBarbox($position) {
+  position: absolute;
+  top: 0;
+  #{$position}: 0;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  i {
+    font-size: 2rem;
+  }
+}
+
+.tp-container {
+  display: flex;
+  width: 50%;
+  margin: 2rem auto;
+  flex-direction: column;
+  // border: 1px solid white;
+  font-size: 1.7rem;
+  // transform: scale(1.4);
+}
+// agrandar todos los inputs al 100%
+.tp-container > * {
+  width: 100%;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.radio-button {
+  margin: 5px;
+}
+.busqueda-global {
+  background-color: #1d1d1d !important;
+  margin: 1rem 0 !important;
+  font-size: 1.8rem !important;
+  width: 33% !important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 3px !important;
+  padding: 1rem !important;
+  color: white !important;
+}
+
+.products-component {
+  visibility: visible;
+  opacity: 1;
+  transition: all 0.3s ease-in;
+  width: calc(100% - 23rem);
+  margin-left: auto;
+}

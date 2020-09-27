@@ -1,0 +1,123 @@
+<div class="categoriasComponent">
+  <h1>Categorias</h1>
+
+  <mat-form-field class="input-common" appearance="outline">
+    <mat-label><i class="fas fa-search"></i> Buscar</mat-label>
+    <input
+      matInput
+      class="buscar-input"
+      [(ngModel)]="inputSearchCategory"
+      placeholder="Buscar Categoria"
+    />
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    class="my-1"
+    (click)="createCategoryPopUpBoolean = true"
+  >
+    Crear Categoria
+  </button>
+
+  <div *ngIf="categories && categories.length > 0" class="card-container my-1">
+    <mat-card>
+      <mat-list>
+        <mat-list-item
+          *ngFor="let cat of categories"
+          class="eachCatTextCard-container my-1"
+        >
+          <mat-card-header *ngIf="!editcategoryboolean">
+            <mat-card-title>{{ cat.name }}</mat-card-title>
+          </mat-card-header>
+
+          <mat-form-field
+            *ngIf="editcategoryboolean"
+            style="width: 85%;"
+            class="example-full-width"
+          >
+            <mat-label>{{ cat.name }}</mat-label>
+            <input matInput placeholder="cambiar el nombre" [(ngModel)]="cat.name" [value]="cat.name" />
+          </mat-form-field>
+
+          
+          <mat-card-actions class="mat-actions my-2">
+            <button
+            mat-mini-fab
+            *ngIf="editcategoryboolean"
+            color="accent"
+            (click)="editcategoryboolean = !editcategoryboolean"
+            aria-label="Example icon button with a menu icon"
+          >
+            <mat-icon>clear</mat-icon>
+          </button>
+            <button
+              mat-mini-fab
+              color="primary"
+              *ngIf="!editcategoryboolean"
+              (click)="editcategoryboolean = !editcategoryboolean"
+              aria-label="Example icon button with a menu icon"
+            >
+              <mat-icon>create</mat-icon>
+            </button>
+            <button
+              mat-mini-fab
+              color="warn"
+              (click)="borrarCategoria(cat)"
+              aria-label="Example icon button with a menu icon"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button
+              mat-mini-fab
+              color="accent"
+              (click)="updateCat(cat)"
+              aria-label="Example icon button with a menu icon"
+            >
+              <mat-icon>save</mat-icon>
+            </button>
+          </mat-card-actions>
+
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+  </div>
+
+  <div
+    class="darkBackground"
+    (click)="createCategoryPopUpBoolean = false"
+    [ngStyle]="{
+      visibility: createCategoryPopUpBoolean ? 'visible' : 'hidden',
+      opacity: createCategoryPopUpBoolean ? '1' : '0'
+    }"
+  ></div>
+  <div
+    class="popUpCreateCategory"
+    [ngStyle]="{
+      visibility: createCategoryPopUpBoolean ? 'visible' : 'hidden',
+      opacity: createCategoryPopUpBoolean ? '1' : '0'
+    }"
+  >
+    <div class="centered-text">
+      <h1>Crear Categoria</h1>
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input
+          matInput
+          placeholder="Nombre de la Categoria"
+          [(ngModel)]="inputCreateCategory"
+        />
+      </mat-form-field>
+
+      <mat-checkbox [(ngModel)]="istaxablecategory" placeholder="Es Taxable"
+        ><h2 class="mat-display-5">Es Taxable?</h2></mat-checkbox
+      >
+      <br />
+
+      <button mat-raised-button color="primary" (click)="onSaveCategory()">
+        Guardar
+      </button>
+    </div>
+  </div>
+</div>

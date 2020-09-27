@@ -1,0 +1,134 @@
+.item-container {
+	display: flex;
+	justify-content: space-between;
+	.item-element {
+		font-size: 2rem;
+    white-space: nowrap;
+    max-width: 158px;
+    overflow: hidden;
+	}
+}
+
+.input-received {
+	padding: 1rem;
+	font-size: 3rem;
+	align-items: center;
+	text-align: center;
+	border-radius: 1rem;
+	border: none;
+	box-shadow: 2px 2px 5px #777;
+	background: radial-gradient(#303030, #2e3f2e);
+  color: #3f51b5;
+  width: 27rem;
+}
+
+.deleteItemButton {
+	border-radius: 5rem;
+	font-size: 14px;
+	background: red;
+	border: none;
+	transition: all .2s;
+	&:active {
+		transform: scale(2);
+	}
+}
+.addItemButton {
+	border-radius: 5rem;
+	font-size: 14px;
+  background: green;
+  margin: 0 3px;
+	border: none;
+	transition: all .2s;
+	&:active {
+		transform: scale(2);
+	}
+}
+.close-button-container {
+	cursor: pointer;
+	padding: 1rem;
+
+	.closeButton {
+		font-size: 4rem;
+	}
+}
+.cleanBtnContainer{
+display: flex;
+justify-content: center;
+
+}
+.cleanBtn {
+	font-size: 18px;
+	border: none;
+  padding: 1rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  position: relative;
+	border-radius: 18px;
+	background: #333;
+  color: white;
+  transition: all .3s;
+  &::after{
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    background: #333;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .2s;
+  }
+  &:active{
+    background-color: blue;
+    &::after{
+      transform: scaleX(1.5) scaleY(2.2);
+      opacity: 0;
+    }
+  }
+}
+
+.openJournalComponent{
+  display: inline-block;
+  transform:translate3d(63rem,33rem,21px) !important;
+}
+
+@media screen and (max-width:390px){
+  .title{
+    font-size: 1rem;
+    margin-top: 19%;
+  }
+  .close-button-container{
+    padding: 0rem !important;
+    position: relative !important;
+
+  }
+  .closeButton{
+    font-size: 2rem !important;
+    position: absolute !important;
+    top: 2rem !important;
+    left: -1rem !important;
+  }
+
+  .cleanBtn{
+    font-size: 10px;
+    padding: 6px;
+  }
+  .item-element{
+    font-size: 1rem !important;
+  }
+  .addItemButton{
+    font-size: .5rem !important;
+  }
+  .deleteItemButton{
+    font-size: .5rem !important;
+  }
+  .title-feedback, .input-received{
+    font-size: 1.5rem !important;
+  }
+  .input-received{
+    padding: 0rem !important;
+    width: 13rem !important;
+  }
+
+}
