@@ -22,8 +22,8 @@ import { AdminModule } from './admin/admin.module';
 import { PrimerInterceptor } from './http-interceptors/primer-interceptor';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-const config:SocketIoConfig = {url:'localhost:5000', options:{}};
-  // const config:SocketIoConfig = {url:'https://posdeliveryapp.herokuapp.com', options:{}};
+// const config:SocketIoConfig = {url:'localhost:5000', options:{}};
+  const config:SocketIoConfig = {url:'https://posdeliveryapp.herokuapp.com', options:{}};
 
 @NgModule({
   declarations: [
@@ -47,9 +47,7 @@ const config:SocketIoConfig = {url:'localhost:5000', options:{}};
     PrimengModule,
     AdminModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),    
-
-    
-
+  
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
