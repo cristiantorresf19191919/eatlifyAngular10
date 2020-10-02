@@ -1,51 +1,85 @@
-<div class="main-order-background"  >
-
-  <mat-grid-list cols="4" rows="5" rowHeight="40px">
-
-    <mat-grid-tile [colspan]="4" >
-      <h1 >New order received</h1>
-    </mat-grid-tile>
-
-    <mat-grid-tile [colspan]="4" [rowspan]="3">
-      <mat-icon class="order-icon">store</mat-icon>
-    </mat-grid-tile>
-
-    <mat-grid-tile [colspan]="4">
-     <h1> ${{amount$ | async}}</h1>
-    </mat-grid-tile>
-
-    <mat-grid-tile [colspan]="4" [rowspan]="11" style="overflow-y: scroll;" >
-      <div class="products-grid">
-        <mat-card *ngFor="let item of products$ | async; index as i">
-          <mat-card-header>
-
-            <div mat-card-avatar style="background-size: cover;" [ngStyle]="{'background-image': 'url('+item.imgUrl+')'}"></div>
-            <mat-card-title>{{item.title}}</mat-card-title>
-            <mat-card-subtitle>$ {{item.price}} X {{item.quantity}}</mat-card-subtitle>
-
-
-          </mat-card-header>
-          <img mat-card-image src={{item.imgUrl}}>
-          <mat-card-content>
-            <p>
-              aqui va una descripcion del producto
-            </p>
-          </mat-card-content>
-
-      
-        </mat-card>
+<div class="main-order-background" matRipple>
+  <div class="icon-close"> <h1 (click)="closePopup()"><mat-icon>close</mat-icon></h1></div>
+  <div class="container p-5">
+    <h1 class="text-center animated bounceIn" style="font-size: 45px;">NEW ORDER</h1>
+    <div class="row my-2">
+      <div class="col-12 text-center">
+        <h3 class="animated pulse infinite">          
+            Tap anywhere to accept
+        </h3>
       </div>
-    
-    </mat-grid-tile>
+  <!--     <div class="col-12">
+        <mat-icon class="order-icon">store</mat-icon>       
+      </div> -->
+    </div>
+    <div class="row text-center my-3">
+      <div class="col-12" *ngIf="amount$ | async">
+        <h1 class="font-weight-bold">
+          {{amount$ | async}}
+        </h1>
+      </div>
+      <div class="col-12">
+        <h4>
+        October 01 2020
+        </h4>
+      </div>
+    </div>
+    <div class="row text-center mt-2">
+      <div class="col-12"><h1>Order Details</h1></div>
+    </div>
 
-    <mat-grid-tile [colspan]="4">
-      <h1 >Tab anywhere to accept</h1> 
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="4">
-      <button mat-raised-button color="warn" (click)="closePopup()">DECLINE</button>
-    </mat-grid-tile>
-    
-    
-  </mat-grid-list>
+    <div class="row text-center mt-5" >
+      <div class="col-md-6">
+        <div class="list-group-cr z-depth-1">
+          <div class="list-group-cr-item">            
+              <mat-icon class="list-group-item-icon">
+                account_circle
+              </mat-icon>          
+            Keanu Reeves
+          </div>
+          <div class="list-group-cr-item -nowtextrap">
+            <mat-icon class="list-group-item-icon">
+              location_on
+            </mat-icon>  
+            31-15 96st 1124 Queens
+          </div>
+          <div class="list-group-cr-item">
+             <mat-icon class="list-group-item-icon">
+                phone_in_talk
+              </mat-icon>  929 282 8737</div>
+          <div class="list-group-cr-item">
+             <mat-icon class="list-group-item-icon">
+                payment
+              </mat-icon>  Bank of America</div>
+        </div>
+      </div>
+      <div class="col-md-6 products-list" *ngIf="products$ | async">
+        <div class="list-group-cr z-depth-1">
+
+          <div class="list-group-cr-item" *ngFor="let item of products$ | async" >
+            <div class="image-container" [ngStyle]="{'background-image': 'url('+item.imgUrl+')'}"></div>
+            <div><h4>{{item.title}}</h4></div>
+            <div><h4>{{item.quantity}} <b>X</b>  ${{item.price}}</h4></div>
+
+
+          </div>
+
+
+
+
+        </div>
+
+      </div>
+    </div>
   
+
+  </div>
+
+  
+</div>
+
+<div class="row mt-2">
+  <div class="col-12">
+    <button (click)="closePopup()"  mat-raised-button color="warn" class="mx-auto p-2 w-100 decline-button" >Decline Order</button>
+  </div>
 </div>

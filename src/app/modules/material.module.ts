@@ -22,6 +22,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 
 
+import {MatRippleModule} from '@angular/material/core'; 
+
 
 
 import {MatDialogModule} from '@angular/material/dialog';
@@ -55,7 +57,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 	MatSlideToggleModule,
 	MatMenuModule,
 	MatTooltipModule,
-	MatDialogModule
+	MatDialogModule,
+	MatRippleModule
 	]
 })
 export class MaterialModule {}

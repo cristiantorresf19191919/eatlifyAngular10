@@ -47,6 +47,13 @@ export class DashboardComponent implements OnInit {
      ) { }
 
   ngOnInit() {
+
+    // testing
+  /*   const dialogRef = this.dialog.open(NewOrderComponent, {
+      width: `${screen.width}px`,
+      height:`${screen.height}px`,
+      minWidth:`${screen.width}px`,
+    }); */
        //ocultar icono y estado de reciviendo pedidos
 		this.utilities.setCambioRuta(true);
     this.subscription = this.sourceABC.subscribe()
@@ -66,6 +73,12 @@ export class DashboardComponent implements OnInit {
       });
     })
   
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this._orderSubscriptor.unsubscribe();
   }
 
   openDialog(): void {

@@ -17,7 +17,6 @@ import { VentasComponent } from "./ventas/ventas.component";
 import { PrimengModule } from "../modules/primeng.module";
 import { ResumenComponent } from "./resumen/resumen.component";
 import { MatChipsModule } from "@angular/material/chips";
-
 import { JournalComponentComponent } from "./journal-component/journal-component.component";
 import { RealtimeComponent } from "./realtime/realtime.component";
 import { RealtimeListComponent } from "./realtime-list/realtime-list.component";

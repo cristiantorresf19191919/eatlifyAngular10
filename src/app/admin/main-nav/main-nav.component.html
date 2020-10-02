@@ -156,7 +156,7 @@
     position: fixed;
     z-index: 99;
     bottom: 14px;
-    right: 50%;
+    left: 1px;
     transform: translateX(50%);
   " class="mat-chip-list-stacked" aria-label="Color selection">
       <mat-chip
@@ -167,6 +167,7 @@
         style="width: 9rem;"
         (click)="onClickChip()"
       >
+      
         {{ chip.estadoStatus }}
       </mat-chip>
     </mat-chip-list>

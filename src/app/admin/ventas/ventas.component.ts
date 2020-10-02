@@ -26,7 +26,7 @@ import { BuscarService } from "src/app/servicios/buscar.service";
 import {
   fadeInDownOnEnterAnimation,
   bounceInDownOnEnterAnimation,
-  zoomInLeftOnEnterAnimation,
+  zoomInLeftOnEnterAnimation, zoomOutLeftOnLeaveAnimation
 } from "angular-animations";
 import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 import { CategoriasService } from "src/app/servicios/categorias.service";
@@ -44,6 +44,7 @@ interface Categories {
     fadeInDownOnEnterAnimation(),
     bounceInDownOnEnterAnimation(),
     zoomInLeftOnEnterAnimation(),
+    zoomOutLeftOnLeaveAnimation()
   ],
 })
 export class VentasComponent implements OnInit, OnChanges {
@@ -870,6 +871,7 @@ export class VentasComponent implements OnInit, OnChanges {
   assignMenuValue(val) {
     this.activateShortCutComponent = false;
     this.itemssubcatmenu = val;
+    
     this.copiaSeguraProductosParaEnviar = this.products.filter(
       (el: Item) => el.category === val
     );

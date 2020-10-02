@@ -61,20 +61,22 @@
     </div>
   </div>
 
-
-  <div class="restaurant-body" *ngIf="restaurantDataHasLongName  || !onedit">
-    <mat-card class="example-card" *ngIf="restaurantData" style="width: 60rem;">
+  <!-- show restaurant information -->
+  <div class="restaurant-body" *ngIf="restaurantDataHasLongName  || !onedit" [@zoomInRightOnEnter] >
+    <mat-card class="example-card" *ngIf="restaurantData" style="width: 60rem;" [ngStyle]="{'visibility': onedit ? 'hidden' : 'visible'}">
       <mat-card-header>
+        <h1>testing</h1>
         <mat-card-title>{{ restaurantData.name }}</mat-card-title>
       </mat-card-header>
      
-      <ng-container *ngIf="restaurantData.image; else elseTemplate">
+      <ng-container *ngIf="restaurantData.image; else elseTemplate" >
         <img
         *ngIf="restaurantData.image.url"
         mat-card-image
         src="{{ restaurantData.image.url }}"
         style="height: 29rem;"
         alt="Foto Restaurante "
+        [@zoomInLeftOnEnter]
       />
 
       </ng-container>
@@ -117,7 +119,7 @@
       </mat-card-content>
     </mat-card>
   </div>
-  
+  <!-- add or edit restaurant information -->
   <div class="restaurant-body" *ngIf="!restaurantDataHasLongName || onedit">
 
    <!--  <button 
@@ -150,7 +152,7 @@
 
     <h1 style="color: #2d88ff; text-align: center">Datos de Restaurante</h1>
 
-    <mat-card class="example-card" style="background-color: #303030;
+    <mat-card class="example-card z-depth-1" style="background-color: #303030;
     box-shadow: 1px 2px 1px #222;" >
       <mat-card-header>
         <mat-card-title>Completa información </mat-card-title>

@@ -30,11 +30,13 @@ import {
   loadRestaurant,
   deleteRestaurantEffect,
 } from "../../store/actions/restaurantActions";
+import { bounceInDownOnEnterAnimation, zoomInLeftOnEnterAnimation, zoomInRightOnEnterAnimation } from 'angular-animations';
 
 @Component({
   selector: "app-restaurant",
   templateUrl: "./restaurant.component.html",
   styleUrls: ["./restaurant.component.scss"],
+  animations:[zoomInLeftOnEnterAnimation({delay:600}), zoomInRightOnEnterAnimation()]
 })
 export class RestaurantComponent implements OnInit, AfterViewInit {
   count$: Observable<number>;
@@ -43,6 +45,7 @@ export class RestaurantComponent implements OnInit, AfterViewInit {
   address: string;
   description: string;
   phone: string;
+
 
   restaurantDataHasLongName: boolean = false;
 

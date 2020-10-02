@@ -8,10 +8,13 @@ import { getOrderAmount, getOrderProducts } from 'src/app/store/reducers/orderRe
 import { OrderData } from '../dashboard/dashboard.component';
 
 
+
 @Component({
   selector: 'app-new-order',
   templateUrl: './new-order.component.html',
-  styleUrls: ['./new-order.component.scss']
+  styleUrls: ['./new-order.component.scss'],
+
+
 })
 export class NewOrderComponent implements OnInit {
   
@@ -28,6 +31,12 @@ export class NewOrderComponent implements OnInit {
 
     this.amount$ = this.store.pipe(select(getOrderAmount));
     this.products$ = this.store.pipe(select(getOrderProducts));
+    let audio = new Audio();
+    audio.src = '../../../assets/audio/clear.mp3';
+    audio.load();
+    audio.play();
+
+
   
   
     

@@ -3,7 +3,18 @@
 background: -webkit-linear-gradient(to right, #3a7bd5, #2d88ff);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to right, #3a7bd5, #2d88ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     height: 100%;
-    padding: 100px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    .icon-close{
+        position: absolute;
+        top: 2px;
+        right: 5px;
+    }
+    
 }
 
 .order-icon{
@@ -22,4 +33,53 @@ background: linear-gradient(to right, #3a7bd5, #2d88ff); /* W3C, IE 10+/ Edge, F
     height: 100%;
     padding: 63px;
     grid-gap: 20px;
+}
+
+.list-group-cr{
+   
+    padding: 20px 20px 28px 20px;
+   
+
+    .list-group-cr-item{
+        font-size: 20px;
+        padding: 11px 19px 7px 19px;
+        width: 70%;
+        margin: 2% auto;        
+        border-bottom: 1px solid rgba(211, 211, 211, 0.37);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        word-break: break-all;
+        .list-group-item-icon{
+            display: block;
+            // transform: translateY(9px);
+            font-size: 30px;
+        }
+
+        .image-container{
+            width: 40px;
+            height: 40px;
+            background-size: cover;
+            background-position: top;    
+            background-image: url('https://cdn.pixabay.com/photo/2017/06/19/16/49/black-2420162__340.png');
+            border-radius: 50%;
+            box-shadow: 1px 2px 6px rgba(68, 68, 68, 0.5) !important;
+
+        }
+    }
+   
+
+}
+
+.products-list{
+    max-height: 300.5px;
+    overflow-y: auto;
+}
+
+.decline-button{
+   z-index: 999;
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   right: 0;
 }
