@@ -1,3 +1,6 @@
+$cool-shadow:   10px 10px 20px #222222a2;
+$primary-color : #2d88ff;
+
 .categoriasComponent {
   transition: all 0.3s;
   text-align: center;
@@ -12,9 +15,17 @@
   margin-left: auto;
 }
 .eachCatTextCard-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 50%; 
+    margin: 0 auto; 
+    font-size: 26px;
+    align-items: center;
+}
+
+.spacer_cr{
+  flex: 1 1 1;
 }
 
 .card-container {
@@ -127,4 +138,21 @@
   width: 19rem;
     display: flex;
   justify-content: space-evenly;
+}
+
+.product-header{
+  width: 100%;
+  h1{
+    color: #2d88ff;
+    font-size: 30px; 
+    text-align: start;
+    padding: 2% 3%;
+    border-bottom: 1px solid $primary-color;
+    position: sticky;
+
+ 
+  }
+  transform: translateY(-5px);
+  background: linear-gradient(145deg, #333333, #2b2b2b);
+  box-shadow:  $cool-shadow;
 }

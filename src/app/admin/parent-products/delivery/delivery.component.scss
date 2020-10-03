@@ -1,3 +1,6 @@
+$primary-color : #2d88ff;
+$cool-shadow:   10px 10px 20px #222222a2, 
+-10px -10px 20px #3e3e3ea4;
 .parent {
   position: relative !important;
   
@@ -27,7 +30,6 @@
 }
 .formulario {
   margin: 0 auto;
-  border: 2px solid rgba(224, 255, 255, 0.52);
   width: 97%;
   padding: 2rem;
   position: relative;
@@ -156,13 +158,14 @@
 }
 
 .picture-container {
-  width: 50rem;
+  width: 47rem;
   border-radius: 20%;
+  
   &__picture {
     border-radius: 4%;
     height: 23rem;
     width: 42rem;
-    border: 1px solid #2d88ff;
+    
     padding: 4px;
     max-width: 42rem;
     max-height: 23rem;
@@ -294,4 +297,54 @@ nav {
 .delivery-component {
   width: calc(100% - 23rem);
   margin-left: auto;
+}
+
+.product-header{
+  h1{
+    color: #2d88ff;
+    font-size: 30px; 
+    padding: 2% 3%;
+    border-bottom: 1px solid $primary-color;
+    position: sticky;
+
+ 
+  }
+  transform: translateY(-5px);
+  background: linear-gradient(145deg, #333333, #2b2b2b);
+  box-shadow:  $cool-shadow;
+}
+
+.photo-container{
+  padding: 0 21px;
+  display: flex;
+   p{
+     font-size: 15px;
+   }
+
+   .img-info{
+     text-align: center;
+     
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between; 
+    padding: 20px;
+     box-shadow:  10px 10px 20px #222222a2, 
+  -10px -10px 20px #3e3e3ea4;
+
+    .info-actions{
+      display: flex;
+      justify-content: space-around;
+    }
+
+   }
+
+}
+
+input, mat-label,mat-form-field,mat-slide-toggle{
+  font-size: 25px;
+}
+
+
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
 }

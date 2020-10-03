@@ -53,3 +53,19 @@
   width: calc(100% - 23rem);
   margin-left: auto;
 }
+
+
+td, tr, th{
+  font-size: 20px;
+}
+
+
+.product-image-ontable{
+  vertical-align: middle;
+  border-style: none;
+  width: 5rem;
+  border-radius: 50%;
+  height: 5rem;
+  margin-right: 4%;
+  padding: 2px;
+}

@@ -14,7 +14,7 @@ import {FieldsetModule} from 'primeng/fieldset';
 import {MenuModule} from 'primeng/menu';
 import {MenuItem} from 'primeng/api';
 import {ChartModule} from 'primeng/chart';
-
+import {CheckboxModule} from 'primeng/checkbox';
 
 @NgModule({
   declarations: [],
@@ -51,7 +51,8 @@ import {ChartModule} from 'primeng/chart';
     SpinnerModule,
     FieldsetModule,
     MenuModule,
-    ChartModule
+    ChartModule,
+    CheckboxModule
 
 
 

@@ -1,5 +1,6 @@
 import { ElementRef, ViewChild } from '@angular/core';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Utilities } from './Utilties';
 
 @Component({
@@ -10,7 +11,7 @@ import { Utilities } from './Utilties';
 export class ParentProductsComponent implements OnInit, AfterViewInit {
   @ViewChild("sidebar",{static:false}) sideBar:ElementRef;
 
-  constructor(private utilities: Utilities) { }
+  constructor(private utilities: Utilities, private router:Router) { }
 
   ngAfterViewInit(): void {
     // outputs `I am span`
@@ -38,6 +39,8 @@ export class ParentProductsComponent implements OnInit, AfterViewInit {
       //ocultar icono y estado de reciviendo pedidos
 		this.utilities.setCambioRuta(true);
     this.utilities.notificarCambioRuta.emit("cambia");
+    
+    this.router.navigate(["/dashboard/parentProducts/modifierGroups"])
   }
 
 }

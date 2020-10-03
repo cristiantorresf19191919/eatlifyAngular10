@@ -35,11 +35,9 @@ import { NewOrderComponent } from './new-order/new-order.component';
 
 @NgModule({
   declarations: [
-    DashboardComponent,
-    DeliveryComponent,
+    DashboardComponent,    
     MainNavComponent,
-    NewOrderComponent,
-    ProductsComponent,
+    NewOrderComponent,    
     CajerosComponent,
     VentasComponent,
     ResumenComponent,
@@ -47,13 +45,11 @@ import { NewOrderComponent } from './new-order/new-order.component';
     RealtimeComponent,
     RealtimeListComponent,
     VentasSocketComponent,
-    ShowProductsComponent,
-    BakeryDeliComponent,
-    CreateProductComponent,
-    CategoriesComponent,
-    ParentProductsComponent,
+    ShowProductsComponent,   
+    CategoriesComponent,    
     LoadingGlobalComponent,
     RestaurantComponent,
+    
   ],
   imports: [
     CommonModule,

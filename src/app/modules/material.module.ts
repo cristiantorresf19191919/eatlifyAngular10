@@ -20,22 +20,17 @@ import { MatOptionModule } from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+
 
 
 import {MatRippleModule} from '@angular/material/core'; 
-
-
-
 import {MatDialogModule} from '@angular/material/dialog';
-
-
 
 @NgModule({
 	declarations: [],
 	imports: [
 		CommonModule,
-		
-
 	],
 	exports: [
 		CommonModule,
@@ -58,7 +53,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 	MatMenuModule,
 	MatTooltipModule,
 	MatDialogModule,
-	MatRippleModule
+	MatRippleModule,
+	MatButtonModule
 	]
 })
 export class MaterialModule {}

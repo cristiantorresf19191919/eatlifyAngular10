@@ -8,6 +8,7 @@ import { zoomInLeftOnEnterAnimation } from 'angular-animations';
 import { Category } from 'src/app/models/item';
 import { Utilities } from '../Utilties';
 import { Router } from '@angular/router';
+import { DeliveryService } from 'src/app/servicios/delivery.service';
 
 
 
@@ -37,13 +38,18 @@ export class ProductsComponent implements OnInit {
 		private productsService: ProductosService,
 		private messageService: MessageService,
 		private categoriasService: CategoriasService,
-		public router: Router
+		public router: Router,
+		private utilites:Utilities,
+		private deliveryService:DeliveryService
 		
 	) {}
 
 	
 
 	ngOnInit() {
+
+		//ocultar recibiendo pedidos
+		this.utilites.setCambioRuta(true);
 
 		// get categorias para cargar el select
 
@@ -78,8 +84,7 @@ export class ProductsComponent implements OnInit {
 		this.cols = [
 			{ field: 'name', header: 'name' },
 			{ field: 'price', header: 'price' },
-			{ field: 'category', header: 'category' },
-			{ field: 'description', header: 'description' }
+			{ field: 'category', header: 'category' },			
 		];
 
 		/* get products from server */
@@ -249,5 +254,13 @@ export class ProductsComponent implements OnInit {
 		Utilities.CreateCategory(this.router);
 	}
 
+	editProduct(product){	
+
+
+		this.router.navigate([
+			'/dashboard/parentProducts/delivery',
+			{product_id:product._id}]);
+		
+	}
 	
 }

@@ -53,6 +53,10 @@ export class ProductosService {
 	
 		return this.httpClient.get(GLOBAL.url+'/products', httpOptions);
 	}
+
+	getProductById(id){
+		return this.httpClient.get(GLOBAL.url+"/products/"+id);
+	}
 	UpdateProduct(product) {
 		return this.httpClient.put(`${GLOBAL.url+'/products'}/${product._id}`, product, httpOptions);
 	}

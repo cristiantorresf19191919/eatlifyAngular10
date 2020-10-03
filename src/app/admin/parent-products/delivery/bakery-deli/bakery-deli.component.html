@@ -1,17 +1,16 @@
-<app-loading-global [loadingState]="loading"></app-loading-global>
 
 <div class="parent">
   <div
     class="item"
-    *ngFor="let items of bakeryProducts"
-    (click)="pasarEvento(items)"
+    *ngFor="let item of bakeryProducts"
+    (click)="pasarEvento(item)"
   >
-    <div *ngIf="items.image" class="imagen-container">
-      <img class="imagen-producto" src="{{ items.image.url }}" alt="" />
+    <div *ngIf="item.image" class="imagen-container">
+      <img class="imagen-producto" src="{{ item.image.url }}" alt="" />
     </div>
     <div class="item-details-container">
-      <h2>{{ items.name }}</h2>
-      <h2>$ {{ items.price }}</h2>
+      <h2>{{ item.name }}</h2>
+      <h2>$ {{ item.price }}</h2>
     </div>
   </div>
 </div>

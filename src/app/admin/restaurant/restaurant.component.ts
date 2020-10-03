@@ -36,7 +36,7 @@ import { bounceInDownOnEnterAnimation, zoomInLeftOnEnterAnimation, zoomInRightOn
   selector: "app-restaurant",
   templateUrl: "./restaurant.component.html",
   styleUrls: ["./restaurant.component.scss"],
-  animations:[zoomInLeftOnEnterAnimation({delay:600}), zoomInRightOnEnterAnimation()]
+  animations:[zoomInLeftOnEnterAnimation({delay:300}), zoomInRightOnEnterAnimation()]
 })
 export class RestaurantComponent implements OnInit, AfterViewInit {
   count$: Observable<number>;

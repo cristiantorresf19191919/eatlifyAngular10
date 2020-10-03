@@ -48,7 +48,11 @@ const routes: Routes = [
       },
       { path: "restaurant",
        component: RestaurantComponent },
-      {
+       {
+         path:"parentProducts",
+         loadChildren: () => import('./parent-products/parent-products.module').then(m => m.ParentProductsModule)
+       },
+     /*  {
         path: "parentProducts",
         component: ParentProductsComponent,
         children: [
@@ -76,7 +80,7 @@ const routes: Routes = [
             ],
           },
         ],
-      },
+      }, */
       {
         path: "cajeros",
         component: CajerosComponent,

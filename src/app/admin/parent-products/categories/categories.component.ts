@@ -15,13 +15,13 @@ export class CategoriesComponent implements OnInit {
   categories: Category[] = [];
   editcategoryboolean: boolean;
   categorias: any = [];
-
   inputCreateCategory: String;
   inputSearchCategory: String;
-
   createCategoryPopUpBoolean: boolean = false;
-
   istaxablecategory: boolean;
+
+  currentIndex: number;
+  
   constructor(
     private categoriasService: CategoriasService,
 	private messageService: MessageService,
@@ -38,7 +38,7 @@ export class CategoriesComponent implements OnInit {
 
     console.log("corre funcion");
     this.categoriasService.getCategories().subscribe((arreglo: Category[]) => {
-      debugger;
+     
       console.log("Ha llegado el arreglo desde el servidor");
       console.log(arreglo);
       this.categories = arreglo;

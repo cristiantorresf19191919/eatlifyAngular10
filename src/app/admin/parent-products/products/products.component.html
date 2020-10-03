@@ -1,5 +1,14 @@
 <div class="products-component">
-  <div class="tp-container">
+  <div class="product-header">
+    <h1 
+    
+  
+    
+  >
+    Products
+  </h1>
+  </div>
+<!--   <div class="tp-container">
     <mat-card class="card-title">Add Products</mat-card>
     <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
@@ -30,36 +39,47 @@
         
         <button mat-raised-button color="primary" (click)="registrar();">Registrar</button>
         <p *ngIf="!info">{{name}}</p>
-  </div>
+  </div> -->
 
 
   <div *ngIf="categorias">
     <div class="table-container" *ngIf='categorias.length > 1' style="padding: 20px;" >
-      <p-table #tt [columns]="cols" [value]="products" dataKey="_id" editMode="row" [paginator]="switchPaginator" [rows]="10" >
+      <p-table #tt [columns]="cols" [value]="products" dataKey="_id" [paginator]="switchPaginator" [rows]="10" >
           <ng-template pTemplate="caption">
-              <mat-icon style="margin:4px 4px 0 0">search</mat-icon>
-              <input type="text" class="busqueda-global" pInputText size="50" placeholder="Busqueda Global" (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-              <p style="color:white"><b>Exportar todos los productos a excel</b></p><br>
-            <button type="button" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="ui-button-success"></button>
-            <button class="mat-raised-button mat-button-base mat-accent" (click)="switchPaginator = !switchPaginator">{{switchPaginator ? 'See All' : 'Paginator'}}</button>
+            <div class="row">
+              <div class="col-12">
+                <div class="d-flex justify-content-center align-items-center">
+                  <mat-icon style="margin:4px 4px 0 0">search</mat-icon>
+                  <input type="text" class="busqueda-global" pInputText size="50" placeholder="Busqueda Global" (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+
+                </div>
+  
+              </div>
+            </div>
+            <div class="text-white d-flex justify-content-center">
+              <button type="button" class="p-5" pButton icon="pi pi-file-excel" iconPos="left" label="EXCEL" (click)="exportExcel()" style="margin-right: 0.5em;" class="p-button-success"></button>
+              <button type="button" class="p-5" pButton icon="pi pi-file-excel" iconPos="left" [label]="switchPaginator ? 'See All' : 'Off' " (click)="switchPaginator = !switchPaginator" style="margin-right: 0.5em;" class="p-button-info"></button>
+              
+            </div>
           </ng-template>
           <ng-template pTemplate="header" let-columns>
             <!-- primera fila del header -->
-            <tr>
+            <tr class="text-center">
               <th
               *ngFor="let col of columns"
               style="width:100px;"
+              class="text-center"
               [pSortableColumn]="col.field"
               >
                 {{col.header}}
               </th>
-              <th style="width:8em"></th>
+              <th style="width:8em" class="text-center">Actions</th>
             </tr>
 
             <!-- segunda fila del header -->
 
             <tr>
-              <th *ngFor="let col of columns" [ngSwitch]="col.field">
+              <th *ngFor="let col of columns" [ngSwitch]="col.field" class="text-center">
 
                 <input *ngSwitchCase="'name'" style="width: 132px;" pInputText type="text" (input)="tt.filter($event.target.value, col.field, col.filterMatchMode)">
 
@@ -72,6 +92,9 @@
                 <div *ngSwitchCase="'description'" tyle="width: 214px;">
                   <input pInputText style="width:50%" type="text" (input)="tt.filter($event.target.value, col.field, col.filterMatchMode)">
                 </div>
+
+              </th>
+              <th style="width: 8em;">
 
               </th>
 
@@ -107,7 +130,11 @@
                           <input style="width: 132px;" pInputText type="text" [(ngModel)]="producto.name">
                         </ng-template>
                         <ng-template pTemplate="output">
-                          {{producto.name}}
+                          <div class="px-4">
+                            <img class="product-image-ontable" [src]="producto.image.url" alt="">
+                            {{producto.name}}
+
+                          </div>
                         </ng-template>
                       </p-cellEditor>
                     </td>
@@ -117,8 +144,10 @@
                       <ng-template pTemplate="input">
                         <input style="width: 132px;" pInputText type="text" [(ngModel)]="producto.price">
                       </ng-template>
-                      <ng-template pTemplate="output">
-                        {{producto.price}}
+                      <ng-template pTemplate="output" class="text-center">
+                        <p class="text-center">
+                          $ {{producto.price}}
+                        </p>
                       </ng-template>
                     </p-cellEditor>
                   </td>
@@ -129,26 +158,16 @@
                           <p-dropdown style="width: 200px;" [options]="categorias" [(ngModel)]="producto.category" [style]="{'width':'100%'}"></p-dropdown>
                       </ng-template>
                       <ng-template pTemplate="output">
-                        {{producto.category}}
+                        <p class="text-center">
+                          {{producto.category}}
+                        </p>
+                       
                       </ng-template>
                     </p-cellEditor>
                   </td>
-
-                  <td>
-                      <p-cellEditor>
-                        <ng-template pTemplate="input">
-                          <input pInputText style="width: 100%;" type="text" [(ngModel)]="producto.description">
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                          {{producto.description}}
-                        </ng-template>
-                      </p-cellEditor>
-                    </td>
                     <td style="text-align:center">
-                        <button *ngIf="!editing" pButton type="button" pInitEditableRow icon="pi pi-pencil" class="ui-button-info" style="margin-right: .5em" (click)="onRowEditInit(producto)"></button>
-                        <button *ngIf="!editing" pButton type="button" pCancelEditableRow icon="pi pi-times" class="ui-button-danger" (click)="deleteProduct(producto)"></button>
-                        <button *ngIf="editing" pButton type="button" pSaveEditableRow icon="pi pi-check" class="ui-button-success" style="margin-right: .5em" (click)="onRowEditSave(producto)"></button>
-                        <button *ngIf="editing" pButton type="button" pCancelEditableRow icon="pi pi-times" class="ui-button-danger" (click)="onRowEditCancel(producto, ri)"></button>
+                        <button pButton type="button" pInitEditableRow icon="pi pi-pencil" class="p-button-info" style="margin-right: .5em" (click)="editProduct(producto)"></button>
+                        <button pButton type="button" pCancelEditableRow icon="pi pi-times" class="p-button-danger" (click)="deleteProduct(producto)"></button>
                     </td>
 
               </tr>

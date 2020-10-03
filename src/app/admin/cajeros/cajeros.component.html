@@ -56,6 +56,7 @@
 
   <div class="allcajeros-container">
     <mat-accordion class="mat-accordion-el" *ngFor="let cajero of cajerosRegistrados; let i = index">
+      <h1><b>current index = {{currentIndex}} i = {{i}} panelOpenState = {{panelOpenState}} </b></h1>
       <mat-expansion-panel
         (opened)="panelOpenState=true"
         (closed)="panelOpenState=false"
@@ -112,7 +113,7 @@
               <button  *ngIf="editionmode && currentIndex === i" mat-raised-button color="primary" class="boton" (click)="update(cajero)">Guardar Edicion</button>
               <button mat-raised-button color="warn" class="boton" (click)="delete(cajero)">Eliminar</button>
             </div>
-          <b>current index es {{currentIndex}} y {{i}}</b>
+          
           </div>
       </mat-expansion-panel>
       <br>    

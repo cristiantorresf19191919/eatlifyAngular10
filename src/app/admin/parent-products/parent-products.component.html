@@ -1,57 +1,5 @@
-<div class="container">
-  <input
-    type="radio"
-    class="radio-products"
-    id="toggleProducts"
-    name="toggle"
-  />
-  <input
-    type="radio"
-    class="radio-categories"
-    id="toggleCategories"
-    name="toggle"
-  />
-  <input
-    type="radio"
-    class="radio-activate-side-bars"
-    id="toggleSideBarsOn"
-    name="toggleSideBars"
-  />
-  <input
-    type="radio"
-    class="radio-activate-side-bars"
-    id="toggleSideBarsOff"
-    name="toggleSideBars"
-  />
-  <input
-    type="radio"
-    class="radio-products"
-    id="toggleProducts"
-    name="toggle"
-  />
-  <input
-    type="radio"
-    class="radio-categories"
-    id="toggleCategories"
-    name="toggle"
-  />
-  <input
-    type="radio"
-    class="radio-activate-side-bars"
-    id="toggleSideBarsOn"
-    name="toggleSideBars"
-  />
-  <input
-    type="radio"
-    class="radio-activate-side-bars"
-    id="toggleSideBarsOff"
-    name="toggleSideBars"
-  />
-  <div class="container__iconbox">
-    <label for="toggleSideBarsOn">
-      <i class="fas fa-bars" id="barsicons"></i>
-    </label>
-  </div>
+<div class="container"> 
+ 
 
   <div class="side-bar" #sidebar>
     <div class="side-bar__iconBox">
@@ -61,7 +9,8 @@
     </div>
 
     <div class="side-bar__element"> 
-      <a [routerLink]="['products']" mat-raised-button style="background-color: transparent; padding: 7px; width: 20rem;  ">
+     
+      <a [routerLink]="['products']"  mat-raised-button style="background-color: transparent; padding: 7px; width: 20rem; color: white;  ">
 
       <mat-icon>shopping_basket</mat-icon>   <label for="toggleProducts" class="side-bar__label" router
       ><a class="link" >Productos Tabla</a></label>
@@ -84,6 +33,28 @@
       <mat-icon>shopping_basket</mat-icon>    
       <label for="toggleCategories" class="side-bar__label"
         ><a class="link">Productos</a></label
+      >
+      </a>  
+      </div>
+      
+
+    <div class="side-bar__element"> 
+      <a [routerLink]="['create']" mat-raised-button style="background-color: transparent; padding: 7px; width: 20rem;  ">
+
+      <mat-icon>open_in_browser</mat-icon>    
+      <label for="toggleCategories" class="side-bar__label"
+        ><a class="link">New Product</a></label
+      >
+      </a>  
+      </div>
+
+
+    <div class="side-bar__element"> 
+      <a [routerLink]="['modifierGroups']" mat-raised-button style="background-color: transparent; padding: 7px; width: 20rem;  ">
+
+      <mat-icon>group_work</mat-icon>    
+      <label for="toggleCategories" class="side-bar__label"
+        ><a class="link">Modifier Groups</a></label
       >
       </a>  
       </div>
@@ -110,6 +81,7 @@
   
    
   </div>
+
 </div>
 
 <router-outlet></router-outlet>

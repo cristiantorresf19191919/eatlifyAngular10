@@ -1,6 +1,15 @@
-<div class="categoriasComponent">
-  <h1>Categorias</h1>
 
+<div class="categoriasComponent">
+
+<div class="product-header">
+  <h1 
+  
+
+  
+>
+  Categories
+</h1>
+</div>
   <mat-form-field class="input-common" appearance="outline">
     <mat-label><i class="fas fa-search"></i> Buscar</mat-label>
     <input
@@ -22,29 +31,29 @@
 
   <div *ngIf="categories && categories.length > 0" class="card-container my-1">
     <mat-card>
-      <mat-list>
-        <mat-list-item
-          *ngFor="let cat of categories"
+      <div>
+        <div
+          *ngFor="let cat of categories; index as ind"
           class="eachCatTextCard-container my-1"
         >
-          <mat-card-header *ngIf="!editcategoryboolean">
-            <mat-card-title>{{ cat.name }}</mat-card-title>
-          </mat-card-header>
+      
+          <h3 *ngIf="!editcategoryboolean || currentIndex !== ind ">
+            {{ cat.name }}
+          </h3>
 
           <mat-form-field
-            *ngIf="editcategoryboolean"
+            *ngIf="editcategoryboolean && currentIndex == ind"
             style="width: 85%;"
             class="example-full-width"
-          >
-            <mat-label>{{ cat.name }}</mat-label>
-            <input matInput placeholder="cambiar el nombre" [(ngModel)]="cat.name" [value]="cat.name" />
+          >            
+            <input matInput [(ngModel)]="cat.name" [value]="cat.name" style="font-size: 14px;" />
           </mat-form-field>
 
-          
-          <mat-card-actions class="mat-actions my-2">
+         
+          <div class="mat-actions my-2">
             <button
             mat-mini-fab
-            *ngIf="editcategoryboolean"
+            *ngIf="editcategoryboolean && currentIndex ==ind"
             color="accent"
             (click)="editcategoryboolean = !editcategoryboolean"
             aria-label="Example icon button with a menu icon"
@@ -55,7 +64,7 @@
               mat-mini-fab
               color="primary"
               *ngIf="!editcategoryboolean"
-              (click)="editcategoryboolean = !editcategoryboolean"
+              (click)="editcategoryboolean = !editcategoryboolean;currentIndex = ind"
               aria-label="Example icon button with a menu icon"
             >
               <mat-icon>create</mat-icon>
@@ -76,11 +85,11 @@
             >
               <mat-icon>save</mat-icon>
             </button>
-          </mat-card-actions>
+          </div>
 
-          <mat-divider></mat-divider>
-        </mat-list-item>
-      </mat-list>
+
+        </div>
+      </div>
     </mat-card>
   </div>
 

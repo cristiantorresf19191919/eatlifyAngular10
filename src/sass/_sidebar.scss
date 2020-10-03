@@ -1,8 +1,8 @@
 
   @mixin side-bar {
-    background-color: #242526;
+    background-color: #303030;
     display: flex;
-    background-image: linear-gradient(to right, #242526, #3e4142);
+    background-image: linear-gradient(to right, #303030, #292a2a);
     flex-direction: column;
     align-items: center;
     font-size: 1.3rem;
@@ -23,6 +23,8 @@
     z-index: 0;  
     position: fixed;
     overflow: hidden;
+    box-shadow:  10px 10px 20px #22222280, 
+    -10px -10px 20px #3e3e3e;
     &::before{
       content: " ";
       position: absolute;

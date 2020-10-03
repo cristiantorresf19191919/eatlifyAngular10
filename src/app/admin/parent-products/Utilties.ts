@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 export class Utilities{
     private _notificarUpload = new EventEmitter<any>();
 
-    private $cambioRuta = new Subject<Boolean>();
+    private cambioRuta$ = new Subject<Boolean>();
 
     private _notificarCambioRuta = new EventEmitter<any>();
     constructor(){}
@@ -28,11 +28,11 @@ export class Utilities{
     }
 
     setCambioRuta(param:Boolean){
-        this.$cambioRuta.next(param);
+        this.cambioRuta$.next(param);
     }
 
     getCambioRuta():Observable<Boolean>{
-        return this.$cambioRuta.asObservable();
+        return this.cambioRuta$.asObservable();
     }
 
     static errorDeConexion(){
