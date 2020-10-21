@@ -297,18 +297,12 @@ nav {
 .delivery-component {
   width: calc(100% - 23rem);
   margin-left: auto;
+  position: relative;
+  font-size: 18px;
 }
 
 .product-header{
-  h1{
-    color: #2d88ff;
-    font-size: 30px; 
-    padding: 2% 3%;
-    border-bottom: 1px solid $primary-color;
-    position: sticky;
-
  
-  }
   transform: translateY(-5px);
   background: linear-gradient(145deg, #333333, #2b2b2b);
   box-shadow:  $cool-shadow;
@@ -347,4 +341,37 @@ input, mat-label,mat-form-field,mat-slide-toggle{
 
 .mat-form-field + .mat-form-field {
   margin-left: 8px;
+}
+
+.upload-pic{
+  border: 3px dashed $primary-color;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: $cool-shadow;
+  margin-right: 3%;
+  h3{
+    color: $primary-color;
+  }
+}
+
+.product-name{
+  width: 100%;
+  background: #303030;
+  border: none;
+  outline: none;
+  color: $primary-color;
+  box-shadow: $cool-shadow;
+  height: 100%;
+  color: #2d88ff;
+  font-size: 30px;   
+  border-bottom: 1px solid $primary-color;
+  position: sticky;
+  padding: 2rem;
+}
+
+.category-select{
+  font-size: 20px;
+
 }

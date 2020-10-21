@@ -1,12 +1,9 @@
-
 <div class="tp-container">
-
   <div class="product-header">
     <h1>Create Product</h1>
   </div>
 
-  <div class="form-body w-90 mx-auto">
-
+  <div class="form-body p-5">
     <mat-card class="card-title">Add Products</mat-card>
     <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
@@ -16,7 +13,7 @@
         placeholder="Product Name"
       />
     </mat-form-field>
-  
+
     <mat-form-field appearance="outline">
       <mat-label>Price</mat-label>
       <span matPrefix>$&nbsp;</span>
@@ -26,7 +23,7 @@
         placeholder="Product Price"
       />
     </mat-form-field>
-  
+
     <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
       <input
@@ -35,7 +32,7 @@
         placeholder="Product Description"
       />
     </mat-form-field>
-  
+
     <mat-form-field>
       <mat-select placeholder="Category" [(ngModel)]="category_CreateProduct">
         <mat-option *ngFor="let cat of categories" [value]="cat.name">{{
@@ -43,102 +40,70 @@
         }}</mat-option>
         <mat-option (click)="addNewCategory()">Add new Category </mat-option>
       </mat-select>
-    </mat-form-field>
-  
-    <div>
-      <mat-slide-toggle [(ngModel)]="topProduct"
-        >Producto Destacado?</mat-slide-toggle
-      >
+    </mat-form-field>   
+
+    <div class="addon-container">
+      <div>
+        <mat-slide-toggle [(ngModel)]="topProduct"
+          >Popular Product</mat-slide-toggle
+        >
+      </div>
+      <div class="addon-info">
+        <p>
+          <mat-icon>help</mat-icon>
+          Check this to prioritize this product in your app, so It will show first than others
+        </p>
+      </div>
     </div>
-  
+
+    <div class="addon-container">
+      <div>
+        <mat-slide-toggle [(ngModel)]="addonProduct"
+          >AddOn Product</mat-slide-toggle
+        >
+      </div>
+      <div class="addon-info">
+        <p>
+          <mat-icon>help</mat-icon>
+          Check this whether you later want this product as an addon to other
+          products. Addon products won't be visible to the App
+        </p>
+      </div>
+    </div>
+
     <div class="column">
       <input
         #imageInput
         id="imageInput"
         type="file"
-        style="visibility: hidden; opacity: 0;"
+        style="visibility: hidden; opacity: 0"
         class="formulario__input-product"
         placeholder="Upload Image"
         (change)="onFileSelected(imageInput)"
       />
     </div>
 
-
-
-
-
-
-
-
     <label *ngIf="imgUrl" for="imageInput" class="d-flex-main-column"
-    ><i class="fas fa-camera" style="font-size: 2rem;"></i> 
-    Cambiar Imagen</label
+      > <button mat-raised-button>Change Image</button></label
     >
     <div class="parent-flex">
-      <div class="no-picture" *ngIf="!imgUrl">   
-        <h1 >
+      <div class="no-picture" *ngIf="!imgUrl">
+        <h1>
           <label for="imageInput" class="d-flex-main-column"
-            ><i class="fas fa-camera" style="font-size: 2rem;"></i> Subir
-            Imagen</label
+            ><i class="fas fa-camera" style="font-size: 2rem"></i>Upload Image</label
           >
         </h1>
       </div>
-       <!-- si esta dentro de un if no se accede al elementRef -->
-       <!-- aca con javascript elementRef nativeElement style.backgorundImage -->
-       <!-- y classList.add("") -->
-       <!-- agrego clase y estilos -->
-        <div id="yesPicture" #pictureContainer >
-        </div>
-    
-          
-     
-        
+      <!-- si esta dentro de un if no se accede al elementRef -->
+      <!-- aca con javascript elementRef nativeElement style.backgorundImage -->
+      <!-- y classList.add("") -->
+      <!-- agrego clase y estilos -->
+      <div *ngIf="selectedImage" id="yesPicture" #pictureContainer></div>
     </div>
-    <div style="display: flex; justify-content: center;">
+    <div style="display: flex; justify-content: center" class="my-4">
       <button mat-raised-button color="primary" (click)="registrar()">
-        Registrar
+        Add Product
       </button>
     </div>
-    
-  
-  
-  
-  
-  
-  
-  
-  
-    </div>
-  
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>

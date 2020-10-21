@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from 'src/app/modules/material.module';
 import { PrimengModule } from 'src/app/modules/primeng.module';
@@ -13,6 +13,7 @@ import { ParentProductsComponent } from './parent-products.component';
 import { ProductsComponent } from './products/products.component';
 import { ModifierGroupsComponent } from './modifier-groups/modifier-groups.component';
 import { NewModifierComponent } from './new-modifier/new-modifier.component';
+import { NewAddonItemComponent } from './new-modifier/new-addon-item/new-addon-item.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { NewModifierComponent } from './new-modifier/new-modifier.component';
     CreateProductComponent,
     ModifierGroupsComponent,
     NewModifierComponent,
+    NewAddonItemComponent,
 
   ],
   imports: [
@@ -31,7 +33,8 @@ import { NewModifierComponent } from './new-modifier/new-modifier.component';
     MaterialModule,
     PrimengModule,
     FormsModule,
+    ReactiveFormsModule
   ],
-  exports: [parentProductsRoutingModule],
+  exports: [],
 })
 export class ParentProductsModule {}

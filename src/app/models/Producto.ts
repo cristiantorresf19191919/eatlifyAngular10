@@ -3,6 +3,7 @@ export class Product{
     name:string;
     restaurant?: string;
     topProduct:boolean;
+    addonProduct ?: boolean;
     description:string;
     category:string;
     price:string;

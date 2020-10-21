@@ -7,6 +7,10 @@ export class Item {
   quantity?:number;
   name:string;
   topProduct?:boolean;
+  addonProduct ?: boolean;
+  restaurant?: string;
+  outOfStock?:boolean;
+
 }
 
 export interface Category {
@@ -15,3 +19,10 @@ export interface Category {
   taxable?:boolean;
 }
 
+export class Category{
+  _id?: string;
+  name?:string;
+  taxable?:boolean;
+
+  constructor(){}
+}

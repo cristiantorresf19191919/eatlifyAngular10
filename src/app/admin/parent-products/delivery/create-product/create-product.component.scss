@@ -1,3 +1,13 @@
+$primary-color : #2d88ff;
+$cool-shadow:   10px 10px 20px #222222a2, 
+-10px -10px 20px #3e3e3ea4;
+
+@mixin  tablet {
+	@media (min-width:550px){
+		@content;
+	}
+	
+}
 .tp-container {
 	display: flex;
 	flex-direction: column;
@@ -15,6 +25,10 @@
 	// border: 1px solid white;
 	font-size: 1.7rem;
 	padding: 0 3rem;
+	@include tablet{
+		width: 80%;
+		margin: 0 auto;
+	}
 	// transform: scale(1.4);
 }
 .parent-flex {
@@ -74,4 +88,19 @@
 	}
 }
 
+
+.addon-container{
+	display: flex;
+	margin: 2% 0;
+	align-items: center;
+
+	.addon-info{
+		font-size: 15px;
+		margin-left: 5%;
+		box-shadow: $cool-shadow;
+		padding: 10px;
+		width: 50%;
+	}
+
+}
 

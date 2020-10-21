@@ -25,7 +25,7 @@ export class ParentProductsComponent implements OnInit, AfterViewInit {
     console.log('prevScrollpos = ',prevScrollpos);
     main.addEventListener('scroll',()=>{
       var currentScrollPos = main.scrollTop;      
-      console.log('currentScrollPos = ',currentScrollPos);
+   
         if (prevScrollpos > currentScrollPos) {
           this.sideBar.nativeElement.style.top = "10%";
           } else {    
@@ -40,7 +40,7 @@ export class ParentProductsComponent implements OnInit, AfterViewInit {
 		this.utilities.setCambioRuta(true);
     this.utilities.notificarCambioRuta.emit("cambia");
     
-    this.router.navigate(["/dashboard/parentProducts/modifierGroups"])
+    // this.router.navigate(["/dashboard/parentProducts/modifierGroups"])
   }
 
 }

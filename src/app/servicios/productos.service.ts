@@ -54,6 +54,11 @@ export class ProductosService {
 		return this.httpClient.get(GLOBAL.url+'/products', httpOptions);
 	}
 
+	getAddonsProducts() {
+	
+		return this.httpClient.get(GLOBAL.url+'/products/addons', httpOptions);
+	}
+
 	getProductById(id){
 		return this.httpClient.get(GLOBAL.url+"/products/"+id);
 	}

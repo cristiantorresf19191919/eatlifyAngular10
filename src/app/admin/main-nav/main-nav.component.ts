@@ -22,6 +22,7 @@ import { getRestaurantName } from 'src/app/store/reducers/restaurantReducer';
 })
 export class MainNavComponent implements OnInit, OnChanges, OnDestroy {
 	nombre: string;
+	
 	restaurantName$: Observable<string> = this.store.pipe(select(getRestaurantName));
 
 	public isInDashboardUrl: boolean = false;	

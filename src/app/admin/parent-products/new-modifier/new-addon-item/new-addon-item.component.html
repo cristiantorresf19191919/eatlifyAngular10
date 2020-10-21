@@ -1,0 +1,100 @@
+<div class="background-black" (click)="close()" *ngIf="showSideBarBoolean" [ngStyle]="{'opacity': showSideBarBoolean ? 1 : 0,'vissibility': showSideBarBoolean ? 'visible' : 'hidden' }">
+  </div>
+  <!-- boton para subir archivo se conecta con label para decoracion -->
+  <input style="display: none;" #imageInput id="uploadPicInput" type="file" placeholder="suba" (change)="onFileSelected(imageInput)">
+
+  
+<div class="side-bar-product" [ngStyle]="{
+    'transform': showSideBarBoolean ? 'translateX(0)' : 'translateX(70rem)',
+    'opacity': showSideBarBoolean ? 1 : 0}">
+    
+    <div class="top-right">
+      <button mat-raised-button color="primary" (click)="registrar()">Save</button>
+      <mat-icon class="side-bar-product__close-icon" (click)="close()">close</mat-icon>
+    </div>
+  
+     <div class="header">
+       <input type="text" [(ngModel)]="product.name" placeholder="name" class="input-title">
+     </div>
+   
+     <p class="lead px-2">photo</p>
+
+     <section class="picture-container p-3">
+   
+       <div class="picture-container__photo">
+   
+   
+        <!-- photo not loaded -->
+         <label for="uploadPicInput" *ngIf="!imgUrl" class="label-pic">
+           Browse File
+         
+         </label>
+        
+        <!-- photo loaded from pc -->
+        <div class="picture-container" *ngIf="imgUrl">
+          <img class="picture-container__picture" src="{{ imgUrl }}" alt="" />
+        </div>
+   
+       </div>
+   
+       <div class="picture-container__photo-info">
+   
+         <div>
+           <p class="lead px-2"><b>Photos help customer decide what to order and can increase sales</b></p>
+           <p>File requirements: JPG, PNG</p>
+         </div>
+         <div class="action-buttons">
+           <button mat-raised-button>Add Photo</button>
+           <button mat-raised-button>Download</button>
+           <button mat-raised-button (click)="removePicture()">Remove</button>
+         </div>
+   
+       </div>
+   
+     </section>
+   
+     <p class="lead px-2">Description (Optional)</p>
+     <section class="description p-3">
+       <textarea 
+        [(ngModel)]="product.description"
+         class="description__input" 
+         name="" 
+         id="" 
+         cols="50"
+         rows="50"
+         placeholder="Enter Description...">
+   
+       </textarea>
+   
+     </section>
+   
+     <p class="lead px-2">Default Price</p>
+     <section class="price p-3 flex-1">
+       <div>$</div> <input type="text" [(ngModel)]="product.price" class="price__input" placeholder="price">
+     </section>
+
+     <p class="lead px-2">Category</p>
+     <section class="category p-3 flex-1">
+       <mat-select placeholder="Select Category" *ngIf="categories" name="item" [(ngModel)]="product.category">
+         <mat-option *ngFor="let item of categories" [value]="item.name">
+           {{item.name}}
+         </mat-option>
+       </mat-select>
+     </section>
+   
+     <p class="lead px-2">Add-on Product</p>
+     <section class="addOnProduct p-3 flex-1">
+       <div>
+         <mat-slide-toggle [(ngModel)]="product.addonProduct">AddOn Product?</mat-slide-toggle>
+       </div>
+       <div class="addOnProduct__info">
+         <p>
+           <mat-icon>help</mat-icon>
+           Check this whether you later want this product as an addon to other
+           products. Addon products won't be visible to the App
+         </p>
+   
+       </div>
+     </section>
+   
+   </div>

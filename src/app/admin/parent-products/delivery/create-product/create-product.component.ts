@@ -16,7 +16,11 @@ import { CategoriasService } from "src/app/servicios/categorias.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Utilities } from "../../Utilties";
 import Swal from "sweetalert2";
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { State } from 'src/app/store';
+import { select, Store } from '@ngrx/store';
+import { getRestaurantId } from 'src/app/store/reducers/restaurantReducer';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: "app-create-product",
@@ -33,23 +37,38 @@ export class CreateProductComponent implements OnInit {
   description_CreateProduct: string;
   category_CreateProduct: string;
   topProduct: boolean = false;
-  /* img to go */
-  selectedImage: File;
-  imgUrl: any;
-  loading: boolean = false;
-  categories: Category[];
-  fileLoaded: boolean = false;
-  private $subscriber = new Subject<any>();
-  constructor(
-    private deliveryService: DeliveryService,
-    private productosService: ProductosService,
-    private deliveryTransferService: DeliveryTransferDataService,
-    private categoriasService: CategoriasService,
-    private router: Router,
-    private renderer: Renderer2
-  ) {}
+ /* img to go */
+ selectedImage: File;
+ imgUrl: any;
+ loading: boolean = false;
+ categories: Category[];
+ fileLoaded: boolean = false;
+ addonProduct:boolean = false;
+ private $subscriber = new Subject<any>();
+ restaurantId:string="";
+
+ constructor(
+  private deliveryService: DeliveryService,
+  private productosService: ProductosService,
+  private deliveryTransferService: DeliveryTransferDataService,
+  private categoriasService: CategoriasService,
+  private router: Router,
+  private renderer: Renderer2,
+  private store: Store<State>
+) {}
+  private onDestroy$:Subject<void> = new Subject<void>();
+  restaurantId$:Observable<string> = this.store.pipe(
+    takeUntil(this.onDestroy$),
+    select(getRestaurantId)
+  );
+
+  public ngOnDestroy(): void {
+    this.onDestroy$.next();    
+    this.onDestroy$.complete();    
+  }
 
   ngOnInit() {
+    this.restaurantId$.subscribe((id:string)=>this.restaurantId = id);
     this.categoriasService.getCategories().subscribe(
       (categories: Category[]) => {
         this.categories = categories.slice();
@@ -69,6 +88,8 @@ export class CreateProductComponent implements OnInit {
       description: this.description_CreateProduct,
       category: this.category_CreateProduct,
       topProduct: this.topProduct,
+      addonProduct: this.addonProduct,
+      restaurant:this.restaurantId
     };
 
     // enviando el item a la base de datos
@@ -86,6 +107,8 @@ export class CreateProductComponent implements OnInit {
             this.CerrarPopUp.emit("");
             this.loading = false;
           }, 2000);
+          this.resetForm();
+          // this.router.navigate(['/dashboard/parentProducts/products']);
         }
       },
       (error: HttpErrorResponse) => {
@@ -97,6 +120,7 @@ export class CreateProductComponent implements OnInit {
   }
 
   onFileSelected(imageInput: any) {
+    
     const file: File = imageInput.files[0];
     /* cargue instantaneamente la imagen que sube del input */
     const fileReader = new FileReader();
@@ -146,5 +170,19 @@ export class CreateProductComponent implements OnInit {
       }
 
     })
+  }
+
+  resetForm(){
+
+    this.name_CreateProduct = "";
+    this.price_CreateProduct= 0;
+    this.description_CreateProduct = "";
+    this.category_CreateProduct = "";
+    this.topProduct = false;
+    this.addonProduct = false;
+    this.selectedImage = null;
+    this.fileLoaded = false;
+    this.imgUrl = null;
+
   }
 }

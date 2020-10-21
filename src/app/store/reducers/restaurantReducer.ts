@@ -65,3 +65,8 @@ export const getRestaurantName = createSelector(
   getRestaurantState,
   (state: RestaurantState) => state.name
 );
+
+export const getRestaurantId = createSelector(
+  getRestaurantState,
+  (state: RestaurantState) => state._id
+)

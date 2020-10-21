@@ -1,1 +1,123 @@
-<p>new-modifier works!</p>
+<div class="newModifierComponent">
+  <div class="top-right">
+    <button mat-raised-button color="primary">Save</button>
+  </div>
+  <div class="p-3">
+    <input type="text" class="modifier-name" placeholder="name" />
+  </div>
+
+  <section class="padding p-3">
+
+  <!-- addon auto complete -->
+  <mat-form-field class="example-chip-list">
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip *ngIf="itemSelected">
+        {{ itemSelected.name }}
+        <mat-icon matChipRemove (click)="remove()" *ngIf="removable"
+          >cancel</mat-icon
+        >
+      </mat-chip>
+      <input
+        placeholder="New Addon..."
+        #fruitInput
+        [formControl]="fruitCtrl"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        (click)="autoLoadOnClick()"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (matChipInputTokenEnd)="add($event)"
+      />
+    </mat-chip-list>
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="selected($event)"
+    >
+      <mat-option *ngFor="let item of filteredItems | async" [value]="item">
+        {{ item.name }}
+      </mat-option>
+      <mat-option [value]="{ openPopup: true }">
+        <a mat-button color="primary">Create New</a>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <button
+    class="mx-3"
+    mat-raised-button
+    color="primary"
+    *ngIf="onSelectedItem"
+    (click)="addItemGroup()"
+  >
+    Add
+  </button>
+
+  <div class="mx-auto w-80 p-5 group-item-container">
+    <div class="group-item" *ngFor="let item of groupItems">
+      <div class="d-flex w-100 align-items-center">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+        <mat-card class="w-100 d-flex justify-content-between">
+          <div class="left">
+            <div class="title h3">
+              {{ item.name }}
+            </div>
+            <div class="subtitle">Found in {{ item.category }}</div>
+          </div>
+
+          <div class="right d-flex align-items-center">
+            <div class="price">$ <input type="text" class="price_input" /></div>
+            <div class="icon">
+              <mat-icon [matMenuTriggerFor]="menu">more_vert</mat-icon>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="deleteModifier(item)">Delete</button>
+                <button mat-menu-item>Other Action</button>
+              </mat-menu>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <mat-divider class="my-5"></mat-divider>
+
+  <section class="rules my-2">
+    <p class="h3"><b>Rules</b></p>
+    <p>
+      Set rules to control how customers select items in this modifier group
+    </p>
+
+    <div class="rules__form p-3">
+      <mat-card>
+        <mat-checkbox>Require Customers to select an Item?</mat-checkbox>
+      </mat-card>
+      <div class="flex-form-1">
+      <p>What's the maximum amount of items customers can select? &nbsp;    </p>
+   
+        <input class="rules__form__input" type="text" />        
+      </div>
+      <div class="flex-form-1">
+    
+      <p>How many times can customers select any single item?</p>
+      <input class="rules__form__input" type="text">
+    </div>
+
+   <!--  <div class="background-black" (click)="showSideBar=false" *ngIf="showSideBar" [ngStyle]="{'opacity': showSideBarBoolean ? 1 : 0,'vissibility': showSideBarBoolean ? 'visible' : 'hidden' }">
+    </div>
+ -->
+    <app-new-addon-item
+      [showSideBar]="showSideBar"
+      (closeSideBar)="closeSideBar()"
+    >
+    </app-new-addon-item>
+    <!--   <h1 *ngIf="showSideBar">verdadero</h1>
+  <h1 *ngIf="!showSideBar">falso</h1> -->
+    </div>
+  </section>
+
+
+
+
+
+
+</section>
+</div>
+

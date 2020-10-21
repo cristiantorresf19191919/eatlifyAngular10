@@ -113,3 +113,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background: linear-gradient(145deg, #333333, #2b2b2b);
     box-shadow:  $cool-shadow;
   }
+
+
+  .p-dropdown-items, .p-inputtext{
+    font-size: 13px;
+  }

@@ -3,13 +3,15 @@ import { DeliveryService } from 'src/app/servicios/delivery.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { expressionType } from '@angular/compiler/src/output/output_ast';
 import { CategoriasService } from 'src/app/servicios/categorias.service';
-import { Category } from 'src/app/models/item';
+import { Category, Item } from 'src/app/models/item';
 import { DeliveryTransferDataService } from 'src/app/servicios/delivery-transfer-data.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Utilities } from '../Utilties';
 import { ProductosService } from 'src/app/servicios/productos.service';
-import { exhaustMap, map } from 'rxjs/operators';
+import { delay, exhaustMap, map } from 'rxjs/operators';
 import { fadeInDownOnEnterAnimation, fadeInOnEnterAnimation, rubberBandAnimation, rubberBandOnEnterAnimation } from 'angular-animations';
+import { from, Observable, of } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-delivery',
@@ -21,7 +23,7 @@ export class DeliveryComponent implements OnInit {
   // insert python string here
 
   onEdit: boolean;
-  dataSelected: any;
+  dataSelected: Item;
   categories: any;
   selectedImage: File;
   onScroll: boolean;
@@ -31,7 +33,10 @@ export class DeliveryComponent implements OnInit {
   loading: boolean = false;
   popUpActive: boolean = false;
   panelOpenState = false;
+  percentageIncrease:number = 0;
   animatePhotoInfoBoolean:boolean = false;
+  onLoadPc:boolean=false;
+  selectedCategory:string;
   constructor(
     private deliveryService: DeliveryService,
     private categoriesService: CategoriasService,
@@ -43,7 +48,7 @@ export class DeliveryComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.deliveryService.getItem().subscribe(
-      (product) => {
+      (product:Item) => {
         this.onEdit = true;
         this.dataSelected = product;
       },
@@ -55,10 +60,10 @@ export class DeliveryComponent implements OnInit {
     this.activatedRoute.params
       .pipe(
         exhaustMap(({ product_id }) => {
-          return this.productsService.getProductById("5f30c8b95d7be60017f8590c");
+          return this.productsService.getProductById(product_id);
         })
       )
-      .subscribe((product) => {
+      .subscribe((product:Item) => {
         this.dataSelected = product;
         this.onEdit = true;
       });
@@ -68,16 +73,18 @@ export class DeliveryComponent implements OnInit {
       this.loading = false;
     }, 3000);
     const title = document.getElementById('title');
-    const limitTop = title.offsetTop;
+
+
     this.categoriesService.getCategories().subscribe(
       (cat: Category[]) => {
+        
         this.categoriesArray = cat;
       },
       (error: HttpErrorResponse) => {
         error;
       }
     );
-    console.log('el limite del top es ' + limitTop);
+   
     document.getElementById('parentContainer').addEventListener(
       'scroll',
       (event: any) => {
@@ -98,36 +105,68 @@ export class DeliveryComponent implements OnInit {
     }, 1000);
   }
 
-  onFileSelected(imageInput: any, productSelected) {
+  onFileSelected(imageInput: any) {
+    
+    
     try {
       const file: File = imageInput.files[0];
       /* cargue instantaneamente la imagen que sube del input */
       const fileReader = new FileReader();
+      
       fileReader.readAsDataURL(file);
       fileReader.onload = (_event) => {
         this.imgUrl = fileReader.result;
+        
       };
       /* para reutilizarla en cuando de salvar al boton y hacer el post */
-      this.productSelected = productSelected;
+      
       this.selectedImage = imageInput.files[0];
+      
       console.log('imageInput.value');
       console.log(imageInput.value);
-      console.log(`el id del producto seleccionado es ${productSelected._id}`);
-      console.log(productSelected);
     } catch (error) {
       console.log('exploto la aplicacion');
       console.log(error);
     }
   }
+
+  saveEdition(){
+    const id = this.dataSelected._id;
+ 
+    this.deliveryService.updateProduct(this.dataSelected,id)
+    .pipe(
+      exhaustMap((item:Item)=>{
+        if (this.selectedImage){
+          return this.deliveryService.SubirFoto(this.selectedImage,item._id).pipe(
+            delay(1000)
+          )       
+        } else {
+          return from<Observable<Item>>(of(item));
+        }
+       
+      }        
+      )
+    ).subscribe((data:Item)=>{
+      Swal.fire({
+        title:"Ok",
+        text:'Producto actualizado con exito',
+        icon:'success'
+      })
+      console.log('todo bien mijo ',data);  
+    },(putoError:HttpErrorResponse)=>console.log(putoError.message));
+  }
+  
   updateProduct(product) {
     this.loading = true;
     /* subir foto */
     const productSelected = this.productSelected || product;
-
+    this.selectedImage;
+   
+    
     this.deliveryService
       .SubirFoto(this.selectedImage, productSelected._id)
       .subscribe(
-        (data) => {
+        (data:Item) => {
           this.dataSelected = data;
 
           this.imgUrl = undefined;
@@ -154,9 +193,7 @@ export class DeliveryComponent implements OnInit {
   uploadPicOnly(product) {}
   ngOnChanges() {
     /* no se quede pegado */
-    this.dataSelected = {};
-    this.dataSelected = {};
-    this.dataSelected = {};
+    this.dataSelected = null;
     this.imgUrl = undefined;
   }
   onCategorySelected(category: Category) {
@@ -174,6 +211,14 @@ export class DeliveryComponent implements OnInit {
   //reenviar al compo categoria
   crearMuevaCategoria() {
     Utilities.CreateCategory(this.router);
+  }
+
+  removePicture(){
+   
+    this.imgUrl = null;
+    // this.onLoadPc = true;
+    this.dataSelected.image = null;
+    
   }
   // cat 1 for each element
   // cat 2 backend

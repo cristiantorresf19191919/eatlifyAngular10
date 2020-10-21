@@ -15,28 +15,12 @@ import {MenuModule} from 'primeng/menu';
 import {MenuItem} from 'primeng/api';
 import {ChartModule} from 'primeng/chart';
 import {CheckboxModule} from 'primeng/checkbox';
+import {MultiSelectModule} from 'primeng/multiselect';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    SliderModule,
-    TableModule,
-    DropdownModule,
-    InputTextModule,
-    ButtonModule,
-    ToastModule,
-    DialogModule,
-    KeyFilterModule,
-    SpinnerModule,
-    FieldsetModule,
-    MenuModule,
-    ChartModule
-
-
-
-
-
   ],
   exports: [
     CommonModule,
@@ -52,7 +36,8 @@ import {CheckboxModule} from 'primeng/checkbox';
     FieldsetModule,
     MenuModule,
     ChartModule,
-    CheckboxModule
+    CheckboxModule,
+    MultiSelectModule
 
 
 
