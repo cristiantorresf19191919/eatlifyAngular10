@@ -112,23 +112,23 @@
     "rxjs" "6.6.2"
     "source-map" "0.7.3"
 
-"@angular/animations@^11.0.0 || ^12.0.0-0", "@angular/animations@~12.2.13", "@angular/animations@12.2.13":
+"@angular/animations@^12.0.0 || ^13.0.0-0", "@angular/animations@~12.2.13", "@angular/animations@12.2.13":
   "integrity" "sha512-qpdmvu+nxsKnimJ3Hc1joNuzK7xXYyE+VtNMk4K77Ao/9+5C/juGMce85DhqZCcu1xraZ3YYIrzYmL/GgdUK4g=="
   "resolved" "https://registry.npmjs.org/@angular/animations/-/animations-12.2.13.tgz"
   "version" "12.2.13"
   dependencies:
     "tslib" "^2.2.0"
 
-"@angular/cdk@^11.2.13", "@angular/cdk@11.2.13":
-  "integrity" "sha512-FkE4iCwoLbQxLDUOjV1I7M/6hmpyb7erAjEdWgch7nGRNxF1hqX5Bqf1lvLFKPNCbx5NRI5K7YVAdIUQUR8vug=="
-  "resolved" "https://registry.npmjs.org/@angular/cdk/-/cdk-11.2.13.tgz"
-  "version" "11.2.13"
+"@angular/cdk@^12.2.13", "@angular/cdk@12.2.13":
+  "integrity" "sha512-zSKRhECyFqhingIeyRInIyTvYErt4gWo+x5DQr0b7YLUbU8DZSwWnG4w76Ke2s4U8T7ry1jpJBHoX/e8YBpGMg=="
+  "resolved" "https://registry.npmjs.org/@angular/cdk/-/cdk-12.2.13.tgz"
+  "version" "12.2.13"
   dependencies:
-    "tslib" "^2.0.0"
+    "tslib" "^2.2.0"
   optionalDependencies:
     "parse5" "^5.0.0"
 
-"@angular/common@^11.0.0 || ^12.0.0-0", "@angular/common@~12.2.13", "@angular/common@12.2.13":
+"@angular/common@^12.0.0 || ^13.0.0-0", "@angular/common@~12.2.13", "@angular/common@12.2.13":
   "integrity" "sha512-I1t/jl9ojCwTJKT7PKHnk23D+vMHTHS/9qZ2nndCjzGusMK8029nn8l3tHAkwefvxZWSaLAk1MgsVcP+rHQNsQ=="
   "resolved" "https://registry.npmjs.org/@angular/common/-/common-12.2.13.tgz"
   "version" "12.2.13"
@@ -177,7 +177,7 @@
   "resolved" "https://registry.npmjs.org/@angular/compiler/-/compiler-9.0.0.tgz"
   "version" "9.0.0"
 
-"@angular/core@^11.0.0 || ^12.0.0-0", "@angular/core@~12.2.13", "@angular/core@12.2.13":
+"@angular/core@^12.0.0 || ^13.0.0-0", "@angular/core@~12.2.13", "@angular/core@12.2.13":
   "integrity" "sha512-tZ5nAnmOi418JDaJIFiiP9z2JrluMJZvUvXO4QDUs52BXaL2yuP7MJ2LczWOVJXrBLZXeZGfjDjZmaFPA24grg=="
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-12.2.13.tgz"
   "version" "12.2.13"
@@ -194,7 +194,7 @@
   "resolved" "https://registry.npmjs.org/@angular/core/-/core-9.0.0.tgz"
   "version" "9.0.0"
 
-"@angular/forms@^11.0.0 || ^12.0.0-0", "@angular/forms@~12.2.13":
+"@angular/forms@^12.0.0 || ^13.0.0-0", "@angular/forms@~12.2.13":
   "integrity" "sha512-wa7I5R8sck2q+VWNL262GJTVxtpEHMys8Bt6oE+lyHB5zlZAgOXwAb8GE4XVwuc+BZU1Gvrocn21P/8KvDY1uw=="
   "resolved" "https://registry.npmjs.org/@angular/forms/-/forms-12.2.13.tgz"
   "version" "12.2.13"
@@ -211,12 +211,12 @@
   "resolved" "https://registry.npmjs.org/@angular/http/-/http-2.4.10.tgz"
   "version" "2.4.10"
 
-"@angular/material@^11.2.13":
-  "integrity" "sha512-FqFdGSkOtqsmeLyTSousodDGUy2NqbtxCIKv2rwbsIRwHNKB0KpR/UQhA2gMRuGa5hxhMJ0DW0Tf9neMRuLCTg=="
-  "resolved" "https://registry.npmjs.org/@angular/material/-/material-11.2.13.tgz"
-  "version" "11.2.13"
+"@angular/material@^12.2.13":
+  "integrity" "sha512-6g2GyN4qp2D+DqY2AwrQuPB3cd9gybvQVXvNRbTPXEulHr+LgGei00ySdFHFp6RvdGSMZ4i3LM1Fq3VkFxhCfQ=="
+  "resolved" "https://registry.npmjs.org/@angular/material/-/material-12.2.13.tgz"
+  "version" "12.2.13"
   dependencies:
-    "tslib" "^2.0.0"
+    "tslib" "^2.2.0"
 
 "@angular/platform-browser-dynamic@^2.3.1":
   "integrity" "sha1-jfJd7CsGrcaQzJvCZEjezK682Ow="
