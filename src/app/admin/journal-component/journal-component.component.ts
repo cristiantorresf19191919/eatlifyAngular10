@@ -10,6 +10,7 @@ import {
 	lightSpeedOutOnLeaveAnimation
 } from 'angular-animations';
 import { VentasSocketService } from '../ventas-socket/ventas-socket.service';
+import { Product } from 'src/app/models/Producto';
 
 interface preventaCollectionModel {
   ops:Item[]
@@ -29,6 +30,9 @@ export class JournalComponentComponent implements OnInit {
 	@Output() closeComponentEvent = new EventEmitter();
   @Output() productSelectedPopUp = new EventEmitter();
   @Output() newSoldDATA = new EventEmitter();
+
+	producto:Product;
+
 	allItems: Item[] = [];
 	totalPrice: number = 0;
 	moneyRecieved: number = 0;
@@ -40,6 +44,9 @@ export class JournalComponentComponent implements OnInit {
     private ventasSocketService: VentasSocketService,
     private preventasService : PreventasService) {}
 	ngOnInit() {
+
+		
+
 		this.ventasJournalService.getItemUpdated().subscribe((item: Item) => {
 			const currentItem = this.allItems.find((el) => el._id === item._id);
 			const currentItemIndex = this.allItems.indexOf(currentItem);
@@ -70,6 +77,11 @@ export class JournalComponentComponent implements OnInit {
 		// You can also use categoryId.previousValue and
 		// categoryId.firstChange for comparing old and new values
 		/* this.allItems.push(changes.itemObject.currentValue); */
+	}
+
+
+	botaunstring(numero:number):string{
+		return String(numero);
 	}
 
 	onChangeQuantity(event: any) {
