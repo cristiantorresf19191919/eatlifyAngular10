@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 
   LoginDaddy: FormGroup;
   email:string;
-  password:string;
+  password:string;  
   constructor(
     private cajerosService: CajerosService,
     private validacionesPersonalizadas: ValidacionesPersonalizadas,
@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
     private guardian:AuthGuard,
     // private socketService: VentasSocketService
     ) {
+   
       if (this.guardian.TokenValide()){
         this.router.navigate(["/admin"]);
       }
@@ -91,6 +92,7 @@ export class LoginComponent implements OnInit {
     this.subscription = this.sourceABC.subscribe(val=>{
       this.loading=false;
     });
+    
     this.cajerosService.loginCajero(this.LoginDaddy.value).subscribe((data:User)=>{
       if (data){
         this.cajerosService.guardeUsuario(data.usuarioenviar);

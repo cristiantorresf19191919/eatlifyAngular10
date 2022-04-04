@@ -10,7 +10,5 @@ export class Restaurant{
         url:string
     };
     productos?: Product[];
-    ventas?:[]
-
-   
+    ventas?:[]  
 }

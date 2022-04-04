@@ -1,27 +1,27 @@
 
- 
+
 <div id="appDelivery" class="delivery-component">
- 
+
   <div class="product-header">
     <div class="top-right">
       <button mat-raised-button color="primary" (click)="saveEdition()">Save</button>
     </div>
-  
+
   <input *ngIf="dataSelected" type="text" class="product-name"  [(ngModel)]="dataSelected.name">
-   
+
   </div>
 
   <input style="display: none;" #imageInput id="uploadPic" type="file" placeholder="suba" (change)="onFileSelected(imageInput)">
 
   <!-- images -->
-  <div class="parent-grid">      
-    <div class="column">      
+  <div class="parent-grid">
+    <div class="column">
       <input
         type="file"
         id="imageInputFuncione"
         style="visibility: hidden; opacity: 0;"
         #imageInput
-        *ngIf="onEdit"       
+        *ngIf="onEdit"
         (change)="onFileSelected(imageInput, dataSelected)"
       />
     </div>
@@ -29,20 +29,20 @@
   <!-- (change)="onFileSelected(imageInput,dataSelected)" -->
   <p class="ml-5 lead">Photo</p>
   <!-- photo loaded from pc -->
-  <div class="photo-container"> 
+  <div class="photo-container">
     <div class="picture-container" *ngIf="imgUrl">
       <img class="picture-container__picture" src="{{ imgUrl }}" alt="" />
     </div>
     <!-- photo from database -->
     <div class="picture-container" [@fadeInOnEnter] *ngIf="dataSelected.image">
-      <h1>database</h1>
+      <h1>{{dataSelected.name}}</h1>
       <img
         class="picture-container__picture"
         src="{{ dataSelected.image.url }}"
         alt=""
       />
     </div>
-    
+
     <!-- photo deleted -->
     <div class="picture-container" [@fadeInOnEnter] *ngIf="dataSelected.image == null && !imgUrl">
       <h1>photo deleted</h1>
@@ -50,8 +50,8 @@
         <h3>Upload </h3>
      </label>
     </div>
-   
- 
+
+
 
 
     <div class="img-info">
@@ -69,7 +69,7 @@
   </div>
 
   <!-- images -->
- 
+
   <!-- <div class="title-box">
     <h1 (click)="popUpActive = !popUpActive">Create Product</h1>
   </div> -->
@@ -87,24 +87,24 @@
     ></app-create-product>
   </div> -->
   <p class="ml-5 my-2 lead">Description (optional)</p>
-  
+
 <div class="mx-auto" style="width: 95% !important;">
-    
+
       <mat-form-field style="width: 100%; ">
         <textarea matInput
         placeholder="..."
-        style="background-color: #2a2a2a;font-size: 21px;" 
+        style="background-color: #2a2a2a;font-size: 21px;"
         cdkTextareaAutosize=false
         [(ngModel)]="dataSelected.description"
-        matAutosizeMaxRows=5    
+        matAutosizeMaxRows=5
         rows=3
-          
+
            >
         </textarea>
-      </mat-form-field> 
+      </mat-form-field>
 
-    
-  
+
+
 </div>
 
 <p class="ml-5 my-2 lead">Default price</p>
@@ -115,19 +115,19 @@
     <button mat-button matSuffix mat-icon-button aria-label="Clear">
       <mat-icon>attach_money</mat-icon>
     </button>
-    
-    
-  
+
+
+
   </mat-form-field>
-  
+
   <mat-form-field class="mx-5">
     <mat-label>VAT</mat-label>
     <input matInput type="text" [(ngModel)]="percentageIncrease" >
-  
+
     <button mat-button matSuffix mat-icon-button aria-label="Clear">
       <mat-icon>trending_up</mat-icon>
     </button>
-  
+
   </mat-form-field>
 
 </div>
@@ -149,12 +149,12 @@
 <p class="ml-5 my-2 lead">Category</p>
 
 <div class="my-2 p-5">
-  
+
   <mat-select class="category-select" placeholder="Placeholder" [(ngModel)]="dataSelected.category" name="item">
     <mat-option *ngFor="let cat of categoriesArray" [value]="cat.name">
       {{cat.name}}
     </mat-option>
-    
+
   </mat-select>
 
 </div>
@@ -162,7 +162,7 @@
 
 
 <div class="my-2 p-5">
-  
+
   <mat-accordion>
 
     <mat-expansion-panel (opened)="panelOpenState = true"
@@ -183,12 +183,12 @@
 
       </div>
 
-        
+
     </mat-expansion-panel>
   </mat-accordion>
-  
-  
-  
+
+
+
 </div>
 <mat-divider></mat-divider>
 
@@ -197,5 +197,5 @@
 
 
 
- 
+
 </div>

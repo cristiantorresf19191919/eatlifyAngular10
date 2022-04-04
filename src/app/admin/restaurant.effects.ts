@@ -60,8 +60,6 @@ export class RestaurantEffects {
     )
   )
   )
-
-
  
   constructor(
     private actions$: Actions,
