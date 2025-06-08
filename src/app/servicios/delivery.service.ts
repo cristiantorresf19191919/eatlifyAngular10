@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { catchError, map, tap, delay, retry } from 'rxjs/operators';
 import { Observable, of, throwError, Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import { GLOBAL } from './url';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
 	headers: new HttpHeaders({
@@ -17,7 +17,7 @@ const httpOptions = {
 export class DeliveryService {
 	// pilas no se le olvide cambiar las urls despues
 
-  private url = GLOBAL.url;
+  private url = environment.url;
 	public imageSelected: any;
   private dataObs$ = new Subject();
   private pasefoto$ = new Subject();

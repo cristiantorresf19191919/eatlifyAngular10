@@ -46,7 +46,6 @@ import { NewOrderComponent } from './new-order/new-order.component';
     RealtimeListComponent,
     VentasSocketComponent,
     ShowProductsComponent,   
-    CategoriesComponent,    
     LoadingGlobalComponent,
     RestaurantComponent,
     

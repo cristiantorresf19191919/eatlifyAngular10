@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { catchError, map, tap, delay, retry } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { GLOBAL } from './url';
+import { environment } from 'src/environments/environment';
 
 
 const httpOptions = {
@@ -21,10 +21,10 @@ export class ProductosService {
 	user: string;
 
 
-	private url : string = GLOBAL+"/products"; 
+	private url : string = environment.url+"/products"; 
 	
 	constructor(private httpClient: HttpClient, private router: Router) {
-		this.url = GLOBAL+"/products" ;
+		this.url = environment.url+"/products" ;
 		
 	}
 
@@ -47,25 +47,25 @@ export class ProductosService {
 	}
 
 	addProduct(product) {
-		return this.httpClient.post(GLOBAL.url+'/products', product, httpOptions);
+		return this.httpClient.post(environment.url+'/products', product, httpOptions);
 	}
 	getProducts() {
 	
-		return this.httpClient.get(GLOBAL.url+'/products', httpOptions);
+		return this.httpClient.get(environment.url+'/products', httpOptions);
 	}
 
 	getAddonsProducts() {
 	
-		return this.httpClient.get(GLOBAL.url+'/products/addons', httpOptions);
+		return this.httpClient.get(environment.url+'/products/addons', httpOptions);
 	}
 
 	getProductById(id){
-		return this.httpClient.get(GLOBAL.url+"/products/"+id);
+		return this.httpClient.get(environment.url+"/products/"+id);
 	}
 	UpdateProduct(product) {
-		return this.httpClient.put(`${GLOBAL.url+'/products'}/${product._id}`, product, httpOptions);
+		return this.httpClient.put(`${environment.url+'/products'}/${product._id}`, product, httpOptions);
 	}
 	DeleteProduct(product) {
-		return this.httpClient.delete(`${GLOBAL.url+'/products'}/${product._id}`, httpOptions);
+		return this.httpClient.delete(`${environment.url+'/products'}/${product._id}`, httpOptions);
 	}
 }

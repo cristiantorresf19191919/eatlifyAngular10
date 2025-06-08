@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { catchError, map, tap, delay, retry } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { GLOBAL } from './url';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
 	headers: new HttpHeaders({
@@ -20,7 +20,7 @@ export class VentasService {
 	user: string;
 
 
-	 private url = GLOBAL.url+"/ventas";
+	 private url = environment.url+"/ventas";
   constructor(private httpClient: HttpClient, private router: Router) {}
 
 

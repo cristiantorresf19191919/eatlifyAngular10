@@ -132,6 +132,7 @@
   },
   "defaultProject": "eatlify",
   "cli": {
-    "defaultCollection": "@ngrx/schematics"
+    "defaultCollection": "@ngrx/schematics",
+    "analytics": "d2ca2d86-71eb-4c36-b884-45c419d5bfc3"
   }
 }

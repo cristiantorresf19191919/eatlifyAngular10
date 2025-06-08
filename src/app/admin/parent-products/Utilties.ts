@@ -15,7 +15,7 @@ export class Utilities{
     constructor(){}
 
     static CreateCategory(router){
-        router.navigate(['/dashboard/parentProducts/categories','openPlease'])
+        router.navigate(['/dashboard/restaurant/categories','openPlease'])
 
     }
     // actualizar la foto automaticamente cuando se cambie

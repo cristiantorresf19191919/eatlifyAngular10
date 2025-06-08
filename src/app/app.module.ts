@@ -22,14 +22,14 @@ import { AdminModule } from './admin/admin.module';
 import { PrimerInterceptor } from './http-interceptors/primer-interceptor';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-const config:SocketIoConfig = {url:'localhost:5000', options:{}};
+const config:SocketIoConfig = {url:'localhost:8000', options:{}};
   // const config:SocketIoConfig = {url:'https://posdeliveryapp.herokuapp.com', options:{}};
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent
-    
+
   ],
   imports: [
     CloudinaryModule.forRoot({Cloudinary}, { cloud_name: 'dzkewxe2v' } as CloudinaryConfiguration),
@@ -46,8 +46,8 @@ const config:SocketIoConfig = {url:'localhost:5000', options:{}};
     SocketIoModule.forRoot(config),
     PrimengModule,
     AdminModule,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),    
-  
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

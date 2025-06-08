@@ -1,0 +1,1 @@
+{"ast":null,"code":"// export enum GLOBAL {\n//     url= \"https://posdeliveryapp.herokuapp.com\"\n// }\nexport var GLOBAL = /*#__PURE__*/(() => {\n  (function (GLOBAL) {\n    GLOBAL[\"url\"] = \"http://localhost:8000\";\n  })(GLOBAL || (GLOBAL = {}));\n\n  return GLOBAL;\n})();","map":null,"metadata":{},"sourceType":"module"}

@@ -22,10 +22,10 @@ import { getRestaurantName } from 'src/app/store/reducers/restaurantReducer';
 })
 export class MainNavComponent implements OnInit, OnChanges, OnDestroy {
 	nombre: string;
-	
+
 	restaurantName$: Observable<string> = this.store.pipe(select(getRestaurantName));
 
-	public isInDashboardUrl: boolean = false;	
+	public isInDashboardUrl: boolean = false;
 	chip:ChipStatus = new ChipStatus();
 
 	isHandset$: Observable<boolean> = this.breakpointObserver
@@ -42,13 +42,13 @@ export class MainNavComponent implements OnInit, OnChanges, OnDestroy {
 	) {}
 
 	logout() {
-		localStorage.clear();
+    localStorage.clear();
 		this.cajerosService.logout();
 		this.router.navigate([ '/' ]);
 	}
 
 	ngOnInit() {
-	
+
 
 
 		this.utilities.getCambioRuta().subscribe((booleano:boolean) => {
@@ -56,7 +56,7 @@ export class MainNavComponent implements OnInit, OnChanges, OnDestroy {
 				this.isInDashboardUrl = false;
 			}
 		})
-	
+
 		this.nombre = localStorage.getItem('name');
 		this.chip.estadoStatus = "Online";
 		this.chip.estado = "Tu restaurante esta Recibiendo Pedidos";
@@ -69,22 +69,22 @@ export class MainNavComponent implements OnInit, OnChanges, OnDestroy {
 		// nose como mas se haria
 		this.cambioRuta.getSujeto().subscribe(booleano => {
 			if (booleano){
-				this.isInDashboardUrl = false; 
-			
+				this.isInDashboardUrl = false;
+
 			} else {
 				this.isInDashboardUrl = true;
 			}
 		})
-		
+
 	}
 
 	ngOnChanges(e: SimpleChanges){
-	
+
 
 		this.cambioRuta.getSujeto().subscribe(booleano => {
 			if (booleano){
-				this.isInDashboardUrl = false; 
-				
+				this.isInDashboardUrl = false;
+
 			} else {
 				this.isInDashboardUrl = true;
 			}
@@ -94,14 +94,14 @@ export class MainNavComponent implements OnInit, OnChanges, OnDestroy {
 		} else {
 			this.isInDashboardUrl = false;
 		}
-		
-		
+
+
 	}
 
 	ngOnDestroy(){
 		this.utilities.setCambioRuta(true);
-	}	
-	
+	}
+
 	offline(){
 		this.chip.estado = "Tu restaurante esta OFFLINE"
 		this.chip.estadoStatus = "offline"

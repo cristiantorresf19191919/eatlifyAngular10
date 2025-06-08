@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class ChipStatus {\n  constructor() {\n    this.color = \"accent\";\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

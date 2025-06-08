@@ -46,41 +46,10 @@ const routes: Routes = [
         path: "products",
         component: ProductsComponent,
       },
-      { path: "restaurant",
-       component: RestaurantComponent },
-       {
-         path:"parentProducts",
-         loadChildren: () => import('./parent-products/parent-products.module').then(m => m.ParentProductsModule)
-       },
-     /*  {
-        path: "parentProducts",
-        component: ParentProductsComponent,
-        children: [
-          {path:'', redirectTo:'products',pathMatch:'full'},
-          { path: "products", component: ProductsComponent },
-          { path: "categories", component: CategoriesComponent },
-          
-          { path: "categories/:open", component: CategoriesComponent },
-          {
-            path:"delivery/:abraModal",
-            component:DeliveryComponent
-        },
-          {
-            path: "delivery",
-            component: DeliveryComponent,
-            children: [
-              {
-                path: "Bakery",
-                component: BakeryDeliComponent,
-              },
-              {
-                path:"CreateProduct",
-                component: CreateProductComponent
-              }
-            ],
-          },
-        ],
-      }, */
+      { 
+        path: "restaurant",
+        loadChildren: () => import('./parent-products/parent-products.module').then(m => m.ParentProductsModule)
+      },
       {
         path: "cajeros",
         component: CajerosComponent,

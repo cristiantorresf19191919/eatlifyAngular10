@@ -1,41 +1,40 @@
 <div class="modifiersComponent">
-  <div class="product-header"> 
-          <h1 class="d-flex justify-content-between align-items-center">Modifier Groups
-            <div>
+  <div class="product-header">
+    <h1 class="d-flex justify-content-between align-items-center">Modifier Groups
+      <div>
 
-                <button
-                [routerLink]="['/dashboard/parentProducts/newModifier']"
-                mat-raised-button color="primary"> <mat-icon>add_circle</mat-icon>  New Goup</button>  
-              
-            </div>
+        <button [routerLink]="['/dashboard/restaurant/newModifier']" mat-raised-button color="primary">
+          <mat-icon>add_circle</mat-icon> New Goup</button>
 
-          </h1>
+      </div>
+
+    </h1>
 
   </div>
 
 
   <div class="d-flex justify-content-start ">
     <mat-form-field appearance="outline">
-        <mat-label>Search...</mat-label>
-        <input matInput>
-        <mat-icon matPrefix>search</mat-icon>      
-      </mat-form-field>
+      <mat-label>Search...</mat-label>
+      <input matInput>
+      <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field>
 
-  </div> 
+  </div>
 
   <table mat-table #table style="width: 100%;">
-      <ng-container matColumnDef="column">
-          <th mat-header-cell *matHeaderCellDef> header </th>
-          <td mat-cell class="h4"> name </td>
-          <td mat-cell class="h4"> notes </td>
-          <td mat-cell class="h4"> contains </td>
-          <td mat-cell class="h4"> items using </td>
-          
-      </ng-container>
-      <mat-divider></mat-divider>
-      <hr>
-      <tr mat-header-row></tr>
-      <tr mat-row></tr>
+    <ng-container matColumnDef="column">
+      <th mat-header-cell *matHeaderCellDef> header </th>
+      <td mat-cell class="h4"> name </td>
+      <td mat-cell class="h4"> notes </td>
+      <td mat-cell class="h4"> contains </td>
+      <td mat-cell class="h4"> items using </td>
+
+    </ng-container>
+    <mat-divider></mat-divider>
+    <hr>
+    <tr mat-header-row></tr>
+    <tr mat-row></tr>
   </table>
 
 

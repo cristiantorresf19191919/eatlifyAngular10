@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { createAction, props } from '@ngrx/store';\nexport const loadOrder = createAction(\"[Dashboard Component] socket\", props());\nexport const loadOrderEffect = createAction(\"[Dashboard Component] socket\", props());","map":null,"metadata":{},"sourceType":"module"}

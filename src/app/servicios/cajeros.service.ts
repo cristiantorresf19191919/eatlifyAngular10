@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http
 import { catchError, map, tap, delay, retry } from "rxjs/operators";
 import { Observable, of, throwError } from "rxjs";
 import { Router } from "@angular/router";
-import { GLOBAL } from './url';
+import { environment } from 'src/environments/environment';
 
 interface Usuario{
   id: string,
@@ -34,7 +34,7 @@ export class CajerosService {
 
   // pilas no se le olvide cambiar las urls despues
   // private url = "http://localhost:5000";
-  private url = GLOBAL.url;
+  private url = environment.url;
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 

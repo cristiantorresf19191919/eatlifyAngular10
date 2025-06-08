@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { catchError, map, tap, delay, retry } from 'rxjs/operators';
 import { Observable, of, throwError, Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import { GLOBAL } from './url';
 import { ModifierGroup } from '../models/ModifierGroup';
 
 const httpOptions = {
@@ -23,8 +22,8 @@ export class ModifierGroupService{
         private httpClient:HttpClient
     ){}
 
-    addModifierGroup(item:ModifierGroup):Observable<ModifierGroup>{
+    /* addModifierGroup(item:ModifierGroup):Observable<ModifierGroup>{
         // return this.httpClient.post(`${this.url}/deliver/${itemId}`,item, httpOptions);
 
-    }
+    } */
 }
