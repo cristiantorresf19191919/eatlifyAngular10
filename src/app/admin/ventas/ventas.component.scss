@@ -330,12 +330,18 @@ body .ui-table .ui-table-tbody>tr>td {
   transform: translate(-50%, -50%);
 }
 
+.p-dialog #p-dialog {
+
+  background-color: $primary-bg;
+}
+
 /* para celular */
 @media screen and (max-width: 390px) {
 
 
   .p-dialog #p-dialog {
     transform: scale(0.2);
+    background-color: $primary-bg;
   }
 
   .numeros,

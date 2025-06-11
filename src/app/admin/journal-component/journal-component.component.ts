@@ -160,7 +160,7 @@ export class JournalComponentComponent implements OnInit {
 			arreglo_ventas: this.allItems
 		};
     this.preventasService.agregarVenta(obj).subscribe((preventaCollection:preventaCollectionModel)=>{
-      this.newSoldDATA.emit(preventaCollection)
+      this.newSoldDATA.emit(preventaCollection.ops)
     } );
 		this.allItems = [];
 		this.totalPrice = 0;
