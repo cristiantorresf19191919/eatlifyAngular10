@@ -21,19 +21,14 @@ export class ProductosService {
 	user: string;
 
 
-	private url : string = environment.url+"/products"; 
+	private url : string = environment.apiUrl+"/products"; 
 	
 	constructor(private httpClient: HttpClient, private router: Router) {
-		this.url = environment.url+"/products" ;
+		this.url = environment.apiUrl+"/products" ;
 		
 	}
 
 	private handleError(error: HttpErrorResponse) {
-		console.log('*********************************************');
-		console.log('*********************************************');
-
-		console.log('*********************************************');
-		console.log('*********************************************');
 		if (error.error instanceof ErrorEvent) {
 			// A client-side or network error occurred. Handle it accordingly.
 			console.error('An error occurred:', error.error.message);
@@ -47,25 +42,25 @@ export class ProductosService {
 	}
 
 	addProduct(product) {
-		return this.httpClient.post(environment.url+'/products', product, httpOptions);
+		return this.httpClient.post(environment.apiUrl+'/products', product, httpOptions);
 	}
 	getProducts() {
 	
-		return this.httpClient.get(environment.url+'/products', httpOptions);
+		return this.httpClient.get(environment.apiUrl+'/products', httpOptions);
 	}
 
 	getAddonsProducts() {
 	
-		return this.httpClient.get(environment.url+'/products/addons', httpOptions);
+		return this.httpClient.get(environment.apiUrl+'/products/addons', httpOptions);
 	}
 
 	getProductById(id){
-		return this.httpClient.get(environment.url+"/products/"+id);
+		return this.httpClient.get(environment.apiUrl+"/products/"+id);
 	}
 	UpdateProduct(product) {
-		return this.httpClient.put(`${environment.url+'/products'}/${product._id}`, product, httpOptions);
+		return this.httpClient.put(`${environment.apiUrl+'/products'}/${product._id}`, product, httpOptions);
 	}
 	DeleteProduct(product) {
-		return this.httpClient.delete(`${environment.url+'/products'}/${product._id}`, httpOptions);
+		return this.httpClient.delete(`${environment.apiUrl+'/products'}/${product._id}`, httpOptions);
 	}
 }

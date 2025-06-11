@@ -16,7 +16,7 @@ const httpOptions = {
 })
 export class CategoriasService {
 
-    private url = environment.url+'/categorias';
+    private url = environment.apiUrl+'/categorias';
     constructor(private httpClient : HttpClient, private router: Router) { }
     getCategories(){
       return this.httpClient.get(this.url);

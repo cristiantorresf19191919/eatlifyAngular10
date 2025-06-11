@@ -20,7 +20,7 @@ export class VentasService {
 	user: string;
 
 
-	 private url = environment.url+"/ventas";
+	 private url = environment.apiUrl+"/ventas";
   constructor(private httpClient: HttpClient, private router: Router) {}
 
 

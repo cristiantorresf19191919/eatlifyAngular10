@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  url: 'https://posdeliveryapp.herokuapp.com'
+  apiUrl: "https://eatlifybackend-cva3cnhzf7c6feaq.canadacentral-01.azurewebsites.net/"
 };

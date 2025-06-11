@@ -17,7 +17,7 @@ const httpOptions = {
 export class DeliveryService {
 	// pilas no se le olvide cambiar las urls despues
 
-  private url = environment.url;
+  private url = environment.apiUrl;
 	public imageSelected: any;
   private dataObs$ = new Subject();
   private pasefoto$ = new Subject();
