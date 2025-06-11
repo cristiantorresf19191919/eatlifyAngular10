@@ -225,23 +225,7 @@ export class VentasComponent implements OnInit, OnChanges {
       }
     );
     /* Mostrar la tabla de productos vendidos de primerazo GET PREVENTAS  */
-    this.preventasService.verVentas().subscribe(
-      (preventas) => {
-        this.arregloproducrosvendidos = preventas;
-        console.log(preventas);
-        console.log("obteniendo productos vendidos de la base de datos");
-
-        this.arregloproducrosvendidos.map((products) => {
-          this.autoSuma += products.price;
-        });
-        this.arregloproducrosvendidos.map((products) => {
-          this.totalquantity += products.quantity;
-        });
-      },
-      (error: HttpErrorResponse) => {
-        Utilities.errorDeConexion();
-      }
-    );
+    this.getSales();
   }
 
   ngAfterViewInit() {
@@ -384,18 +368,15 @@ export class VentasComponent implements OnInit, OnChanges {
   }
   /* producto seleccionado desde show components el que tiene el grid */
   ProductoSeleccionado(event) {
-    /* INtentando pasar de una el producto al componente journal*/
-    this.sell(event);
-
-    /* */
+    this.ventasJournalService.setItem(event);
   }
 
   cloneProduct(c: any) {
-    let clone = {};
-    for (let i in c) {
-      clone[i] = c[i];
+    let product = {};
+    for (let prop in c) {
+      product[prop] = c[prop];
     }
-    return clone;
+    return product;
   }
 
   onChangeQuantity(event: any) {
@@ -539,6 +520,15 @@ export class VentasComponent implements OnInit, OnChanges {
     this.calcularSumaTotalyCantidad();
   }
 
+  deleteItemSoldProduct(item) {
+    console.log("item a eliminar", item);
+    this.arregloproducrosvendidos = this.arregloproducrosvendidos.filter(
+      (p) => p._id !== item._id
+    );
+    this.sumarTodoLoVendido();
+    this.recalcularCantidadProductos();
+   }
+
   onDeleteItemFromChild(item) {
     const ventaId = item._id;
     this.autoSuma = 0;
@@ -559,47 +549,8 @@ export class VentasComponent implements OnInit, OnChanges {
   }
 
   deleteProductSold(product, id_del_producto) {
-    Swal.fire({
-      icon: "error",
-      title: "Are you sure you wanna delete this sell",
-      html:
-        '<p style="font-size:25px"> Product : <b style="color: orangered;">' +
-        product.name +
-        '</b> Quantity : <b style="color: orange;">' +
-        product.quantity +
-        '</b> Price : <b style="color: orangered;">' +
-        product.price +
-        "</b></p>",
-      focusConfirm: false,
-      showCancelButton: true,
-      confirmButtonText: 'DELETE <i class="fas fa-skull-crossbones"></i>',
-      cancelButtonText: 'NO DELETE <i class="fas fa-walking"></i>',
-      confirmButtonColor: "#19B600",
-      cancelButtonColor: "#9D0D0B",
-    }).then((result) => {
-      if (result.value) {
-        this.preventasService.borrarVenta(product._id).subscribe(
-          (deleted) => {
-            this.messageService.add({
-              severity: "success",
-              summary: "producto {" + product.name + "} eliminado",
-              detail: "en la base de datos id = " + product._id,
-            });
-
-            this.arregloproducrosvendidos = this.arregloproducrosvendidos.filter(
-              (p) => p._id !== product._id
-            );
-            this.sumarTodoLoVendido();
-            this.recalcularCantidadProductos();
-          },
-          (error: HttpErrorResponse) => {
-            console.log(
-              "un error ha ocurrido tratando de eliminar un producto de la tabla"
-            );
-          }
-        );
-      }
-    });
+    this.deleteItemSoldProduct(product);
+    this.deleteSaleFromServer(product._id);
   }
   saveAsExcelFile(buffer: any, fileName: string): void {
     import("file-saver").then((FileSaver) => {
@@ -660,16 +611,7 @@ export class VentasComponent implements OnInit, OnChanges {
     console.log("arreglo original");
     console.log(this.arregloproducrosvendidos);
     /* ["asd","sdsad","ada"] */
-    let arregloNombres = [];
-    /* [
-      [{name:'igual'},{name:'igual'}],
-      [{name:'igual'},{name:'igual'}],
-      [{name:'igual'},{name:'igual'}],
-      [{name:'igual'},{name:'igual'}],
-      [{name:'igual'},{name:'igual'}],
-      [{name:'igual'},{name:'igual'}],
-    ]*/
-    /* arreglo con el nombre de los productos repetidos*/
+    let arregloNombres = []; 
     for (let i in this.arregloproducrosvendidos) {
       if (!arregloNombres.includes(this.arregloproducrosvendidos[i]["name"])) {
         arregloNombres[i] = this.arregloproducrosvendidos[i]["name"];
@@ -706,22 +648,6 @@ export class VentasComponent implements OnInit, OnChanges {
     let arregloFinalResumenCantidadVentas = [];
     let preciototal = 0;
     let cantidadtotal = 0;
-    /*
-    [
-        [
-        {name: "Almojabana", price: 9, … },​​
-        {name: "Almojabana", price: 4.5, … },​​
-        {name: "Almojabana", price: 3, … },​​
-        {name: "Almojabana", price: 3, … }
-        ],
-        [
-        {name: "Empanada", price: 5, … },​​
-        {name: "Empanada", price: 5.5, … },​​
-        {name: "Empanada", price: 5, … },​​
-        {name: "Empanada", price: 5, … }
-        ],
-    ]
-    */
     for (let i in arregloIndicesCorregidosNombres) {
       preciototal = 0;
       cantidadtotal = 0;
@@ -777,8 +703,7 @@ export class VentasComponent implements OnInit, OnChanges {
         console.log(postObject);
         this.ventaService.agregarVentaSummary(postObject).subscribe(
           (res) => {
-            this.arregloproducrosvendidos = [];
-            this.router.navigate(["/resumen"]);
+            this.getSales();
           },
           (error: HttpErrorResponse) => {
             Swal.fire(error.error);
@@ -837,6 +762,10 @@ export class VentasComponent implements OnInit, OnChanges {
     product.price = this.initialpriceforsmoothies + additional;
   }
 
+  deleteSaleFromServer(productId: string) {
+    this.preventasService.borrarVenta(productId).subscribe();
+  }
+
   deleteAllSales() {
     Swal.fire({
       title: "Are you sure?",
@@ -855,9 +784,7 @@ export class VentasComponent implements OnInit, OnChanges {
 
         Promise.all(deletePromises)
           .then(() => {
-            this.arregloproducrosvendidos = [];
-            this.sumarTodoLoVendido();
-            this.recalcularCantidadProductos();
+            this.getSales();
             Swal.fire("Deleted!", "All sales have been deleted.", "success");
           })
           .catch((error) => {
@@ -1141,9 +1068,7 @@ export class VentasComponent implements OnInit, OnChanges {
     /* Mandelo al hijo con el ide de la venta que viene backend */
 
     /* metalo en la tabla de productos vendidos */
-    this.arregloproducrosvendidos.push(this.prodcutoVendido);
-    this.sell(this.prodcutoVendido);
-    this.calcularSumaTotalyCantidad();
+    this.getSales();
   }
 
   calcularSumaTotalyCantidad() {
@@ -1166,8 +1091,19 @@ export class VentasComponent implements OnInit, OnChanges {
   }
   /* POST PREVENTAS  */
   newSoldDATA(dataBack: Item[]) {
-    this.arregloproducrosvendidos = dataBack;
-    this.sumarTodoLoVendido();
-    this.recalcularCantidadProductos();
+    this.getSales();
+  }
+
+  getSales() {
+    this.preventasService.verVentas().subscribe(
+      (preventas) => {
+        this.arregloproducrosvendidos = preventas;
+        this.sumarTodoLoVendido();
+        this.recalcularCantidadProductos();
+      },
+      (error: HttpErrorResponse) => {
+        Utilities.errorDeConexion();
+      }
+    );
   }
 }
