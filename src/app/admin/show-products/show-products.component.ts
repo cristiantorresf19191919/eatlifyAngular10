@@ -74,19 +74,6 @@ export class ShowProductsComponent implements OnInit, OnChanges {
   productoSeleccionado(item){
     //envia producto a otro componente con subject rxjs
     this.ProductoSelecccionado.emit(item);
-    //codigo loco para copiar y mostrar una animacion pendeja
-    /* const itemNative = document.querySelector(".item");    
-    const clone: any = itemNative.cloneNode(true);
-    clone.classList.add('item-animated');
-    const imagen = clone.children[0].children[0];
-    imagen.setAttribute('src',item.image.url); */
-    // imagen.currentSrc = item.image.url;
-   /*  const parent = itemNative.parentNode;
-    parent.appendChild(clone);
-    clone.classList.add("item-animated"); */
-    /* setTimeout(() => {
-      parent.removeChild(clone);
-    }, 1500); */
   }
 
 }

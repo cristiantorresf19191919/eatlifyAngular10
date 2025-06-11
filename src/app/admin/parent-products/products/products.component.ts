@@ -41,10 +41,10 @@ export class ProductsComponent implements OnInit {
 		public router: Router,
 		private utilites:Utilities,
 		private deliveryService:DeliveryService
-		
+
 	) {}
 
-	
+
 
 	ngOnInit() {
 
@@ -54,10 +54,10 @@ export class ProductsComponent implements OnInit {
 		// get categorias para cargar el select
 
 		console.log("corre funcion");
-		this.categoriasService.getCategories().subscribe((arreglo: Category[]) => {
-		  console.log("Ha llegado el arreglo desde el servidor");
-		  console.log(arreglo);
-		  this.categories = arreglo;
+		this.categoriasService.getCategories().subscribe((category: Category[]) => {
+		  console.log("Ha llegado el arreglo desde el servidor", category);
+		  console.log(category);
+		  this.categories = category;
 		  /* ordenar por categorias*/
 		  /*   this.categorias = [
 				  { label: 'All cat', value: null },
@@ -68,40 +68,31 @@ export class ProductsComponent implements OnInit {
 				  { label: 'coffee', value: 'coffee' },
 				  { label: 'sodas', value: 'sodas' }
 				]; */
-	
-		  this.categorias = this.categories.map((cat) => {
-			return { label: cat.name, value: cat.name };
-		  });
+
+		  this.categorias = this.categories.map((cat) => ({ label: cat.name, value: cat.name }));
 		  this.categorias.unshift({ label: "All cat", value: null });
-	
+
 		  console.log("aca termina");
 		  console.log("estas categorias son");
 		  console.log(this.categories);
 		});
-		
+
 
 		this.admin = localStorage.getItem('admin');
 		this.cols = [
-			{ field: 'name', header: 'name' },
-			{ field: 'price', header: 'price' },
-			{ field: 'category', header: 'category' },			
+			{ field: 'name', header: 'Name', width: '50%' },
+			{ field: 'price', header: 'Price', width: '20%', styleClass: 'text-right' },
+			{ field: 'category', header: 'Category', width: '20%', styleClass: 'text-center' },
 		];
 
 		/* get products from server */
 		this.productsService.getProducts().subscribe(
 			(products) => {
-				console.log('lo que llega del servidor');
-				console.log('lo que llega del servidor');
-				console.log('lo que llega del servidor');
-				console.log(products);
-				console.log('lo que llega del servidor');
-				console.log('lo que llega del servidor');
-				console.log('lo que llega del servidor');
-
+				console.log({products});
 				this.products = products;
 			},
 			(error: HttpErrorResponse) => {
-				console.log(error);				
+				console.log(error);
 				Utilities.errorDeConexion();
 			}
 		);
@@ -254,13 +245,12 @@ export class ProductsComponent implements OnInit {
 		Utilities.CreateCategory(this.router);
 	}
 
+	createNewProduct() {
+		this.router.navigate(['/dashboard/parent-products/delivery']);
+	}
+
 	editProduct(product){	
-
-
-		this.router.navigate([
-			'/dashboard/parentProducts/delivery',
-			{product_id:product._id}]);
-		
+		this.router.navigate(['/dashboard/parentProducts/delivery', product._id]);
 	}
 	
 }

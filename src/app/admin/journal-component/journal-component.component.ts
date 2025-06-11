@@ -11,9 +11,12 @@ import {
 } from 'angular-animations';
 import { VentasSocketService } from '../ventas-socket/ventas-socket.service';
 import { Product } from 'src/app/models/Producto';
+import { Store } from '@ngrx/store';
+// import { AddVenta } from 'src/app/store/actions/ventas.actions';
 
 interface preventaCollectionModel {
-  ops:Item[]
+	_id: string;
+	ops:Item[]
 }
 
 @Component({
@@ -42,26 +45,20 @@ export class JournalComponentComponent implements OnInit {
 	constructor(
     private ventasJournalService: VentasJorunalService,
     private ventasSocketService: VentasSocketService,
-    private preventasService : PreventasService) {}
+    private preventasService : PreventasService,
+    private store: Store) {}
 	ngOnInit() {
+		this.ventasJournalService.getItem().subscribe((itemToAdd: Item) => {
+      if (!itemToAdd) { return; }
 
-		
+      const existingItem = this.allItems.find((el) => el.name === itemToAdd.name);
 
-		this.ventasJournalService.getItemUpdated().subscribe((item: Item) => {
-			const currentItem = this.allItems.find((el) => el._id === item._id);
-			const currentItemIndex = this.allItems.indexOf(currentItem);
-			this.allItems.splice(currentItemIndex, 1);
-			this.allItems.unshift(item);
-			this.totalPrice = 0;
-			this.allItems.forEach((el) => (this.totalPrice += el.price));
-		});
-		this.ventasJournalService.getItem().subscribe((el: Item) => {
-			this.totalPrice += el.price;
-			this.ventasSocketService.sendSale(el);
-			this.allItems.push(el);
-			console.log('que estoy reciviendo');
-			console.log(el);
-			this.change = this.valorRecivido - this.totalPrice;
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        this.allItems.push({ ...itemToAdd, quantity: 1 });
+      }
+      this.calculateTotal();
 		});
 	}
 	ngOnChange() {
@@ -112,17 +109,37 @@ export class JournalComponentComponent implements OnInit {
 	}
 
 	calculateTotal() {
-		this.totalPrice = 0;
-		this.allItems.map((item) => {
-			this.totalPrice += item.price;
-		});
-		this.change = this.valorRecivido - this.totalPrice;
+		this.totalPrice = this.allItems.reduce((acc, item) => {
+			return acc + (item.price * item.quantity);
+		}, 0);
+		this.updateChange();
 	}
 
-	DeleteElement(element) {
-		console.log(this.allItems);
-		const index = this.allItems.indexOf(element);
-		this.allItems.splice(index, 1);
+	updateChange() {
+		const total = this.totalPrice || 0;
+		const received = this.moneyRecieved || 0;
+		this.change = received > 0 ? received - total : 0;
+	}
+
+	incrementQuantity(item: Item) {
+		item.quantity++;
+		this.calculateTotal();
+	}
+
+	decrementQuantity(item: Item) {
+		item.quantity--;
+		if (item.quantity <= 0) {
+			this.removeElement(item);
+		} else {
+			this.calculateTotal();
+		}
+	}
+
+	removeElement(element: Item) {
+		const index = this.allItems.findIndex(item => item._id === element._id);
+		if (index > -1) {
+			this.allItems.splice(index, 1);
+		}
 		this.calculateTotal();
 		this.deleteItemEvent.emit(element);
 	}
@@ -137,22 +154,31 @@ export class JournalComponentComponent implements OnInit {
 	}
 	/* Limpiar la data */
 	cleanData() {
+		if (this.allItems.length === 0) { return; }
+
 		const obj = {
 			arreglo_ventas: this.allItems
 		};
     this.preventasService.agregarVenta(obj).subscribe((preventaCollection:preventaCollectionModel)=>{
-		
       this.newSoldDATA.emit(preventaCollection)
     } );
 		this.allItems = [];
 		this.totalPrice = 0;
 		this.change = 0;
-		this.valorRecivido = 0;
-    this.ventasSocketService.clearTheScreen(true);
-
+		this.moneyRecieved = 0;
 	}
 
 	onItemClickEvent(item) {
 		this.productSelectedPopUp.emit(item);
+	}
+
+	borrarPantalla() {
+		this.allItems = [];
+		this.totalPrice = 0;
+		// this.ventasSocketService.clearTheScreen(true);
+	}
+
+	deleteItem(item: Item, i: number) {
+		// ... existing code ...
 	}
 }

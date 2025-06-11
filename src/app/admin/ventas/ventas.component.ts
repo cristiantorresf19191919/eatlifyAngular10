@@ -268,6 +268,7 @@ export class VentasComponent implements OnInit, OnChanges {
 
   productoSeleccionadoFromJournalComponent(product) {
     product;
+    console.log("producto seleccionado desde el journal component", product);
     // alert(JSON.stringify(event));
     this.newProduct = false;
     this.product = this.cloneProduct(product);
@@ -490,6 +491,7 @@ export class VentasComponent implements OnInit, OnChanges {
   }
   /* Producto Seleccionado desde showproducts component*/
   sell(product) {
+    console.log("producto seleccionado desde el show products component", product);
     this.autoSuma = 0;
     /* llevar la cuenta de una manera elegante*/
     this.itemToPassToChild = this.cloneProduct(product);
@@ -519,8 +521,11 @@ export class VentasComponent implements OnInit, OnChanges {
     this.quantity = 1;
     this.prodcutoVendido = product;
     this.prodcutoVendido["quantity"] = this.quantity;
+    this.prodcutoVendido["date"] = new Date(); //add date so it can be displayed
     /*mandelo al hijo con el id de la venta que viene del backend para despues no tener problemas al eliminarlo */
     /* el hijo tambien se lo envia al socket */
+    console.log("prodcutoVendido", this.prodcutoVendido);
+    this.arregloproducrosvendidos.unshift(this.cloneProduct(this.prodcutoVendido));
     this.ventasJournalService.setItem(this.prodcutoVendido);
     /* faker facturas id */
     if (this.booleanDecision) {
@@ -563,7 +568,7 @@ export class VentasComponent implements OnInit, OnChanges {
         '</b> Quantity : <b style="color: orange;">' +
         product.quantity +
         '</b> Price : <b style="color: orangered;">' +
-        product.quantity +
+        product.price +
         "</b></p>",
       focusConfirm: false,
       showCancelButton: true,
@@ -580,20 +585,17 @@ export class VentasComponent implements OnInit, OnChanges {
               summary: "producto {" + product.name + "} eliminado",
               detail: "en la base de datos id = " + product._id,
             });
-            console.log("this.arregloproducrosvendidos");
-            console.log(this.arregloproducrosvendidos);
-            this.arregloproducrosvendidos.splice(id_del_producto, 1);
-            this.autoSuma = 0;
-            this.arregloproducrosvendidos.map((products) => {
-              this.autoSuma += products.price;
-            });
-            this.totalquantity = 0;
-            this.arregloproducrosvendidos.map((products) => {
-              this.totalquantity += products.quantity;
-            });
+
+            this.arregloproducrosvendidos = this.arregloproducrosvendidos.filter(
+              (p) => p._id !== product._id
+            );
+            this.sumarTodoLoVendido();
+            this.recalcularCantidadProductos();
           },
           (error: HttpErrorResponse) => {
-            Swal.fire(error.error);
+            console.log(
+              "un error ha ocurrido tratando de eliminar un producto de la tabla"
+            );
           }
         );
       }
@@ -836,34 +838,35 @@ export class VentasComponent implements OnInit, OnChanges {
   }
 
   deleteAllSales() {
-    this.autoSuma = 0;
     Swal.fire({
-      icon: "error",
-      title: "Are you sure you wanna delete ALL Ventas",
-      focusConfirm: false,
+      title: "Are you sure?",
+      text: "You are about to delete all sales records. This action cannot be undone.",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'DELETE <i class="fas fa-skull-crossbones"></i>',
-      cancelButtonText: 'NO DELETE <i class="fas fa-walking"></i>',
-      confirmButtonColor: "#9D0D0B",
-      cancelButtonColor: "#19B600",
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete them all!",
     }).then((result) => {
       if (result.value) {
-        this.arregloproducrosvendidos = [];
-        Swal.fire(
-          "Irreversible todas las ventas se eliminaron de la base de datos"
-        );
-        this.preventasService.deleteAllSales().subscribe(
-          (data) => {
-            this.messageService.add({
-              severity: "error",
-              summary: "Todo se ha eliminado de la base de datos",
-              detail: "en la base de datos id = ",
-            });
-          },
-          (error: HttpErrorResponse) => {
-            console.log(error);
-          }
-        );
+        const deletePromises = [];
+        for (const product of this.arregloproducrosvendidos) {
+          deletePromises.push(this.preventasService.borrarVenta(product._id).toPromise());
+        }
+
+        Promise.all(deletePromises)
+          .then(() => {
+            this.arregloproducrosvendidos = [];
+            this.sumarTodoLoVendido();
+            this.recalcularCantidadProductos();
+            Swal.fire("Deleted!", "All sales have been deleted.", "success");
+          })
+          .catch((error) => {
+            Swal.fire(
+              "Error!",
+              "An error occurred while deleting sales.",
+              "error"
+            );
+          });
       }
     });
   }
@@ -1163,7 +1166,8 @@ export class VentasComponent implements OnInit, OnChanges {
   }
   /* POST PREVENTAS  */
   newSoldDATA(dataBack: Item[]) {
-    this.arregloproducrosvendidos.push(...dataBack);
+    this.arregloproducrosvendidos = dataBack;
+    this.sumarTodoLoVendido();
     this.recalcularCantidadProductos();
   }
 }

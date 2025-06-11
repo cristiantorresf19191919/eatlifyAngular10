@@ -1,12 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav
-    #drawer
-    class="sidenav"
-    fixedInViewport
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false"
-  >
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item [routerLink]="['/']">Dashboard</a>
@@ -21,13 +15,8 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar>
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async"
-      >
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <mat-icon class="hand_pointer" [routerLink]="['/']" style="margin-right: 1%;">account_circle</mat-icon>
@@ -36,85 +25,67 @@
       </ng-container>
       <ng-template #noRestaurantName>
         <span class="dashboard-title hand_pointer" [routerLink]="['/']">{{ nombre }}</span>
-        
+
       </ng-template>
-      
+
 
       <span class="spacer"></span>
       <div class="main-menu">
 
         <a mat-raised-button matTooltip="Dashboard" [routerLink]="['/']"
-        style="background-color: transparent; font-size: 40px; padding: 10px;"
-        matTooltipClass="custom-tooltip"
-        [matTooltipShowDelay]="'below'"
-        [matTooltipHideDelay]="'below'"
-        aria-label="Button that displays a tooltip with a customized delay in showing and hiding">
-        <mat-icon >dashboard</mat-icon>
-      </a>
+          style="background-color: transparent; font-size: 40px; padding: 10px;" matTooltipClass="custom-tooltip"
+          [matTooltipShowDelay]="'below'" [matTooltipHideDelay]="'below'"
+          aria-label="Button that displays a tooltip with a customized delay in showing and hiding">
+          <mat-icon>dashboard</mat-icon>
+        </a>
 
-      <a mat-raised-button matTooltip="Cajeros" routerLinkActive="active-route-css" [routerLink]="['cajeros']" 
-      style="background-color: transparent; font-size: 40px; padding: 10px;"
-      matTooltipClass="custom-tooltip"
-      [matTooltipShowDelay]="'below'"
-      [matTooltipHideDelay]="'below'"
-      aria-label="cajeros">
-      <mat-icon >people</mat-icon>
-    </a>
+        <a mat-raised-button matTooltip="Cajeros" routerLinkActive="active-route-css" [routerLink]="['cajeros']"
+          style="background-color: transparent; font-size: 40px; padding: 10px;" matTooltipClass="custom-tooltip"
+          [matTooltipShowDelay]="'below'" [matTooltipHideDelay]="'below'" aria-label="cajeros">
+          <mat-icon>people</mat-icon>
+        </a>
 
-      <a mat-raised-button matTooltip="Ventas" routerLinkActive="active-route-css"  [routerLink]="['ventas']" 
-      style="background-color: transparent; font-size: 40px; padding: 10px;"
-      matTooltipClass="custom-tooltip"
-      [matTooltipShowDelay]="'below'"
-      [matTooltipHideDelay]="'below'"
-      aria-label="ventas">
-      <mat-icon>payments</mat-icon>
-    </a>
+        <a mat-raised-button matTooltip="Ventas" routerLinkActive="active-route-css" [routerLink]="['ventas']"
+          style="background-color: transparent; font-size: 40px; padding: 10px;" matTooltipClass="custom-tooltip"
+          [matTooltipShowDelay]="'below'" [matTooltipHideDelay]="'below'" aria-label="ventas">
+          <mat-icon>payments</mat-icon>
+        </a>
 
 
-      <a mat-raised-button matTooltip="Resumen" routerLinkActive="active-route-css" [routerLink]="['resumen']" 
-      style="background-color: transparent; font-size: 40px; padding: 10px;"
-      matTooltipClass="custom-tooltip"
-      [matTooltipShowDelay]="'below'"
-      [matTooltipHideDelay]="'below'"
-      aria-label="resumen">
-      <mat-icon >assessment</mat-icon>
-    </a>
+        <a mat-raised-button matTooltip="Resumen" routerLinkActive="active-route-css" [routerLink]="['resumen']"
+          style="background-color: transparent; font-size: 40px; padding: 10px;" matTooltipClass="custom-tooltip"
+          [matTooltipShowDelay]="'below'" [matTooltipHideDelay]="'below'" aria-label="resumen">
+          <mat-icon>assessment</mat-icon>
+        </a>
 
 
-      <a mat-raised-button matTooltip="Tiempo Real" routerLinkActive="active-route-css" [routerLink]="['socketventas']"
-      style="background-color: transparent; font-size: 40px; padding: 10px;"
-      matTooltipClass="custom-tooltip"
-      [matTooltipShowDelay]="'below'"
-      [matTooltipHideDelay]="'below'"
-      aria-label="tiempo real">
-      <mat-icon >device_hub</mat-icon>
-    </a>
+        <a mat-raised-button matTooltip="Tiempo Real" routerLinkActive="active-route-css"
+          [routerLink]="['socketventas']" style="background-color: transparent; font-size: 40px; padding: 10px;"
+          matTooltipClass="custom-tooltip" [matTooltipShowDelay]="'below'" [matTooltipHideDelay]="'below'"
+          aria-label="tiempo real">
+          <mat-icon>device_hub</mat-icon>
+        </a>
 
-      <a mat-raised-button matTooltip="Restaurant" routerLinkActive="active-route-css"  [routerLink]="['restaurant']" 
-      style="background-color: transparent; font-size: 40px; padding: 10px;"
-      matTooltipClass="custom-tooltip"
-      [matTooltipShowDelay]="'below'"
-      [matTooltipHideDelay]="'below'"
-      aria-label="tiempo real">
-      <mat-icon>restaurant</mat-icon>
-    </a>
+        <a mat-raised-button matTooltip="Restaurant" routerLinkActive="active-route-css" [routerLink]="['restaurant']"
+          style="background-color: transparent; font-size: 40px; padding: 10px;" matTooltipClass="custom-tooltip"
+          [matTooltipShowDelay]="'below'" [matTooltipHideDelay]="'below'" aria-label="tiempo real">
+          <mat-icon>restaurant</mat-icon>
+        </a>
 
-    <a mat-raised-button matTooltip="Productos" routerLinkActive="active-route-css"  [routerLink]="['parentProducts']" 
-      style="background-color: transparent; font-size: 40px; padding: 10px;"
-      matTooltipClass="custom-tooltip"
-      [matTooltipShowDelay]="'below'"
-      [matTooltipHideDelay]="'below'"
-      aria-label="tiempo real">
-      <mat-icon>storefront</mat-icon>
-    </a>
+        <a mat-raised-button matTooltip="Productos" routerLinkActive="active-route-css"
+          [routerLink]="['parentProducts']" style="background-color: transparent; font-size: 40px; padding: 10px;"
+          matTooltipClass="custom-tooltip" [matTooltipShowDelay]="'below'" [matTooltipHideDelay]="'below'"
+          aria-label="tiempo real">
+          <mat-icon>storefront</mat-icon>
+        </a>
 
 
-        
-       
-      
-        
-       
-    
+
+
+
+
+
+
         <div class="cr-spacer"></div>
 
         <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu">
@@ -147,27 +118,21 @@
             <span>Cerrar Sesion</span>
           </button>
         </mat-menu>
-      
-        
+
+
       </div>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <mat-chip-list  style="
+    <mat-chip-list style="
     position: fixed;
     z-index: 99;
     bottom: 14px;
     left: 1px;
     transform: translateX(50%);
   " class="mat-chip-list-stacked" aria-label="Color selection">
-      <mat-chip
-        selected
-        [color]="chip.color"
-       
-        class="justify-content-center"
-        style="width: 9rem;"
-        (click)="onClickChip()"
-      >
-      
+      <mat-chip selected [color]="chip.color" class="justify-content-center" style="width: 9rem;"
+        (click)="onClickChip()">
+
         {{ chip.estadoStatus }}
       </mat-chip>
     </mat-chip-list>
@@ -175,59 +140,34 @@
     <div *ngIf="isInDashboardUrl">
       <h1>{{ chip.estado }}</h1>
       <div class="svg-container" style="width: 20rem; margin: 0 auto;">
-        <svg
-          viewBox="0 0 100 100"
-          xmlns="http://www.w3.org/2000/svg"
-          width="128px"
-          height="128px"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          style="
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="128px" height="128px"
+          xmlns:xlink="http://www.w3.org/1999/xlink" style="
             width: 100%;
             height: 100%;
             background-color: #3030;
             animation-play-state: paused;
-          "
-        >
-          <g
-            class="ldl-scale"
-            style="
+          ">
+          <g class="ldl-scale" style="
               transform-origin: 50% 50% 0px;
               transform: rotate(0deg) scale(0.8);
               animation-play-state: paused;
-            "
-          >
-            <path
-              fill="#cccbca"
+            ">
+            <path fill="#cccbca"
               d="M62.43 42.293c.219-11.972 6.275-28.691 11.363-34.457.555-.63 1.786-.315 1.786.457V90.08c0 1.337-1.348 2.42-3.011 2.42-1.435 0-2.671-.814-2.952-1.946l-.195-.783a12.097 12.097 0 0 1-.352-3.384l.881-23.374c-4.053-2.986-7.729-9.317-7.52-20.72z"
-              style="fill: rgb(204, 203, 202);"
-              class="cuchillo"
-            ></path>
+              style="fill: rgb(204, 203, 202);" class="cuchillo"></path>
 
-            <path
-              fill="#e0e0e0"
+            <path fill="#e0e0e0"
               d="M42.99 12.272c0-1.509-.943-2.716-2.103-2.718-.07 0-.138-.008-.209-.002-1.092.137-1.894 1.411-1.894 2.838l-.632 13.9a1.709 1.709 0 1 1-3.418 0l-.403-15.952c0-1.062-.494-2.038-1.245-2.525-.032-.02-.065-.035-.098-.053a2.078 2.078 0 0 0-.284-.14c-.088-.033-.181-.053-.274-.073-.058-.013-.114-.033-.174-.041-.083-.011-.17-.003-.256-.004-.086 0-.173-.007-.257.003-.06.008-.116.028-.174.041-.093.02-.185.041-.274.073a2.078 2.078 0 0 0-.284.14c-.033.018-.066.034-.098.053-.751.487-1.245 1.463-1.245 2.525l-.402 15.953a1.709 1.709 0 1 1-3.418 0l-.631-13.901c0-1.427-.802-2.701-1.894-2.838-.071-.005-.139.002-.209.002-1.16.002-2.103 1.21-2.103 2.718l-.631 15.727v5.162a7.305 7.305 0 0 0 4.979 6.922c.983.52 1.931.777 2.531 1.948.46.899.634 1.863.693 2.847L27.444 85.35c0 3.948 1.928 7.148 4.306 7.148h.503c2.378 0 4.306-3.2 4.306-7.148 0-7.39-1.139-40.473-1.139-40.473.059-.984.232-1.949.693-2.847.6-1.171 1.548-1.428 2.531-1.948a7.305 7.305 0 0 0 4.979-6.922v-5.162l-.633-15.726z"
-              style="fill: rgb(224, 224, 224);"
-              class="tenedor"
-            ></path>
+              style="fill: rgb(224, 224, 224);" class="tenedor"></path>
           </g>
           <!-- generated by https://loading.io/ -->
         </svg>
       </div>
       <div class="d-flex-main">
-        <button
-          mat-raised-button
-          (click)="offline()"
-          class="flex-fill-1"
-          color="warn"
-        >
+        <button mat-raised-button (click)="offline()" class="flex-fill-1" color="warn">
           Offline
         </button>
-        <button
-          mat-raised-button
-          (click)="online()"
-          class="flex-fill-1"
-          color="accent"
-        >
+        <button mat-raised-button (click)="online()" class="flex-fill-1" color="accent">
           Online
         </button>
       </div>

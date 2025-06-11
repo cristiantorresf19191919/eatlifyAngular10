@@ -20,6 +20,7 @@ const routes: Routes = [
       { path: 'categories', component: CategoriesComponent },
       { path: 'categories/:open', component: CategoriesComponent },
       { path: 'create', component: CreateProductComponent },
+      { path: 'delivery/:abraModal', component: DeliveryComponent },
       {
         path: 'delivery',
         component: DeliveryComponent,
@@ -28,7 +29,6 @@ const routes: Routes = [
           { path: 'create-product', component: CreateProductComponent },
         ],
       },
-      { path: 'delivery/:abraModal', component: DeliveryComponent },
       {
         path: 'modifierGroups',
         component: ModifierGroupsComponent

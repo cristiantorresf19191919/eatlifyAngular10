@@ -1,60 +1,27 @@
 <!-- overlay con absolute para el modal una caja adentro y swichiar el booleano pdialo -->
-<div
-  *ngIf="displayDialog"
-  (click)="displayDialog = !displayDialog"
-  class="overlay-mask-elegante"
-></div>
+<div *ngIf="displayDialog" (click)="displayDialog = !displayDialog" class="overlay-mask-elegante"></div>
 <!-- ventana POP UP de cada producto -->
-<p-dialog
-  [header]="'Product : ' + product['name']"
-  class="p-dialog"
-  id="p-dialog"
-  [(visible)]="displayDialog"
-  style="
+<p-dialog [header]="'Product : ' + product['name']" class="p-dialog" id="p-dialog" [(visible)]="displayDialog" style="
     max-height: calc(100vh - 210px) !important;
     overflow: scroll !important;
-  "
-  [responsive]="true"
-  showEffect="shake"
-  [modal]="false"
-  [style]="{ width: '60%' }"
-  dismissableMask="true"
-  maximizable="true"
-  [contentStyle]="{ overflow: 'scroll' }"
->
+  " [responsive]="true" showEffect="shake" [modal]="false" [style]="{ width: '60%' }" dismissableMask="true"
+  maximizable="true" [contentStyle]="{ overflow: 'scroll' }">
   <div class="ui-g ui-fluid" *ngIf="product">
-    <img
-      *ngIf="product['image']"
-      width="1000%"
-      src="{{ product.image.url }}"
-      class="imagen-producto-popup"
-      alt=""
-    />
+    <img *ngIf="product['image']" width="1000%" src="{{ product.image.url }}" class="imagen-producto-popup" alt="" />
     <div class="texto-adelante">
       <div class="ui-g-12">
         <div class="ui-g-4">
-          <label class="popup-label"
-            ><b>Quantity?</b>
-            <p class="numeros">{{ quantity }}</p> </label
-          ><br /><br />
-          <label class="popup-label"
-            ><b>Total Price </b> <br />
-            <p class="numeros">{{ product["price"] }}</p></label
-          >
+          <label class="popup-label"><b>Quantity?</b>
+            <p class="numeros">{{ quantity }}</p>
+          </label><br /><br />
+          <label class="popup-label"><b>Total Price </b> <br />
+            <p class="numeros">{{ product["price"] }}</p>
+          </label>
         </div>
         <div class="ui-g-8">
           <!-- slider cantidad input -->
-          <input
-            type="range"
-            min="1"
-            max="10"
-            step="1"
-            value="1"
-            (change)="onChangeQuantity($event)"
-            class="quantitySlider"
-            (input)="onChangeQuantity($event)"
-            [(ngModel)]="quantity"
-          />
+          <input type="range" min="1" max="10" step="1" value="1" (change)="onChangeQuantity($event)"
+            class="quantitySlider" (input)="onChangeQuantity($event)" [(ngModel)]="quantity" />
 
           <!-- input cantidad tradicional -->
 
@@ -64,92 +31,50 @@
           (keyup)="onChangeQuantity($event)" [(ngModel)]="quantity"
           style="width: 100%; padding: 5px;
           margin-bottom: 1%; font-size: 6px; text-align: center;"> -->
-          <p-spinner
-            size="30"
-            style="margin-top: 5%;"
-            type="number"
-            (input)="onReceiveMoney($event)"
-            (change)="onReceiveMoney($event)"
-            [(ngModel)]="change"
-            placeholder="Calcule Vueltas"
-            [step]="0.25"
-            style="
+          <p-spinner size="30" style="margin-top: 5%;" type="number" (input)="onReceiveMoney($event)"
+            (change)="onReceiveMoney($event)" [(ngModel)]="change" placeholder="Calcule Vueltas" [step]="0.25" style="
               padding: 12px !important;
               margin-bottom: 1%;
               font-size: 30px !important;
               text-align: center !important;
-            "
-          ></p-spinner>
+            "></p-spinner>
         </div>
         <!-- precio fijo por si hay controversia -->
 
         <br />
-        <input
-          type="range"
-          min="1"
-          step="0.5"
-          max="15"
-          class="inputFixedPrice"
-          placeholder="add fixed price"
-          [(ngModel)]="product['price']"
-        />
+        <input type="range" min="1" step="0.5" max="15" class="inputFixedPrice" placeholder="add fixed price"
+          [(ngModel)]="product['price']" />
       </div>
 
       <div class="ui-g-12">
         <mat-label for="">Change: </mat-label>
         <h5 class="change" style="font-size: 2rem;">
-          <mat-card
-            ><p class="changeMoney" *ngIf="giveChange">
+          <mat-card>
+            <p class="changeMoney" *ngIf="giveChange">
               {{ giveChange }}
-            </p></mat-card
-          >
+            </p>
+          </mat-card>
         </h5>
       </div>
       <div class="ui-g-12" *ngIf="product['category'] == 'smoothies'">
         <mat-label for="">Add extra fruit: </mat-label>
-        <input
-          type="text"
-          [(ngModel)]="extrafruit"
-          class="number-assign-input"
-          pInputText
-          pKeyFilter="int"
-          placeholder="add extra fruit"
-        />
-        <button
-          mat-raised-button
-          color="accent"
-          (click)="addextrafruit(product, extrafruit)"
-        >
+        <input type="text" [(ngModel)]="extrafruit" class="number-assign-input" pInputText pKeyFilter="int"
+          placeholder="add extra fruit" />
+        <button mat-raised-button color="accent" (click)="addextrafruit(product, extrafruit)">
           add
         </button>
         <br />
       </div>
       <div class="ui-g-12" *ngIf="product['category'] == 'bowls'">
         <mat-label for="">Additionals </mat-label>
-        <input
-          type="text"
-          [(ngModel)]="extrafruit"
-          class="number-assign-input"
-          pInputText
-          pKeyFilter="int"
-          placeholder="add extra fruit"
-        />
+        <input type="text" [(ngModel)]="extrafruit" class="number-assign-input" pInputText pKeyFilter="int"
+          placeholder="add extra fruit" />
 
-        <input
-          type="text"
-          [(ngModel)]="extrascrub"
-          class="number-assign-input"
-          pInputText
-          pKeyFilter="int"
-          placeholder="add extra scrub icecream"
-        />
+        <input type="text" [(ngModel)]="extrascrub" class="number-assign-input" pInputText pKeyFilter="int"
+          placeholder="add extra scrub icecream" />
 
-        <button
-          style="margin: 2% 0;"
-          mat-raised-button
-          color="accent"
-          (click)="addextrascrub(product, extrascrub, extrafruit)"
-        >
+        <button style="margin: 2% 0;" mat-raised-button color="accent"
+          (click)="addextrascrub(product, extrascrub, extrafruit)">
           add
         </button>
         <br />
@@ -169,196 +94,112 @@
 
       <div class="ui-g-12">
         <mat-label>Do you wish to track this customer</mat-label><br />
-        <mat-checkbox color="accent" [(ngModel)]="booleanDecision"
-          >Click here if you want to track the customer</mat-checkbox
-        >
+        <mat-checkbox color="accent" [(ngModel)]="booleanDecision">Click here if you want to track the
+          customer</mat-checkbox>
       </div>
       <div *ngIf="booleanDecision" class="ui-g-12">
-        <input
-          type="number"
-          [(ngModel)]="facturaIdFaker"
-          class="number-assign-input"
-          pInputText
-          pKeyFilter="int"
-          placeholder="asignar esta venta a un numero de cliente"
-        />
+        <input type="number" [(ngModel)]="facturaIdFaker" class="number-assign-input" pInputText pKeyFilter="int"
+          placeholder="asignar esta venta a un numero de cliente" />
       </div>
     </div>
   </div>
   <p-footer>
     <div class="ui-dialog-buttonpane ui-helper-clearfix">
-      <button
-        class="popup-button"
-        type="button"
-        style="background-color: darkred;"
-        pButton
-        icon="pi
-              pi-times"
-        (click)="displayDialog = !displayDialog"
-        label="cancel"
-      ></button>
-      <button
-        class="popup-button"
-        type="button"
-        style="background-color: darkgreen;"
-        pButton
-        icon="pi pi-check"
-        (click)="popUpGreenButton()"
-        label="Vender / Sell"
-      ></button>
+      <button class="popup-button" type="button" style="background-color: darkred;" pButton icon="pi
+              pi-times" (click)="displayDialog = !displayDialog" label="cancel"></button>
+      <button class="popup-button" type="button" style="background-color: darkgreen;" pButton icon="pi pi-check"
+        (click)="popUpGreenButton()" label="Vender / Sell"></button>
     </div>
   </p-footer>
 </p-dialog>
-<!-- empieza el menu y sus iconos con buscador -->
-<div #menuCat class="menuCat" id="navbar">
-  <div *ngFor="let item of categorias" class="btn-container">
-    <button
-      href="#tablaContenedor"
-      [ngStyle]="{
-        padding: item.value === itemssubcatmenu ? '1.1rem' : '1rem',
-        'background-color': item.value != itemssubcatmenu ? '#333' : '#3f51b5'
-      }"
-      class="button-menu-rapid"
-      mat-raised-button
-      (click)="assignMenuValue(item.value)"
-    >
-      {{ item.label }}
-    </button>
-  </div>
-  <div class="btn-container">
-    <button
-      class="button-menu-rapid"
-      mat-raised-button
-      (click)="activateShortCutComponent = true"
-    >
-      Codigo
-    </button>
-  </div>
-</div>
-<!-- Busqueda Global  -->
-<div #busquedaGlobal class="busquedaGlobalContainer">
-  <input
-    type="text"
-    class="busqueda-global"
-    pInputText
-    size="50"
-    placeholder="Busqueda Global"
-    [(ngModel)]="terminoaBuscar"
-    autofocus
-  /><i class="fa fa-search searchInputIcon"></i>
-</div>
+<!-- 
+  New, redesigned layout starts here.
+  I'm wrapping the main view in a new container and creating a two-column structure.
+-->
+<div class="sales-container">
+  <!-- Left side: Product selection -->
+  <div class="products-area">
+    <div class="products-header">
+      <div #menuCat class="menuCat" id="navbar">
+        <div *ngFor="let item of categorias" class="btn-container">
+          <button href="#tablaContenedor" [ngStyle]="{
+              'background-color': item.value === itemssubcatmenu ? '#3f51b5' : 'transparent',
+              'border-color': item.value === itemssubcatmenu ? '#3f51b5' : '#444'
+            }" class="button-menu-rapid" mat-raised-button (click)="assignMenuValue(item.value)">
+            {{ item.label }}
+          </button>
+        </div>
+        <div class="btn-container">
+          <button class="button-menu-rapid" mat-raised-button (click)="activateShortCutComponent = true">
+            Codigo
+          </button>
+        </div>
+      </div>
 
-<!-- button para ocultar o mostrar los productos HIDE -->
-<!--      <button mat-fab color="primary" (click)="apaguetablaproductos=
-        !apaguetablaproductos">{{!apaguetablaproductos ? 'Hide ' : 'Show ' }}</button> -->
-<!-- tabla para navegacion de productos -->
-<div
-  class="switch"
-  id="tablaContenedor"
-  [ngClass]="apaguetablaproductos ? 'hideClassCss' : 'showClassCss'"
->
-  <!-- componente mejorado para mostrar productos -->
-  <app-show-products
-    class="componentShowProducts"
-    *ngIf="products.length > 0"
-    [productos]="copiaSeguraProductosParaEnviar"
-    [terminoBuscar]="terminoaBuscar"
-    (ProductoSelecccionado)="ProductoSeleccionado($event)"
-    (newSoldDATA)="updateChartFromJournalCompOnReady($event)"
-  >
-  </app-show-products>
-
-  <app-journal-component
-    *ngIf="prodcutoVendido"
-    id="journal-component"
-    [ngStyle]="{ display: closeJournalComponent ? 'none' : 'block' }"
-    [ngClass]="{
-      'journal-component-onscroll': onScroll,
-      'journal-component': !onScroll
-    }"
-    [itemObject]="itemToPassToChild"
-    (deleteItemEvent)="onDeleteItemFromChild($event)"
-    (addItemEvent)="onAddItemFromChild($event)"
-    (closeComponentEvent)="onCloseComponentFromChild($event)"
-    (productSelectedPopUp)="productoSeleccionadoFromJournalComponent($event)"
-    (newSoldDATA)="newSoldDATA($event)"
-  >
-  </app-journal-component>
-
-  <!-- SHORTCUT COMPONENT -->
-  <div
-    *ngIf="activateShortCutComponent"
-    class="shortcutComponent"
-    [@zoomInLeftOnEnter] [@zoomOutLeftOnLeave]
-  >
-    <h4 style="margin-bottom: 2%; font-size: 18px; text-align: center;">
-      > {{ productoShortCutConSeparadorDeMiles }}
-    </h4>
-    <div class="row">
-      <button (click)="buttonTecladoPressed($event)">1</button>
-      <button (click)="buttonTecladoPressed($event)">2</button>
-      <button (click)="buttonTecladoPressed($event)">3</button>
-      <button (click)="buttonTecladoPressed($event)">4</button>
-      <button (click)="buttonTecladoPressed($event)">5</button>
-      <button (click)="buttonTecladoPressed($event)">6</button>
-      <button (click)="buttonTecladoPressed($event)">7</button>
-      <button (click)="buttonTecladoPressed($event)">8</button>
-      <button (click)="buttonTecladoPressed($event)">9</button>
-      <button (click)="deleteButtonPressed($event)" class="delete-button">
-        delete
-      </button>
-      <button (click)="buttonTecladoPressed($event)" class="cero-button">
-        0
-      </button>
-      <button (click)="buttonTecladoPressed($event)" class="double-cero">
-        00
-      </button>
-      <button (click)="goButtonPressed($event)" class="go-button">Cod</button>
-      <button (click)="addOnlyValue()" class="value-button">value</button>
+      <div #busquedaGlobal class="busquedaGlobalContainer">
+        <i class="fa fa-search searchInputIcon"></i>
+        <input type="text" class="busqueda-global" pInputText size="50" placeholder="Busqueda Global"
+          [(ngModel)]="terminoaBuscar" autofocus />
+      </div>
     </div>
 
-    <div class="row-4"></div>
-
-    <div class="row-12"></div>
+    <app-show-products class="componentShowProducts" *ngIf="products.length > 0"
+      [productos]="copiaSeguraProductosParaEnviar" [terminoBuscar]="terminoaBuscar"
+      (ProductoSelecccionado)="ProductoSeleccionado($event)" (newSoldDATA)="updateChartFromJournalCompOnReady($event)">
+    </app-show-products>
   </div>
-  <!-- fuera de la tabla -->
-  <!--        <button mat-raised-button color="accent" (click)="switchPaginator=
-          !switchPaginator">{{switchPaginator ? 'See All' : 'Paginator'}}</button><br> -->
-  <!-- SUB MENU PARA NAVEGAR RAPIDO ALL CATA  / BAKERY / NATURAL JUICE / COFFEE -->
-  <!-- onScroll = .sticky es true -->
+
+  <!-- Right side: Journal component -->
+  <app-journal-component *ngIf="prodcutoVendido" id="journal-component"
+    [ngStyle]="{ display: closeJournalComponent ? 'none' : 'block' }" [ngClass]="{
+        'journal-component': true,
+        'journal-component-onscroll': onScroll
+      }" [itemObject]="itemToPassToChild" (deleteItemEvent)="onDeleteItemFromChild($event)"
+    (addItemEvent)="onAddItemFromChild($event)" (closeComponentEvent)="onCloseComponentFromChild($event)"
+    (productSelectedPopUp)="productoSeleccionadoFromJournalComponent($event)" (newSoldDATA)="newSoldDATA($event)">
+  </app-journal-component>
+
 </div>
-<div>{{ products.length }} products</div>
 
-<br />
 
-<mat-chip-list class="mat-chip-list-stacked" aria-label="Color selection">
-  <mat-chip
-    selected
-    [color]="'accent'"
-    class="justify-content-center"
-    style="width: 25rem;"
-  >
-    <!-- para que funcione mi componente deliver en routing tengo que crearlo otra vez -->
-    <!-- y ponerle -->
-    <!-- path:"delivery/:abraModal -->
-    <!-- abraModal es el parametro luego toca con  -->
-    <!-- this.activatedRoute.paramMap.subscribe((params) =>{ } -->
-    <a
-      style="color: white;"
-      [routerLink]="['/dashboard/parentProducts/delivery/', 'abraModal']"
-      >Crear Nuevo Producto</a
-    >
-  </mat-chip>
-</mat-chip-list>
+<!-- SHORTCUT COMPONENT -->
+<div *ngIf="activateShortCutComponent" class="shortcutComponent" [@zoomInLeftOnEnter] [@zoomOutLeftOnLeave]>
+  <h4 style="margin-bottom: 2%; font-size: 18px; text-align: center;">
+    > {{ productoShortCutConSeparadorDeMiles }}
+  </h4>
+  <div class="row">
+    <button (click)="buttonTecladoPressed($event)">1</button>
+    <button (click)="buttonTecladoPressed($event)">2</button>
+    <button (click)="buttonTecladoPressed($event)">3</button>
+    <button (click)="buttonTecladoPressed($event)">4</button>
+    <button (click)="buttonTecladoPressed($event)">5</button>
+    <button (click)="buttonTecladoPressed($event)">6</button>
+    <button (click)="buttonTecladoPressed($event)">7</button>
+    <button (click)="buttonTecladoPressed($event)">8</button>
+    <button (click)="buttonTecladoPressed($event)">9</button>
+    <button (click)="deleteButtonPressed($event)" class="delete-button">
+      delete
+    </button>
+    <button (click)="buttonTecladoPressed($event)" class="cero-button">
+      0
+    </button>
+    <button (click)="buttonTecladoPressed($event)" class="double-cero">
+      00
+    </button>
+    <button (click)="goButtonPressed($event)" class="go-button">Cod</button>
+    <button (click)="addOnlyValue()" class="value-button">value</button>
+  </div>
+
+  <div class="row-4"></div>
+
+  <div class="row-12"></div>
+</div>
 
 <!-- llevar cuenta a los clientes -->
 <div *ngIf="nuevoarreglofiltrado">
-  <h1 *ngIf="nuevoarreglofiltrado; else otro" style="color: greenyellow;">   
+  <h1 *ngIf="nuevoarreglofiltrado; else otro" style="color: greenyellow;">
   </h1>
-  <div
-    class="ui-g ui-fluid"
-    *ngIf="nuevoarreglofiltrado && nuevoarreglofiltrado.length > 0"
-  >
+  <div class="ui-g ui-fluid" *ngIf="nuevoarreglofiltrado && nuevoarreglofiltrado.length > 0">
     <div class="ui-g-4" *ngFor="let product of nuevoarreglofiltrado">
       <h1>
         Id cliente <b class="text-green">{{ product[0]["whocustomer"] }}</b>
@@ -386,303 +227,79 @@
 </ng-template>
 
 <!-- Products VENDIDOS TABLA -->
-<div class="delete-collection-container">
-  <ul (click)="deleteAllSales()">
-    <li>
-      <span style="color:  #2d88ff;">Delete All Sales<i class="fas fa-radiation alert-icon" style="color:  #2d88ff;"></i> </span>
-    </li>
-  </ul>
-</div>
-<div
-  style="border: 2px solid white;border-bottom: none; height: 200%; padding: 0.4rem;"
-  *ngIf="arregloproducrosvendidos.length >= 1"
->
-  <p-table
-    #tg
-    [columns]="colsVentas"
-    [responsive]="true"
-    [value]="arregloproducrosvendidos"
-    dataKey="_id"
-    [paginator]="switchPaginator2"
-    [style]="{
-      color: 'orange'      
-    }"
-    [rows]="5"
-  >
+<div class="sales-report-container" *ngIf="arregloproducrosvendidos.length >= 1">
+  <p-table #tg [columns]="colsVentas" [responsive]="true" [value]="arregloproducrosvendidos" dataKey="_id"
+    [paginator]="switchPaginator2" [rows]="10" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]"
+    styleClass="p-datatable-striped sales-table">
+
     <ng-template pTemplate="caption">
-      <div class="d-flex justify-content-end">
-        <h3>{{ todaysdate }}</h3>
+      <div class="table-header">
+        <h2 class="table-title">Sales Report</h2>
+        <div class="toolbar">
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="tg.filterGlobal($event.target.value, 'contains')"
+              placeholder="Global Search" class="global-filter-input" />
+          </span>
+          <div class="toolbar-actions">
+            <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-text"
+              pTooltip="Export to XLS" tooltipPosition="bottom"></button>
+            <button type="button" pButton pRipple [icon]="switchPaginator2 ? 'pi pi-eye-slash' : 'pi pi-eye'"
+              (click)="switchPaginator2 = !switchPaginator2" class="p-button-text"
+              [pTooltip]="switchPaginator2 ? 'Hide Paginator' : 'Show Paginator'" tooltipPosition="bottom"></button>
+            <button type="button" pButton pRipple icon="pi pi-trash" (click)="deleteAllSales()"
+              class="p-button-text p-button-danger" pTooltip="Delete All Sales" tooltipPosition="bottom"></button>
+          </div>
+        </div>
       </div>
-      <h1
-        style="
-          color:  #2d88ff;
-          font-size: 45px;
-          margin: 0 auto;
-          text-align: center;
-        "
-      >
-        SALES
-      </h1>
-      <mat-icon style="margin: 4px 4px 0 0;">search</mat-icon>
-      <input
-        type="text"
-        class="busqueda-global"
-        pInputText
-        size="50"
-        placeholder="Busqueda Global"
-        (input)="tg.filterGlobal($event.target.value, 'contains')"
-        style="width: auto;"
-      /><br />
-      <div class="d-flex justify-content-center">
-        <button
-        mat-raised-button
-        color="accent"
-        style="margin-bottom: 1rem;"
-        (click)="switchPaginator2 = !switchPaginator2"
-      >
-        {{ switchPaginator2 ? "Ver Todo" : "Paginator" }}</button>
-
-        <button
-        type="button"
-        pButton
-        icon="pi pi-file-excel"
-        iconPos="left"
-        label="EXCEL"
-        (click)="exportExcel()"
-        style="margin-left: 0.5em; height: 36px;"
-        class="ui-button-success"
-      ></button>
-
-
-      </div>
-
-      
-
     </ng-template>
 
     <ng-template pTemplate="header" let-columns>
       <tr>
-        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
-          {{ col.header }}
-        </th>
-        <th style="width: 9rem;">Del</th>
-      </tr>
-
-      <!-- otra row -->
-
-      <tr>
-        <th
-          style="width: 100px;"
-          *ngFor="let col of columns"
-          [ngSwitch]="col.field"
-        >
-          <input
-            *ngSwitchCase="'name'"
-            style="width: 132px;"
-            type="text"
-            pInputText
-            (input)="
-              tg.filter($event.target.value, col.field, col.filterMatchMode)
-            "
-          />
-
-          <input
-            *ngSwitchCase="'price'"
-            style="width: 132px;"
-            type="text"
-            pInputText
-            (input)="
-              tg.filter($event.target.value, col.field, col.filterMatchMode)
-            "
-          />
-
-          <div style="width: 214px;" *ngSwitchCase="'category'">
-            <p-dropdown
-              [options]="categorias"
-              [style]="{ width: '86%' }"
-              (onChange)="tg.filter($event.value, col.field, 'equals')"
-            ></p-dropdown>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field" style="width:15%">
+          <div class="p-d-flex p-jc-between p-ai-center">
+            {{ col.header }}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
           </div>
-
-          <input
-            *ngSwitchCase="'quantity'"
-            pInputText
-            style="width: 50%;"
-            type="text"
-            (input)="
-              tg.filter($event.target.value, col.field, col.filterMatchMode)
-            "
-          />
-
-          <input
-            *ngSwitchCase="'date'"
-            type="text"
-            style="width: 50%;"
-            (input)="
-              tg.filter($event.target.value, col.field, col.filterMatchMode)
-            "
-          />
+          <div class="filter-container">
+            <input *ngIf="col.field === 'name' || col.field === 'price' || col.field === 'quantity'" pInputText
+              type="text" (input)="tg.filter($event.target.value, col.field, 'contains')"
+              [placeholder]="'Filter by ' + col.header" class="w-100" />
+            <p-dropdown *ngIf="col.field === 'category'" [options]="categorias"
+              (onChange)="tg.filter($event.value, col.field, 'equals')" placeholder="All" [showClear]="true"
+              class="w-100">
+            </p-dropdown>
+            <input *ngIf="col.field === 'date'" pInputText type="text"
+              (input)="tg.filter($event.target.value, col.field, 'contains')" placeholder="Filter by Date"
+              class="w-100" />
+          </div>
         </th>
+        <th style="width: 5%;">Del</th>
       </tr>
-
-      <!-- <tr>
-              <th [pSortableColumn]="'name'" style="width:100px;
-                background-color:
-                red;">Name
-                <br> <input style="width: 132px;" pInputText type="text"
-                  (input)="tg.filter($event.target.value, 'name', {field:
-                  'name',
-                  header: 'name'}.filterMatchMode)">
-              </th>
-              <th [pSortableColumn]="'price'" style="width:100px;">Price
-                <br> <input pInputText type="text" style="width: 132px;"
-                  (input)="tg.filter($event.target.value, 'price', {field:
-                  'price',
-                  header: 'price'}.filterMatchMode)">
-
-              </th>
-              <th [pSortableColumn]="'category'"
-                class="category-productstable-dropdown" style="width: 214px;">Category
-                <p-dropdown [options]="categorias" [style]="{'width':'86%'}"
-                  (onChange)="tg.filter($event.value, 'category', 'equals')"></p-dropdown>
-              </th>
-
-              <th [pSortableColumn]="'quantity'" style="width: 100px;">Quantity
-                <br> <input pInputText style="width:50%" type="text"
-                  (input)="tg.filter($event.target.value, 'quantity', {field:
-                  'quantity', header: 'quantity'}.filterMatchMode)">
-              </th>
-              <th [pSortableColumn]="'date'" style="width: 100px;">Date
-                <br> <input pInputText style="width:50%" type="text"
-                  (input)="tg.filter($event.target.value, 'date', {field:
-                  'date',
-                  header: 'date'}.filterMatchMode)">
-              </th>
-              <th style="width:2em"></th>
-            </tr> -->
     </ng-template>
-    <!-- body tabla venta de productos -->
-    <ng-template
-      pTemplate="body"
-      let-producto
-      let-editing="editing"
-      let-ri="rowIndex"
-      style="background-color: red !important;"
-    >
-      <tr [pEditableRow]="producto">
-        <td [ngClass]="'sold-products'">
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <input
-                style="width: 132px;"
-                pInputText
-                type="text"
-                [(ngModel)]="producto.name"
-              />
-            </ng-template>
-            <ng-template class="every-product" pTemplate="output">
-              {{ producto.name }}
-            </ng-template>
-          </p-cellEditor>
-        </td>
 
-        <td [ngClass]="'sold-products'">
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <input
-                style="width: 132px;"
-                pInputText
-                type="text"
-                [(ngModel)]="producto.price"
-              />
-            </ng-template>
-            <ng-template class="every-product" pTemplate="output">
-              {{ producto.price }}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-
-        <td [ngClass]="'sold-products'">
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <p-dropdown
-                style="width: 200px;"
-                [options]="categorias"
-                [(ngModel)]="producto.category"
-                [style]="{ width: '100%' }"
-              ></p-dropdown>
-            </ng-template>
-            <ng-template class="every-product" pTemplate="output">
-              {{ producto.category }}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-
-        <td [ngClass]="'sold-products'">
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <input
-                pInputText
-                style="width: 100%;"
-                type="text"
-                [(ngModel)]="producto.description"
-              />
-            </ng-template>
-            <ng-template class="every-product" pTemplate="output">
-              {{ producto.quantity }}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-        <td class="every-product" [ngClass]="'sold-products'">
-          {{ producto.date | date: "short" }}
-        </td>
-        <td class="every-product" style="text-align: center;">
-          <button
-            pButton
-            type="button"
-            icon="pi pi-times"
-            class="ui-button-danger"
-            (click)="deleteProductSold(producto, ri)"
-          ></button>
+    <ng-template pTemplate="body" let-producto let-ri="rowIndex">
+      <tr>
+        <td>{{ producto.name }}</td>
+        <td>{{ producto.price | currency:'USD' }}</td>
+        <td>{{ producto.category }}</td>
+        <td>{{ producto.quantity }}</td>
+        <td>{{ producto.date | date: "short" }}</td>
+        <td>
+          <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger"
+            (click)="deleteProductSold(producto, ri)"></button>
         </td>
       </tr>
     </ng-template>
 
-    <ng-template
-      pTemplate="summary"
-      style="display: flex; justify-content: space-around;"
-    >
-    <div class="d-flex justify-content-center">
-      <button
-      mat-raised-button
-      color="accent"     
-      (click)="switchPaginator2 = !switchPaginator2"
-      >
-      {{ switchPaginator2 ? "Paginator Off" : "Paginator On" }}</button>
-      <div style="flex: 1;"></div>
-      <h3>total price {{ autoSuma }}</h3>
-      <h3> &nbsp; | &nbsp;</h3>
-      <h3 id="totalproductstext">total products {{ totalquantity }}</h3>
-      <div style="flex: 1.5;"></div>
-    </div>  
+    <ng-template pTemplate="summary">
+      <div class="table-summary">
+        <span>Total Sales: {{ autoSuma | currency:'USD' }}</span>
+        <span>Total Products: {{ totalquantity }}</span>
+      </div>
     </ng-template>
   </p-table>
-
-
-  <div style="display: flex; justify-content: center;">
-    <button
-      (click)="sendSaleOrganized()"
-      style="margin: 0 auto; font-size: 24px;"
-      pButton
-      type="button"
-      label="Enviar ventas del dia"
-      
-    ></button>
-
-    <!-- <button (click)="echeParriba()">
-
-      </button> -->
-  </div>
 </div>
 <!-- message service using toast -->
 <p-toast></p-toast>

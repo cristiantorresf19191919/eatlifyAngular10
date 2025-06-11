@@ -1,23 +1,51 @@
-
-<div style="display: flex;justify-content: flex-end;width: 100%;margin-top: -4rem;margin-right:-6rem;">
-</div>
-<h1 class="title">Journal Component</h1>
-<div *ngIf="allItems.length>0" style="width: 100%;">
-  <div [ngClass]="{'animated slideInLeft':item}" [@bounceOutUpOnLeave] class="item-container" *ngFor="let item of allItems">
-    <p  (click)="onItemClickEvent(item)"   class="item-element">{{item.quantity}} {{item.name}} </p>
-    <p class="item-element"><b>${{item.price}}</b>
-    <button pButton class="addItemButton" type="button" icon="pi pi-plus" (click)="addElement(item)"></button> <button pButton class="deleteItemButton" type="button" icon="pi pi-times" (click)="DeleteElement(item)"></button></p>
+<div class="journal-container">
+  <div class="journal-header">
+    <h2 class="title">Current Sale</h2>
   </div>
-  <hr>
-  <h1 class="title-feedback">total <b>{{totalPrice}}</b></h1>
-  <input type="number" class="input-received" placeholder="change" (change)="onChangeQuantity($event)" (input)="onChangeQuantity($event)" (keydown)="onChangeQuantity($event)" (keyup)="onChangeQuantity($event)" [(ngModel)]="moneyRecieved" autofocus>
-  <h1 class="title-feedback" *ngIf="change">Change {{change}}</h1>
 
+  <div class="journal-body" *ngIf="allItems.length > 0; else emptyState">
+    <div class="items-list">
+      <div class="item-entry" *ngFor="let item of allItems">
+        <div class="item-info">
+          <span class="item-name" (click)="onItemClickEvent(item)">{{ item.name }}</span>
+          <span class="item-price-per-unit">${{ item.price.toFixed(2) }}</span>
+        </div>
+        <div class="item-controls">
+          <button class="control-btn" (click)="decrementQuantity(item)">-</button>
+          <span class="item-quantity">{{ item.quantity }}</span>
+          <button class="control-btn" (click)="incrementQuantity(item)">+</button>
+          <button class="control-btn remove-btn" (click)="removeElement(item)">&times;</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-</div>
-<div class="cleanBtnContainer">
-  <button class="cleanBtn" (click)="cleanData()">Ready</button>
+  <ng-template #emptyState>
+    <div class="empty-state">
+      <p>Select a product to begin a new sale.</p>
+    </div>
+  </ng-template>
 
+  <div class="journal-footer">
+    <div class="summary-section">
+      <div class="summary-row">
+        <span>Total</span>
+        <span class="total-price">${{ totalPrice.toFixed(2) }}</span>
+      </div>
+      <div class="summary-row received-row">
+        <label for="money-received">Received</label>
+        <input id="money-received" type="number" class="input-received" placeholder="$0.00" (input)="updateChange()"
+          [(ngModel)]="moneyRecieved" />
+      </div>
+      <div class="summary-row change-row" *ngIf="moneyRecieved > 0">
+        <span>Change</span>
+        <span class="change-amount">${{ change.toFixed(2) }}</span>
+      </div>
+    </div>
+    <div class="actions-section">
+      <button class="ready-btn" (click)="cleanData()" [disabled]="allItems.length === 0">Complete Sale</button>
+    </div>
+  </div>
 </div>
 
 <!-- <div *ngIf="itemObject">
@@ -25,4 +53,3 @@
   <h1>{{itemObject.price}}</h1>
 
 </div> -->
-

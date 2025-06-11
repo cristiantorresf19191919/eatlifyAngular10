@@ -1,79 +1,66 @@
 <app-loading-global [loadingState]="loading"></app-loading-global>
-<div class="title-container">
-  <!-- <app-loading-global [loadingState]="loading"></app-loading-global> -->
-  <h1>Sistema POS & Delivery para Restaurantes</h1>
-</div>
 
 <div class="login-container">
-    <div class="logo-box">
-        <img src="assets/img/logo.png" alt="" class="logo-box__logo">
-      </div>
-      <div class="form-box">
-          <form id="accesspanel" [formGroup]="LoginDaddy" (submit)="login()">
-              <h1 id="litheader" class="poweron">LOGIN</h1>
-              <div class="inset">
-                <p>
-                  <input
-                    type="text"
-                    name="email"
-                    required
-                    formControlName="email"
-                    [ngClass]="{'is-invalid': Emailgetter.errors?.correoExiste}"
-                    id="email"
-                    placeholder="Email address">
-                </p>
-                <p>
-                  <input
-                    type="password"
-                    name="password"
-                    formControlName="password"
-                    required
-                    id="password"
-                    placeholder="Codigo de Acceso">
-                </p>
-                <div
-                *ngIf="
+
+  <div class="login-header">
+    <img src="assets/img/logo.png" alt="OpttimusDev Logo" class="logo">
+    <h1 class="title">Sistema POS & Delivery para Restaurantes</h1>
+  </div>
+
+  <div class="form-box">
+    <form id="accesspanel" [formGroup]="LoginDaddy" (submit)="login()">
+      <h1 id="litheader" class="poweron">LOGIN</h1>
+      <div class="inset">
+        <p>
+          <input type="text" name="email" required formControlName="email"
+            [ngClass]="{'is-invalid': Emailgetter.errors?.correoExiste}" id="email" placeholder="Email address">
+        </p>
+        <p>
+          <input [type]="passwordVisible ? 'text' : 'password'" name="password" formControlName="password" required
+            id="password" placeholder="Codigo de Acceso">
+          <i class="material-icons password-toggle-icon" (click)="togglePasswordVisibility()">
+            {{ passwordVisible ? 'visibility_off' : 'visibility' }}
+          </i>
+        </p>
+        <div *ngIf="
                   Emailgetter.invalid &&
                   (Emailgetter.dirty || Emailgetter.touched)
-                "
-              >
-                <div *ngIf="Emailgetter.errors.tieneArroba" class="animated pulse">
-                  <b>Te falto poner Arroba</b>
-                </div>
-                <div *ngIf="Emailgetter.errors.required" class="animated pulse">
-                  <b>Ingresa el Email por favor</b>
+                ">
+          <div *ngIf="Emailgetter.errors.tieneArroba" class="animated pulse">
+            <b>Te falto poner Arroba</b>
+          </div>
+          <div *ngIf="Emailgetter.errors.required" class="animated pulse">
+            <b>Ingresa el Email por favor</b>
 
-                </div>
-                <div *ngIf="Emailgetter.errors?.correoExiste" class="animated pulse">
-                  <b style="color:orange; font-size: 15px;">Correo no se encuentra en la base de datos</b>
+          </div>
+          <div *ngIf="Emailgetter.errors?.correoExiste" class="animated pulse">
+            <b style="color:orange; font-size: 15px;">Correo no se encuentra en la base de datos</b>
 
-                </div>
-                <div *ngIf="Emailgetter.errors?.serverError" class="animated pulse">
-                  <b style="color:red">Problemas con el servidor</b>
-                </div>
-              </div>
-                <div style="text-align: center;">
+          </div>
+          <div *ngIf="Emailgetter.errors?.serverError" class="animated pulse">
+            <b style="color:red">Problemas con el servidor</b>
+          </div>
+        </div>
+        <div style="text-align: center;">
 
-                </div>
-                <input class="loginLoginValue" type="hidden" name="service" value="login" />
-              </div>
-              <p class="p-container">
-                <input type="submit" name="Login" id="go" value="Entrar">
-              </p>
-
-            </form>
-            <div class="login-footer">
-              <b>Eatlify</b>
-              <p>Por tiempo limitado recibe pedidos de tu menu mas demandado GRATIS, Aumenta tus ventas y date a conocer </p>
-
-              <b><a href="https://opttimusdev.com" target="_blank">OpttimusDev</a></b>
-              </div>
-
-          
-
+        </div>
+        <input class="loginLoginValue" type="hidden" name="service" value="login" />
       </div>
+      <p class="p-container">
+        <input type="submit" name="Login" id="go" value="Entrar">
+      </p>
+
+    </form>
+    <div class="login-footer">
+      <b>Eatlify</b>
+      <p>Por tiempo limitado recibe pedidos de tu menu mas demandado GRATIS, Aumenta tus ventas y date a conocer </p>
+
+      <b><a href="https://opttimusdev.com" target="_blank">OpttimusDev</a></b>
+    </div>
+
+
+
+  </div>
 
 
 </div>
-
-

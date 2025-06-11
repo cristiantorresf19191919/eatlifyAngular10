@@ -1,110 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription, Observable, interval } from 'rxjs';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
-import { CajerosService } from 'src/app/servicios/cajeros.service';
-import { Utilities } from '../parent-products/Utilties';
-import { MatDialog } from '@angular/material/dialog';
-import { NewOrderComponent } from '../new-order/new-order.component';
-import { OrderSocketService } from 'src/app/servicios/orderSocket.service';
-import { delay } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Store, select } from '@ngrx/store';
 import { State } from "src/app/store";
-import { loadOrderEffect } from 'src/app/store/actions/orderActions';
-
-export interface CartItem{
-  id:string;
-  title:string;
-
-}
-export interface OrderData {
-  id:string;
-  amount:number;
-  products:Array<any>,
-  dateTime:string;
-
-}
-
+import { getRestaurantId } from 'src/app/store/reducers/restaurantReducer';
+/* import { OrderSocketService } from 'src/app/servicios/orderSocket.service';
+import { map } from 'rxjs/operators';
+import { Order } from 'src/app/models/order';
+import { GotNewOrder } from 'src/app/store/actions'; */
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
-  private subscription: Subscription;
-  sourceABC: Observable<number> = interval(7200);
-  private _orderSubscriptor: Subscription;
-  constructor(
-    private router:Router,
-     private cajeroService:CajerosService, 
-     private utilities: Utilities,
-     public dialog:MatDialog,
-     private orderSocketService: OrderSocketService,
-     private store:Store<State>
-     
-     ) { }
+export class DashboardComponent implements OnInit, OnDestroy {
+  // private _orderSubscriptor:Subscription;
+  constructor(/* private orderSocketService:OrderSocketService, */ private store:Store<State>) {
+    /* this._orderSubscriptor = this.orderSocketService.getOrder.pipe(
+      map(order => JSON.parse(order))
+    ).subscribe((order:Order)=>{
+      this.store.dispatch(new GotNewOrder(order))
+    }) */
+  }
 
-  ngOnInit() {
-
-    // testing
-  /*   const dialogRef = this.dialog.open(NewOrderComponent, {
-      width: `${screen.width}px`,
-      height:`${screen.height}px`,
-      minWidth:`${screen.width}px`,
-    }); */
-       //ocultar icono y estado de reciviendo pedidos
-		this.utilities.setCambioRuta(true);
-    this.subscription = this.sourceABC.subscribe()
-    this._orderSubscriptor = this.orderSocketService.getOrder.pipe(
-     
-    ).subscribe((data)=>{
-
-      this.store.dispatch(
-        loadOrderEffect({
-          order:JSON.parse(data)
-        })
-      );
-      const dialogRef = this.dialog.open(NewOrderComponent, {
-        width: `${screen.width}px`,
-        height:`${screen.height}px`,
-        minWidth:`${screen.width}px`,
-      });
-    })
-  
+  ngOnInit(): void {
   }
 
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
-    this._orderSubscriptor.unsubscribe();
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(NewOrderComponent, {
-      width: `${screen.width}px`,
-      height:`${screen.height}px`,
-      minWidth:`${screen.width}px`,
-      
-      data: {name: "cristian"}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      
-    });
-  }
-
-  validateToken(){
-    const token = localStorage.getItem('token');
-    const helper = new JwtHelperService();
-    const isExpired = helper.isTokenExpired(token);
-    if (isExpired){
-      Swal.fire('estimado usuario el token ha expirado por seguridad');
-      this.cajeroService.logout();
-      this.router.navigate(["/login"]);
-    }
+    // this._orderSubscriptor.unsubscribe();
   }
 
 }

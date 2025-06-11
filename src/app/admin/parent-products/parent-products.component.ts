@@ -17,18 +17,18 @@ export class ParentProductsComponent implements OnInit, AfterViewInit {
     // outputs `I am span`
    // pone la side bar bien ajustada cuando se hace scroll down
     // side-bar
-    // inspeccione y busque el padre que hace el scroll y detecta los cambios    
-    
+    // inspeccione y busque el padre que hace el scroll y detecta los cambios
+
 
     let main  =  document.querySelector(".mat-drawer-content");
     var prevScrollpos = main.scrollTop;
     console.log('prevScrollpos = ',prevScrollpos);
     main.addEventListener('scroll',()=>{
-      var currentScrollPos = main.scrollTop;      
-   
+      var currentScrollPos = main.scrollTop;
+
         if (prevScrollpos > currentScrollPos) {
           this.sideBar.nativeElement.style.top = "10%";
-          } else {    
+          } else {
             this.sideBar.nativeElement.style.top = "0";
          }
         prevScrollpos = currentScrollPos;
@@ -39,8 +39,12 @@ export class ParentProductsComponent implements OnInit, AfterViewInit {
       //ocultar icono y estado de reciviendo pedidos
 		this.utilities.setCambioRuta(true);
     this.utilities.notificarCambioRuta.emit("cambia");
-    
+
     // this.router.navigate(["/dashboard/parentProducts/modifierGroups"])
+  }
+
+  createNewProduct() {
+    this.router.navigate(['/dashboard/parent-products/delivery']);
   }
 
 }

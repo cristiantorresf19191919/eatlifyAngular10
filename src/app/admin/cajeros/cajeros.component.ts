@@ -77,6 +77,13 @@ export class CajerosComponent implements OnInit {
       (data: DataServer) => {
         console.log(data);
         this.cajerosRegistrados.push(data);
+        Swal.fire({
+          icon: "success",
+          title: "Cashier Created!",
+          text: `Cashier ${data.name} has been successfully created.`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       },
       (error: HttpErrorResponse) => {
         console.log(error);

@@ -24,6 +24,9 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+
 @NgModule({
 	declarations: [],
 	imports: [
@@ -54,7 +57,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 	MatButtonModule,
 	MatAutocompleteModule,
 	MatSnackBarModule,
-	MatSidenavModule
+	MatSidenavModule,
+	MatToolbarModule,
+	MatListModule
 	]
 })
 export class MaterialModule {}

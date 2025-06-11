@@ -16,9 +16,9 @@ const httpOptions = {
 })
 
 export class OrderSocketService{
-  getOrder = this.socket.fromEvent<any>('get_order');
+  getOrder = of(); // Return an empty observable
 
-  constructor(private socket:Socket) { 
+  constructor(/*private socket:Socket*/) { 
 
   }
 

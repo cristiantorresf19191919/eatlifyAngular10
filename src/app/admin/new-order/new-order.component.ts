@@ -5,7 +5,7 @@ import {  select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { State } from 'src/app/store';
 import { getOrderAmount, getOrderProducts } from 'src/app/store/reducers/orderReducer';
-import { OrderData } from '../dashboard/dashboard.component';
+import { OrderData } from 'src/app/models/order.model';
 
 
 

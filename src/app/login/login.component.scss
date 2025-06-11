@@ -1,13 +1,12 @@
-$background-secundary-color:#027915;
-.title-container{
-  background-image: linear-gradient(90deg,#1b1b1bf8,#0b0f11f3),url("https://cdn.pixabay.com/photo/2016/11/18/15/53/breakfast-1835478_960_720.jpg");
-  color: white;
-  text-align: center;
+$background-secundary-color: #027915;
+
+.title-container {
+  display: none;
 }
 
-.login-container{
+.login-container {
   background: #1b1b1b;
-  background-image: linear-gradient(90deg,#1b1b1bf8,#0b0f11f3),url("https://cdn.pixabay.com/photo/2016/11/18/15/53/breakfast-1835478_960_720.jpg");
+  background-image: linear-gradient(90deg, #1b1b1bf8, #0b0f11f3), url("https://cdn.pixabay.com/photo/2016/11/18/15/53/breakfast-1835478_960_720.jpg");
   width: 100%;
   height: 120vh;
   color: #FFF;
@@ -15,30 +14,59 @@ $background-secundary-color:#027915;
   position: relative;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  padding: 2rem;
 
-  form{
+  .login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: headerEntrance 0.7s ease-out 0.1s forwards;
+    opacity: 0;
+
+    .logo {
+      max-width: 250px;
+      margin-bottom: 1rem;
+    }
+
+    .title {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: #eee;
+      letter-spacing: 1px;
+    }
+  }
+
+  .form-box {
+    animation: formEntrance 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
+    opacity: 0;
+  }
+
+  form {
     background: #111;
-    box-shadow: 0 5px 10px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 10px 5px rgba(0, 0, 0, 0.2);
     border: 1px solid #191919;
     border-radius: .4em;
     overflow: hidden;
     position: relative;
     width: 100%;
-    input{
+
+    input {
       outline: none;
     }
-    &::after{
-        content: "";
-        background: linear-gradient(to right, #111111, #444444, #b6b6b8, #444444, #2F2F2F, #272727);
-        display: block;
-        height: 1px;
-        left: 50px;
-        position: absolute;
-        top: 0;
-        width: 150px;
+
+    &::after {
+      content: "";
+      background: linear-gradient(to right, #111111, #444444, #b6b6b8, #444444, #2F2F2F, #272727);
+      display: block;
+      height: 1px;
+      left: 50px;
+      position: absolute;
+      top: 0;
+      width: 150px;
 
     }
-    &::before{
+
+    &::before {
       content: "";
       border-radius: 50%;
       box-shadow: 0 0 6px 4px #fff;
@@ -77,7 +105,8 @@ form h1 {
 form h1.poweron {
   color: rgb(207, 207, 207);
   transition: all 0.5s;
-  &:hover{
+
+  &:hover {
     animation: flicker 6s ease-in-out 1 alternate, neon 6.5s ease-in-out infinite alternate;
     animation-delay: 0s, 1s;
   }
@@ -97,30 +126,31 @@ form h1:after {
   transform-style: flat;
   transform: skew(20deg);
 
-  background: -moz-linear-gradient(top, hsla(0,0%,100%,0.1) 0%, hsla(0,0%,100%,0) 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,hsla(0,0%,100%,0.2)), color-stop(100%,hsla(0,0%,100%,0)));
-  background: -webkit-linear-gradient(top, hsla(0,0%,100%,0.1) 0%,hsla(0,0%,100%,0) 100%);
-  background: -o-linear-gradient(top, hsla(0,0%,100%,0.1) 0%,hsla(0,0%,100%,0) 100%);
-  background: -ms-linear-gradient(top, hsla(0,0%,100%,0.1) 0%,hsla(0,0%,100%,0) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#42ffffff', endColorstr='#00ffffff',GradientType=0 );
-  background: linear-gradient(to bottom, hsla(0,0%,100%,0.1) 0%,hsla(0,0%,100%,0) 100%);
+  background: -moz-linear-gradient(top, hsla(0, 0%, 100%, 0.1) 0%, hsla(0, 0%, 100%, 0) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, hsla(0, 0%, 100%, 0.2)), color-stop(100%, hsla(0, 0%, 100%, 0)));
+  background: -webkit-linear-gradient(top, hsla(0, 0%, 100%, 0.1) 0%, hsla(0, 0%, 100%, 0) 100%);
+  background: -o-linear-gradient(top, hsla(0, 0%, 100%, 0.1) 0%, hsla(0, 0%, 100%, 0) 100%);
+  background: -ms-linear-gradient(top, hsla(0, 0%, 100%, 0.1) 0%, hsla(0, 0%, 100%, 0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#42ffffff', endColorstr='#00ffffff', GradientType=0);
+  background: linear-gradient(to bottom, hsla(0, 0%, 100%, 0.1) 0%, hsla(0, 0%, 100%, 0) 100%);
 
 }
 
-input[type=text], input[type=password] {
-  background: linear-gradient(#1f2124,#27292c);
+input[type=text],
+input[type=password] {
+  background: linear-gradient(#1f2124, #27292c);
   border: 1px solid #222;
   border-radius: .3em;
-  box-shadow: 0 1px 0 rgba(255,255,255,0.1);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
   color: #FFF;
   font-size: 13px;
-  margin-bottom: 20px;
   padding: 8px 5px;
   width: 100%;
 }
 
-input[type=text]:disabled, input[type=password]:disabled {
-	color: #999;
+input[type=text]:disabled,
+input[type=password]:disabled {
+  color: #999;
 }
 
 label[for=remember] {
@@ -151,9 +181,9 @@ label[for=remember] {
 
 input[type=submit] {
   background: $background-secundary-color;
-  border: 1px solid rgba(0,0,0,0.4);
+  border: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: .3em;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), inset 0 10px 10px rgba(255,255,255,0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 10px 10px rgba(255, 255, 255, 0.1);
   color: #fff;
   cursor: pointer;
   font-size: 1.7rem;
@@ -169,56 +199,57 @@ input[type=submit] {
   background: #EE0000 !important;
 }
 
-input[type=submit]:hover, input[type=submit]:focus {
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), inset 0 -10px 10px rgba(255,255,255,0.1);
+input[type=submit]:hover,
+input[type=submit]:focus {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -10px 10px rgba(255, 255, 255, 0.1);
 }
 
 input[type=text]:hover:not([disabled]),
 input[type=text]:focus,
 input[type=password]:hover:not([disabled]),
 input[type=password]:focus,
-label:hover ~ input[type=text],
-label:hover ~ input[type=password] {
+label:hover~input[type=text],
+label:hover~input[type=password] {
   background: #27292c;
 }
 
 @keyframes neon {
   from {
     text-shadow:
-    0 0 2.5px #fff,
-    0 0 5px #fff,
-    0 0 7.5px #fff,
-    0 0 10px #B6FF00,
-    0 0 17.5px #B6FF00,
-    0 0 20px #B6FF00,
-    0 0 25px #B6FF00,
-    0 0 37.5px #B6FF00;
+      0 0 2.5px #fff,
+      0 0 5px #fff,
+      0 0 7.5px #fff,
+      0 0 10px #B6FF00,
+      0 0 17.5px #B6FF00,
+      0 0 20px #B6FF00,
+      0 0 25px #B6FF00,
+      0 0 37.5px #B6FF00;
   }
 
   to {
-      text-shadow:
+    text-shadow:
       0 0 3px #fff,
-      0 0 7px  #fff,
-      0 0 13px  #fff,
-      0 0 17px  #B6FF00,
-      0 0 33px  #B6FF00,
-      0 0 38px  #B6FF00,
+      0 0 7px #fff,
+      0 0 13px #fff,
+      0 0 17px #B6FF00,
+      0 0 33px #B6FF00,
+      0 0 38px #B6FF00,
       0 0 48px #B6FF00,
       0 0 63px #B6FF00;
-    }
+  }
 }
 
 @keyframes flicker {
   0% {
     text-shadow:
-    0 0 2.5px #fff,
-    0 0 5px #fff,
-    0 0 7.5px #fff,
-    0 0 10px #B6FF00,
-    0 0 17.5px #B6FF00,
-    0 0 20px #B6FF00,
-    0 0 25px #B6FF00,
-    0 0 37.5px #B6FF00;
+      0 0 2.5px #fff,
+      0 0 5px #fff,
+      0 0 7.5px #fff,
+      0 0 10px #B6FF00,
+      0 0 17.5px #B6FF00,
+      0 0 20px #B6FF00,
+      0 0 25px #B6FF00,
+      0 0 37.5px #B6FF00;
   }
 
   2% {
@@ -227,14 +258,14 @@ label:hover ~ input[type=password] {
 
   8% {
     text-shadow:
-    0 0 2.5px #fff,
-    0 0 5px #fff,
-    0 0 7.5px #fff,
-    0 0 10px #B6FF00,
-    0 0 17.5px #B6FF00,
-    0 0 20px #B6FF00,
-    0 0 25px #B6FF00,
-    0 0 37.5px #B6FF00;
+      0 0 2.5px #fff,
+      0 0 5px #fff,
+      0 0 7.5px #fff,
+      0 0 10px #B6FF00,
+      0 0 17.5px #B6FF00,
+      0 0 20px #B6FF00,
+      0 0 25px #B6FF00,
+      0 0 37.5px #B6FF00;
   }
 
   10% {
@@ -243,14 +274,14 @@ label:hover ~ input[type=password] {
 
   20% {
     text-shadow:
-    0 0 2.5px #fff,
-    0 0 5px #fff,
-    0 0 7.5px #fff,
-    0 0 10px #B6FF00,
-    0 0 17.5px #B6FF00,
-    0 0 20px #B6FF00,
-    0 0 25px #B6FF00,
-    0 0 37.5px #B6FF00;
+      0 0 2.5px #fff,
+      0 0 5px #fff,
+      0 0 7.5px #fff,
+      0 0 10px #B6FF00,
+      0 0 17.5px #B6FF00,
+      0 0 20px #B6FF00,
+      0 0 25px #B6FF00,
+      0 0 37.5px #B6FF00;
   }
 
   22% {
@@ -259,14 +290,14 @@ label:hover ~ input[type=password] {
 
   24% {
     text-shadow:
-    0 0 2.5px #fff,
-    0 0 5px #fff,
-    0 0 7.5px #fff,
-    0 0 10px #B6FF00,
-    0 0 17.5px #B6FF00,
-    0 0 20px #B6FF00,
-    0 0 25px #B6FF00,
-    0 0 37.5px #B6FF00;
+      0 0 2.5px #fff,
+      0 0 5px #fff,
+      0 0 7.5px #fff,
+      0 0 10px #B6FF00,
+      0 0 17.5px #B6FF00,
+      0 0 20px #B6FF00,
+      0 0 25px #B6FF00,
+      0 0 37.5px #B6FF00;
   }
 
   28% {
@@ -275,14 +306,14 @@ label:hover ~ input[type=password] {
 
   32% {
     text-shadow:
-    0 0 2.5px #fff,
-    0 0 5px #fff,
-    0 0 7.5px #fff,
-    0 0 10px #B6FF00,
-    0 0 17.5px #B6FF00,
-    0 0 20px #B6FF00,
-    0 0 25px #B6FF00,
-    0 0 37.5px #B6FF00;
+      0 0 2.5px #fff,
+      0 0 5px #fff,
+      0 0 7.5px #fff,
+      0 0 10px #B6FF00,
+      0 0 17.5px #B6FF00,
+      0 0 20px #B6FF00,
+      0 0 25px #B6FF00,
+      0 0 37.5px #B6FF00;
   }
 
   34% {
@@ -299,64 +330,119 @@ label:hover ~ input[type=password] {
 
   100% {
     text-shadow:
-    0 0 2.5px #fff,
-    0 0 5px #fff,
-    0 0 7.5px #fff,
-    0 0 10px #B6FF00,
-    0 0 17.5px #B6FF00,
-    0 0 20px #B6FF00,
-    0 0 25px #B6FF00,
-    0 0 37.5px #B6FF00;
+      0 0 2.5px #fff,
+      0 0 5px #fff,
+      0 0 7.5px #fff,
+      0 0 10px #B6FF00,
+      0 0 17.5px #B6FF00,
+      0 0 20px #B6FF00,
+      0 0 25px #B6FF00,
+      0 0 37.5px #B6FF00;
   }
 }
 
+@keyframes headerEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
 
-.is-invalid{
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes formEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(80px) scale(0.95);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1.05);
+  }
+
+  80% {
+    transform: translateY(5px) scale(0.98);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.is-invalid {
   border-bottom: 1px solid red;
 }
-.logo-box{
+
+.logo-box {
   position: absolute;
   top: 4rem;
   left: 4rem;
-  &__logo{
+
+  &__logo {
     height: 5rem;
     transition: all 0.4s;
-    &:hover{
+
+    &:hover {
       transform: skew(-15deg);
     }
   }
 }
 
-.form-box{
+.form-box {
   width: 25%;
 }
 
-.login-footer{
+.login-footer {
   margin: 2rem 0;
   text-align: center;
   padding: 1rem 0;
   font-size: 14px;
-  b{
-    &:not(:last-child){
+
+  b {
+    &:not(:last-child) {
       margin-bottom: 2rem;
     }
+
     display: block;
   }
 }
+
 /* tableta*/
-@media screen and (max-width:1028px){
-  .form-box{
+@media screen and (max-width:1028px) {
+  .form-box {
     width: 70% !important;
   }
 }
 
 /* celular  */
-@media screen and (max-width:545px){
+@media screen and (max-width:545px) {
   .form-box {
-
     width: 85% !important;
-
   }
-
 }
 
+.inset p {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+#password {
+  padding-right: 40px;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 15px;
+  cursor: pointer;
+  background: #191919;
+  color: #ccc;
+  border-radius: 50%;
+  padding: 0px;
+}

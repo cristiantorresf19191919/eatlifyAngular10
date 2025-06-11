@@ -23,7 +23,7 @@ import { PrimerInterceptor } from './http-interceptors/primer-interceptor';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 const config:SocketIoConfig = {url:'localhost:8000', options:{}};
-  // const config:SocketIoConfig = {url:'https://posdeliveryapp.herokuapp.com', options:{}};
+  //const config:SocketIoConfig = {url:'https://posdeliveryapp.herokuapp.com', options:{}};
 
 @NgModule({
   declarations: [
@@ -43,7 +43,7 @@ const config:SocketIoConfig = {url:'localhost:8000', options:{}};
     PrimengModule,
     StoreModule.forRoot(ROOT_REDUCERS),
     EffectsModule.forRoot([]),
-    SocketIoModule.forRoot(config),
+    // SocketIoModule.forRoot(config),
     PrimengModule,
     AdminModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),

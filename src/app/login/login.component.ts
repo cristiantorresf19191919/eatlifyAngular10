@@ -29,6 +29,7 @@ interface User {
 })
 export class LoginComponent implements OnInit {
 
+  public passwordVisible = false;
   public loading = false;
   private subscription: Subscription;
   sourceABC: Observable<number> = timer(3000);
@@ -80,6 +81,10 @@ export class LoginComponent implements OnInit {
 
   get Emailgetter() {
     return this.LoginDaddy.get("email");
+  }
+
+  togglePasswordVisibility(): void {
+    this.passwordVisible = !this.passwordVisible;
   }
 
   login(){

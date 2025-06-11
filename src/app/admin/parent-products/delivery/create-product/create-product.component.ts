@@ -120,23 +120,29 @@ export class CreateProductComponent implements OnInit {
   }
 
   onFileSelected(imageInput: any) {
-    
     const file: File = imageInput.files[0];
-    /* cargue instantaneamente la imagen que sube del input */
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onload = (_event) => {
-      // la imagen que refresca en la vista
-      this.imgUrl = fileReader.result;   
-      this.$subscriber.next(this.imgUrl);
-
-      
-    };
-    /* para reutilizarla en cuando de salvar al boton y hacer el post */
-    this.selectedImage = imageInput.files[0];
-    this.fileLoaded = true;
-    console.log("imageInput.value");
-    console.log(imageInput.value);
+    const allowedTypes = ['image/png', 'image/jpg', 'image/jpeg'];
+    console.log(file);
+    if (file && allowedTypes.includes(file.type)) {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = (_event) => {
+        this.imgUrl = fileReader.result;
+        this.$subscriber.next(this.imgUrl);
+      };
+      this.selectedImage = file;
+      this.fileLoaded = true;
+    } else {
+      Swal.fire(
+        'Tipo de archivo no valido',
+        'Por favor seleccione una imagen con formato (png, jpg, jpeg).',
+        'warning'
+      );
+      imageInput.value = '';
+      this.fileLoaded = false;
+      this.selectedImage = null;
+      this.imgUrl = null;
+    }
   }
 
   addNewCategory() {

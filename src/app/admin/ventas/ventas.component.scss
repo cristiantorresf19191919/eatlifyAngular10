@@ -1,36 +1,44 @@
+// New styles for the redesigned sales view
+$primary-bg: #1a1a1d;
+$secondary-bg: #22252a;
+$card-bg: #2c2f36;
+$border-color: #43454a;
+$text-color-primary: #f0f0f0;
+$text-color-secondary: #b0b0b0;
+$accent-color: #3f51b5;
+
 @mixin tableta {
-  @media (max-width: 1030px){
+  @media (max-width: 1030px) {
     @content;
   }
 }
 
 @mixin phone {
-  @media (max-width: 500px){
+  @media (max-width: 500px) {
     @content;
   }
 }
 
 @mixin shortcutComponentButton {
   font-size: 2.5rem;
-background-color:
-#303030;
-color:
-#faf9f8;
-border: 1px solid
-rgba(211, 211, 211, 0.59);
-padding: 1rem;
-transition: all 0.2s ease-in;
-position: relative;
-background-image: linear-gradient(45deg,
-#1d1d1d,#fff0);
+  background-color: #303030;
+  color: #faf9f8;
+  border: 1px solid rgba(211, 211, 211, 0.59);
+  padding: 1rem;
+  transition: all 0.2s ease-in;
+  position: relative;
+  background-image: linear-gradient(45deg, #1d1d1d, #fff0);
+
   &:hover {
     transform: scale(1.05);
   }
+
   &:active {
     transform: translateY(4px);
     background-color: #3f51b5;
   }
-  &::after{
+
+  &::after {
     content: "";
     position: absolute;
     top: 2px;
@@ -38,36 +46,39 @@ background-image: linear-gradient(45deg,
 
     width: calc(100% - 4px);
     height: 50%;
-    background: linear-gradient(
-    rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, 0.84));
+    background: linear-gradient(rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0.84));
     opacity: 0.1;
     filter: blur(0px);
   }
 
 }
+
 .busquedaGlobalContainer {
   position: relative;
-  width: 36rem;
-  margin: 0 auto;
+  width: auto;
+  margin: 0;
+  padding: 1rem 1.5rem;
 }
+
 .searchInputIcon {
   position: absolute;
-  top: 39%;
-  left: 3%;
-  font-size: 2rem;
+  top: 50%;
+  left: 2.5rem;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: $text-color-secondary;
 }
+
 .busqueda-global {
-  background-color: #1d1d1d !important;
-  margin: 1rem 0 !important;
-  font-size: 1.8rem !important;
-  width: 97% !important;
-  border: none !important;
-  outline: none !important;
-  border-radius: 3px !important;
-  padding: 1rem !important;
-  color: white !important;
-  text-align: center;
+  background-color: $primary-bg !important;
+  font-size: 1rem !important;
+  width: 100% !important;
+  border: 1px solid $border-color !important;
+  border-radius: 8px !important;
+  padding: 0.8rem 0.8rem 0.8rem 2.5rem !important;
+  color: $text-color-primary !important;
+  text-align: left;
 }
 
 .overlay-mask-elegante {
@@ -77,6 +88,7 @@ background-image: linear-gradient(45deg,
   z-index: 2;
   background-image: linear-gradient(to right, #000000b8, #020316bd);
 }
+
 .numeros {
   font-size: 30px;
   color: green;
@@ -102,6 +114,7 @@ background-image: linear-gradient(45deg,
   color: rgb(29, 255, 8);
   font-size: 1.6rem;
   font-weight: 600;
+
   &::placeholder {
     color: #17901d;
   }
@@ -121,17 +134,16 @@ background-image: linear-gradient(45deg,
 .hideClassCss {
   display: none;
 }
+
 .showClassCss {
-  display: block;
-  display: grid;
-  grid-template-columns: 65% 35%;
-  padding: 1rem;
-  grid-gap: 1rem 1px;
+  display: none;
 }
+
 /* Delete all Ventas collection style*/
 .delete-collection-container {
   display: flex;
   justify-content: center;
+
   .alert-icon {
     font-size: 19px;
     width: 8em;
@@ -139,10 +151,12 @@ background-image: linear-gradient(45deg,
     color: orangered;
     transition: all 0.3s;
   }
+
   ul {
     padding: 0;
     list-style-type: none;
   }
+
   li {
     font-size: 19px;
     width: 8em;
@@ -216,53 +230,11 @@ background-image: linear-gradient(45deg,
 .father-caption {
   position: relative;
 }
+
 /* .fantasmaMenuCat{
   height: 15rem;
   border: 2px solid white;
 } */
-
-.menuCat {
-  @include tableta {
-    padding: 0 4rem;
-  }
-  display: flex;
-  justify-content: space-evenly;
-  width: 95%;
-  margin: 0 auto;
-  padding: 0 5rem;
-
-  div {
-    width: 100%;
-  }
-}
-
-@media only screen and (min-width: 450px) {
-  .menuCat {
-    width: 100%;
-  }
-}
-/* el color lo agarra con un booleano si el category es igual al item*/
-.btn-container{
-  display: flex;
-  justify-content: center;
-  &:not(:last-child){
-
-    border-right: 1px solid white;
-  }
-  .button-menu-rapid {
-    font-size: 19px;
-    padding: 0.2rem;
-    transition: all 0.2s ease-in;
-    background-color: rgb(48, 48, 48) !important;
-    border-left: 1px solid white;
-    border: none;
-
-    &:active {
-      transform: scale(1.1);
-      background-color: darkgreen;
-    }
-  }
-}
 
 .maximize-icon {
   font-size: 3rem;
@@ -274,6 +246,7 @@ background-image: linear-gradient(45deg,
   opacity: 1;
   transition: all 0.3s ease-in;
 }
+
 .maximize-icon-scroll {
   font-size: 3rem;
   position: fixed;
@@ -284,29 +257,35 @@ background-image: linear-gradient(45deg,
   opacity: 1;
   transition: all 0.3s ease-in;
 }
+
 .every-product {
-  @include phone(){
+  @include phone() {
     font-size: 7px;
 
   }
+
   font-size: 14px;
   position: relative;
   padding: 3rem !important;
 }
 
 /* lo mismo que .every-product */
-body .ui-table .ui-table-tbody > tr > td {
+body .ui-table .ui-table-tbody>tr>td {
   padding: 3rem !important;
 }
+
 .popup-label {
   font-size: 22px;
   font-weight: 600;
 }
+
 .popup-button {
   font-size: 2.5rem;
 }
+
 .cantidadProductoPopUp {
   transition: all 0.2s;
+
   &:focus {
     outline-style: double;
     outline-color: #3f51b5;
@@ -315,12 +294,12 @@ body .ui-table .ui-table-tbody > tr > td {
   }
 }
 
-.sticky{
+.sticky {
   @include tableta {
     width: 96.5%;
   }
 
-  @include  phone() {
+  @include phone() {
     border-radius: 1px;
     right: 0rem;
     left: 0rem;
@@ -341,20 +320,7 @@ body .ui-table .ui-table-tbody > tr > td {
 
   display: flex;
 }
-.journal-component {
-  @include phone {
-    padding: 2rem;
-  }
-  border: 2px solid white;
-  position: relative;
-  background-image: linear-gradient(to top, #cfd9dfe5 0%, #e2ebf0ef 100%);
-  color: black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 4rem;
-  z-index: 90;
-}
+
 .close-icon-scroll {
   font-size: 2.5rem;
   top: 50%;
@@ -363,6 +329,7 @@ body .ui-table .ui-table-tbody > tr > td {
   position: relative;
   transform: translate(-50%, -50%);
 }
+
 /* para celular */
 @media screen and (max-width: 390px) {
 
@@ -370,21 +337,25 @@ body .ui-table .ui-table-tbody > tr > td {
   .p-dialog #p-dialog {
     transform: scale(0.2);
   }
+
   .numeros,
   .popup-label,
   .popup-button {
     font-size: 1rem !important;
   }
+
   .category-productstable-dropdown {
     width: 20% !important;
     display: none !important;
   }
+
   .button-menu-rapid {
     font-size: 1rem !important;
     padding: 0rem !important;
     border: none !important;
 
   }
+
   .menuCat {
     display: block;
     background: #333;
@@ -392,8 +363,9 @@ body .ui-table .ui-table-tbody > tr > td {
     justify-content: space-between;
     border: 1px solid white;
     border-bottom: none;
-    
+
   }
+
   .sticky-busqueda-global {
     top: 11px !important;
     width: 57% !important;
@@ -413,55 +385,15 @@ body .ui-table .ui-table-tbody > tr > td {
     font-size: 10px !important;
     width: 82% !important;
   }
+
   .button-menu-rapid {
     box-shadow: none;
     border-radius: 0;
   }
+
   .showClassCss {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
-}
-
-.journal-component-onscroll {
-  position: fixed;
-  color: black;
-  align-items: center;
-  padding: 4rem;
-  display: flex;
-  flex-direction: column;
-  border: 2px solid white;
-  border-radius: 4rem;
-  top: 13rem;
-  left: 64rem;
-  width: 48%;
-  height: 56rem;
-  box-shadow: 3px 2px 2px black;
-  z-index: 90;
-  background-image: linear-gradient(to top, #cfd9dfe5 0%, #e2ebf0ef 100%);
-}
-
-.journalComponentContainer {
-  padding: 5rem;
-  border: 2px solid red;
-  border-radius: 17px;
-}
-
-.journalResponsiveWithBoolean {
-  left: 48rem !important;
-  top: 14rem;
-  width: 48%;
-  position: fixed;
-  color: black;
-  align-items: center;
-  padding: 4rem;
-  display: flex;
-  flex-direction: column;
-  border: 2px solid white;
-  border-radius: 4rem;
-  height: 50rem;
-  box-shadow: 3px 2px 2px black;
-  z-index: 90;
-  background-image: linear-gradient(to top, #cfd9dfe5 0%, #e2ebf0ef 100%);
 }
 
 .buttonToggleProducts {
@@ -476,6 +408,7 @@ body .ui-table .ui-table-tbody > tr > td {
   transition: all 0.3s;
   margin-top: 2%;
   margin-bottom: 3%;
+
   &:hover {
     opacity: 1;
   }
@@ -507,10 +440,12 @@ body .ui-table .ui-table-tbody > tr > td {
   margin-top: 2%;
   margin-bottom: 3%;
   border-radius: 5px;
+
   &:hover {
     opacity: 1;
   }
 }
+
 .inputFixedPrice::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
@@ -537,13 +472,7 @@ body .ui-table .ui-table-tbody > tr > td {
   border: 3px solid greenyellow !important;
 }
 
-.ui-button
-  .ui-widget
-  .ui-state-default
-  .ui-corner-all
-  .ui-button-text-icon-left:active
-  *
-  p-dialog {
+.ui-button .ui-widget .ui-state-default .ui-corner-all .ui-button-text-icon-left:active * p-dialog {
   transform: translateX(34rem) skewY(5deg) perspective(30rem);
 }
 
@@ -553,6 +482,7 @@ body .ui-table .ui-table-tbody > tr > td {
   left: 64%;
   width: 29%;
   height: 47%;
+
   img {
     width: 100%;
     height: 100%;
@@ -567,53 +497,58 @@ body .ui-table .ui-table-tbody > tr > td {
 .shortcutComponent {
   @include tableta {
     background: linear-gradient(to right, #303030ed,
-    #303039ed);
+        #303039ed);
     width: 65.6rem;
     height: 50rem;
     top: 19rem;
   }
+
   position: absolute;
   left: 10px;
   top: 19.4rem;
   width: 86.2rem;
   height: 54rem;
   background: linear-gradient(to right,
-  #303030,
-  #303039);
-  box-shadow: 2px 3px 6px
-  #333;
+    #303030,
+    #303039);
+  box-shadow: 2px 3px 6px #333;
   z-index: 99;
   padding: 2rem 6.7rem !important;
-  color:
-  white;
+  color: white;
   transition: all 0.4s ease-in;
 
   .row {
     display: grid;
-  
+
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 5px 0;
-    .delete-button{
+
+    .delete-button {
       grid-area: 1 / 4 / span 1 / span 1;
     }
-    .double-cero{
+
+    .double-cero {
       grid-area: 4 / 1 / 5 / span 2;
 
     }
-    .value-button{
-      grid-area: 2 / 4 / span 1 / span  1;
+
+    .value-button {
+      grid-area: 2 / 4 / span 1 / span 1;
     }
-    .cero-button{
+
+    .cero-button {
       grid-area: 4 / 3 / 5 / span 1;
     }
 
-    .go-button{
+    .go-button {
       grid-column: 4 / 5;
       grid-row: 3 / span 2;
     }
+
     &:not(:last-child) {
       margin-bottom: 5px;
     }
+
     button {
       @include shortcutComponentButton;
     }
@@ -641,6 +576,7 @@ body .ui-table .ui-table-tbody > tr > td {
   height: 252vh;
   z-index: 50;
 }
+
 .imagen-producto-popup {
   position: absolute;
   width: 100%;
@@ -648,33 +584,207 @@ body .ui-table .ui-table-tbody > tr > td {
   left: 0;
   top: 0;
   opacity: 0.6;
-  mask-image: radial-gradient(
-    ellipse 90% 80% at 48% 78%,
-    black 40%,
-    transparent 50%
-  );
+  mask-image: radial-gradient(ellipse 90% 80% at 48% 78%,
+      black 40%,
+      transparent 50%);
 }
+
 .texto-adelante {
   z-index: 9999999999999999999999999;
 }
 
 .componentShowProducts {
-  border: 2px solid white;
- 
-  height: 50rem;
-  background-image: linear-gradient(to top, #cfd9dfe5 0%, #e2ebf0ef 100%);
-  color: black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 90;
-  position: relative;
-  padding: 1rem;
+  flex-grow: 1;
+  border: none; // It's inside a bordered container now
+  background-color: transparent; // Let the parent handle the background
+  padding: 0;
+  height: auto; // Remove fixed height
 }
 
-.button-menu-rapid{
+.button-menu-rapid {
   border: none !important;
   box-shadow: none !important;
 
 }
 
+.sales-container {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  height: calc(100vh - 80px); // Adjust based on actual header height
+  background-color: $primary-bg;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr 320px;
+  }
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+}
+
+.products-area {
+  display: flex;
+  flex-direction: column;
+  background-color: $secondary-bg;
+  border-radius: 8px;
+  border: 1px solid $border-color;
+  overflow: hidden;
+}
+
+.products-header {
+  flex-shrink: 0;
+}
+
+.journal-component {
+  background-color: $secondary-bg;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  padding: 1.5rem;
+  color: $text-color-primary;
+  overflow-y: auto;
+  position: static; // Remove absolute/fixed positioning from old styles
+
+  @media (max-width: 992px) {
+    margin-top: 1.5rem;
+  }
+}
+
+// Redesigned category filters
+.menuCat {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  width: 100%;
+  margin: 0;
+  padding: 1rem 1.5rem 0.5rem;
+  gap: 0.5rem;
+
+  .btn-container {
+    border: none;
+    flex-grow: 1;
+    display: flex;
+  }
+
+  .button-menu-rapid {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem !important;
+    transition: all 0.2s ease-in;
+    border: 1px solid $border-color !important;
+    border-radius: 20px !important;
+    background-color: transparent !important;
+    color: $text-color-secondary;
+    margin: 0;
+    box-shadow: none !important;
+
+    &:hover {
+      background-color: rgba($accent-color, 0.1) !important;
+      color: $text-color-primary;
+      border-color: rgba($accent-color, 0.5) !important;
+    }
+  }
+}
+
+// Remove old layout classes
+.showClassCss {
+  display: none; // This class is no longer used for the new layout
+}
+
+.journal-component-onscroll {
+  // This might need adjustment or removal depending on the desired sticky behavior
+  // For now, let's keep it but ensure it works with the new layout
+  position: fixed;
+  right: 1.5rem;
+  top: 9.5rem;
+  width: 400px; // Match grid width
+  height: calc(100vh - 11rem);
+}
+
+.sales-report-container {
+  margin: 1.5rem;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: $secondary-bg;
+  border: 1px solid $border-color;
+}
+
+.sales-table {
+  .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: $secondary-bg;
+    border-bottom: 1px solid $border-color;
+
+    .table-title {
+      font-size: 1.5rem;
+      color: $text-color-primary;
+      margin: 0;
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .global-filter-input {
+      background-color: $primary-bg !important;
+      border: 1px solid $border-color !important;
+      color: $text-color-primary !important;
+    }
+  }
+
+  .p-datatable-thead>tr>th {
+    background-color: $card-bg;
+    color: $text-color-primary;
+    border: none;
+    border-bottom: 1px solid $border-color;
+
+    .filter-container {
+      margin-top: 0.5rem;
+    }
+  }
+
+  .p-datatable-tbody>tr {
+    background-color: $card-bg;
+    color: $text-color-secondary;
+
+    &:hover {
+      background-color: lighten($card-bg, 5%);
+    }
+
+    td {
+      border: none;
+      border-bottom: 1px solid $secondary-bg;
+    }
+  }
+
+  .p-paginator {
+    background-color: $secondary-bg;
+    border-top: 1px solid $border-color;
+    color: $text-color-secondary;
+  }
+
+  .table-summary {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: $text-color-primary;
+    background-color: $secondary-bg;
+    border-top: 1px solid $border-color;
+  }
+
+}

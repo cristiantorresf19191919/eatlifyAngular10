@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { OrderData } from 'src/app/admin/dashboard/dashboard.component';
+import { OrderData } from 'src/app/models/order.model';
 
 export const loadOrder = createAction(
     "[Dashboard Component] socket",
