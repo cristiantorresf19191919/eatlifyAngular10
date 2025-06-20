@@ -1,1 +1,0 @@
-{"ast":null,"code":"export class Item {}\nexport class Category {\n  constructor() {}\n\n}","map":null,"metadata":{},"sourceType":"module"}
