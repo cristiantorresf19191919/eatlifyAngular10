@@ -73,8 +73,7 @@ export class LoginComponent implements OnInit {
       email: [
         "",
         this.validacionesPersonalizadas.Busque(/\w/i),
-        this.asyncValidator.validate.bind(this.asyncValidator)
-      ],
+       ],
       password: [""],
     });
   }
