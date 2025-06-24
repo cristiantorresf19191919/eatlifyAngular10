@@ -1,4 +1,4 @@
-<app-loading-global [loadingState]="loading"></app-loading-global>
+<app-loading-global [loadingState]="loading" [loadingMessage]="loadingMessage"></app-loading-global>
 
 <div class="login-container">
 
@@ -47,7 +47,7 @@
         <input class="loginLoginValue" type="hidden" name="service" value="login" />
       </div>
       <p class="p-container">
-        <input type="submit" name="Login" id="go" value="Entrar">
+        <input type="submit" name="Login" id="go" value="Entrar" [disabled]="loading">
       </p>
 
     </form>

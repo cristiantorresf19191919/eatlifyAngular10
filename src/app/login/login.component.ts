@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
 
   public passwordVisible = false;
   public loading = false;
+  public loadingMessage = '';
   private subscription: Subscription;
   sourceABC: Observable<number> = timer(3000);
 
@@ -63,10 +64,13 @@ export class LoginComponent implements OnInit {
    /*  this.socketService.connectionSuccesfully.subscribe((data)=>{
       alert("concexion con socket con exito");
     }); */
-    this.loading=true;
-    //esperar 3 segundos para apagar el loading
+    // Show initial loading for 2 seconds to demonstrate the loading component
+    this.loading = true;
+    this.loadingMessage = 'Iniciando sistema...';
+    
     this.subscription = this.sourceABC.subscribe(val=>{
-      this.loading=false;
+      this.loading = false;
+      this.loadingMessage = '';
     });
 
     this.LoginDaddy = this.ConstructorFormu.group({
@@ -87,39 +91,48 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    this.loading=true;
+    // Prevent multiple submissions
+    if (this.loading) {
+      return;
+    }
+
+    this.loading = true;
+    this.loadingMessage = 'Verificando credenciales...';
+    
     const emailToLowerCase = this.Emailgetter.value.toLowerCase();
     this.Emailgetter.setValue(emailToLowerCase);
    
     this.LoginDaddy.value;
-    //esperar 3 segundos para apagar el loading
-    this.subscription = this.sourceABC.subscribe(val=>{
-      this.loading=false;
-    });
     
     this.cajerosService.loginCajero(this.LoginDaddy.value).subscribe((data:User)=>{
       if (data){
+        this.loadingMessage = 'Iniciando sesión...';
+        
         this.cajerosService.guardeUsuario(data.usuarioenviar);
         this.cajerosService.storeUserData(data.token,data.usuarioenviar.admin,data.usuarioenviar.id);        
-        Swal.fire({
-          title:"Bienvenido "+data.usuarioenviar.name,
-          icon:"success",
-          confirmButtonText: "Ingresar"
-        }).then((a)=>{
-          if (a.value) this.router.navigate(["/admin"]);
-        });
+        
+        // Small delay to show the "Iniciando sesión" message
+        setTimeout(() => {
+          this.loading = false;
+          this.loadingMessage = '';
+          
+          Swal.fire({
+            title:"Bienvenido "+data.usuarioenviar.name,
+            icon:"success",
+            confirmButtonText: "Ingresar"
+          }).then((a)=>{
+            if (a.value) this.router.navigate(["/admin"]);
+          });
+        }, 500);
       }
     },(error:HttpErrorResponse)=>{
       console.log(error);
+      
+      this.loading = false;
+      this.loadingMessage = '';
   
       if (error.error.msg) Swal.fire({title:'Error de conexion',text:error.error.msg,icon:'warning'});
       Swal.fire({title:'Error',text:'Credenciales Invalidas',icon:'warning'})
-      
-
     });
-
-
-
   }
-
 }

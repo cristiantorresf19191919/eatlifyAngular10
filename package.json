@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "npx ng serve",
     "build": "npx ng build --configuration production",
+    "build:dev": "npx ng build --configuration development",
     "test": "npx ng test",
     "lint": "npx ng lint",
     "e2e": "npx ng e2e"

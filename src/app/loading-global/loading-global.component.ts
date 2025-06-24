@@ -6,16 +6,22 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
   styleUrls: ['./loading-global.component.scss']
 })
 export class LoadingGlobalComponent implements OnInit, OnChanges {
-  @Input()loadingState;
-  loading:boolean;
+  @Input() loadingState;
+  @Input() loadingMessage: string = '';
+  loading: boolean;
+  
   constructor() { }
+  
   ngOnChanges(changes: SimpleChanges): void {
-    
-    this.loading = changes['loadingState'].currentValue;
+    if (changes['loadingState']) {
+      this.loading = changes['loadingState'].currentValue;
+    }
+    if (changes['loadingMessage']) {
+      this.loadingMessage = changes['loadingMessage'].currentValue;
+    }
   }
 
   ngOnInit() {
     this.loading = this.loadingState;
   }
-
 }

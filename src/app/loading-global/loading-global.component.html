@@ -1,7 +1,14 @@
-<div *ngIf="loading">
-    <mat-progress-bar
-      style="position: absolute;top: 0; left: 0; right: 0; z-index: 999;"
-      mode="indeterminate"
-    ></mat-progress-bar>
+<div *ngIf="loading" class="loading-backdrop">
+  <div class="loading-container">
+    <mat-progress-spinner mode="indeterminate" diameter="60" color="primary">
+    </mat-progress-spinner>
+
+    <div class="loading-message" *ngIf="loadingMessage">
+      {{ loadingMessage }}
+    </div>
+
+    <div class="loading-text" *ngIf="!loadingMessage">
+      Cargando...
+    </div>
   </div>
-  
+</div>
