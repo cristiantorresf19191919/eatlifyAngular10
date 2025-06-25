@@ -1,14 +1,46 @@
 <div *ngIf="loading" class="loading-backdrop">
   <div class="loading-container">
-    <mat-progress-spinner mode="indeterminate" diameter="60" color="primary">
-    </mat-progress-spinner>
-
-    <div class="loading-message" *ngIf="loadingMessage">
-      {{ loadingMessage }}
+    <!-- Main Spinner -->
+    <div class="spinner-container">
+      <div class="spinner-ring">
+        <div class="spinner-ring-inner"></div>
+      </div>
+      <div class="spinner-core">
+        <div class="spinner-dot"></div>
+      </div>
     </div>
 
+    <!-- Floating Particles -->
+    <div class="particles">
+      <div class="particle" *ngFor="let i of [1,2,3,4,5,6,7,8]" [style.animation-delay]="(i * 0.1) + 's'"></div>
+    </div>
+
+    <!-- Pulse Rings -->
+    <div class="pulse-rings">
+      <div class="pulse-ring" *ngFor="let i of [1,2,3]" [style.animation-delay]="(i * 0.3) + 's'"></div>
+    </div>
+
+    <!-- Loading Message -->
+    <div class="loading-message" *ngIf="loadingMessage">
+      <div class="message-text">{{ loadingMessage }}</div>
+      <div class="message-dots">
+        <span class="dot" *ngFor="let i of [1,2,3]" [style.animation-delay]="(i * 0.2) + 's'"></span>
+      </div>
+    </div>
+
+    <!-- Default Loading Text -->
     <div class="loading-text" *ngIf="!loadingMessage">
-      Cargando...
+      <div class="text-content">Cargando</div>
+      <div class="text-dots">
+        <span class="dot" *ngFor="let i of [1,2,3]" [style.animation-delay]="(i * 0.2) + 's'"></span>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
     </div>
   </div>
 </div>

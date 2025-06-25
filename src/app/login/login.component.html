@@ -47,7 +47,8 @@
         <input class="loginLoginValue" type="hidden" name="service" value="login" />
       </div>
       <p class="p-container">
-        <input type="submit" name="Login" id="go" value="Entrar" [disabled]="loading">
+        <input type="submit" name="Login" id="go" value="{{ loading ? 'Iniciando sesión...' : 'Entrar' }}"
+          [disabled]="loading" [class.loading-button]="loading">
       </p>
 
     </form>

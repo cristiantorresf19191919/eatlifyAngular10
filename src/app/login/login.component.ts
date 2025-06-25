@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
     }); */
     // Show initial loading for 2 seconds to demonstrate the loading component
     this.loading = true;
-    this.loadingMessage = 'Iniciando sistema...';
+    this.loadingMessage = 'Inicializando sistema Eatlify...';
     
     this.subscription = this.sourceABC.subscribe(val=>{
       this.loading = false;
@@ -97,7 +97,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    this.loadingMessage = 'Verificando credenciales...';
+    this.loadingMessage = 'Conectando con el servidor...';
     
     const emailToLowerCase = this.Emailgetter.value.toLowerCase();
     this.Emailgetter.setValue(emailToLowerCase);
@@ -106,23 +106,29 @@ export class LoginComponent implements OnInit {
     
     this.cajerosService.loginCajero(this.LoginDaddy.value).subscribe((data:User)=>{
       if (data){
-        this.loadingMessage = 'Iniciando sesión...';
+        this.loadingMessage = 'Autenticando credenciales...';
         
         this.cajerosService.guardeUsuario(data.usuarioenviar);
         this.cajerosService.storeUserData(data.token,data.usuarioenviar.admin,data.usuarioenviar.id);        
         
         // Small delay to show the "Iniciando sesión" message
         setTimeout(() => {
-          this.loading = false;
-          this.loadingMessage = '';
+          this.loadingMessage = 'Preparando dashboard...';
           
-          Swal.fire({
-            title:"Bienvenido "+data.usuarioenviar.name,
-            icon:"success",
-            confirmButtonText: "Ingresar"
-          }).then((a)=>{
-            if (a.value) this.router.navigate(["/admin"]);
-          });
+          setTimeout(() => {
+            this.loading = false;
+            this.loadingMessage = '';
+            
+            Swal.fire({
+              title:"¡Bienvenido "+data.usuarioenviar.name+"!",
+              text: "Sesión iniciada exitosamente",
+              icon:"success",
+              confirmButtonText: "Ingresar",
+              confirmButtonColor: "#027915"
+            }).then((a)=>{
+              if (a.value) this.router.navigate(["/admin"]);
+            });
+          }, 800);
         }, 500);
       }
     },(error:HttpErrorResponse)=>{
@@ -131,8 +137,18 @@ export class LoginComponent implements OnInit {
       this.loading = false;
       this.loadingMessage = '';
   
-      if (error.error.msg) Swal.fire({title:'Error de conexion',text:error.error.msg,icon:'warning'});
-      Swal.fire({title:'Error',text:'Credenciales Invalidas',icon:'warning'})
+      if (error.error.msg) Swal.fire({
+        title:'Error de conexión',
+        text:error.error.msg,
+        icon:'warning',
+        confirmButtonColor: "#027915"
+      });
+      Swal.fire({
+        title:'Error de autenticación',
+        text:'Credenciales inválidas. Por favor, verifica tu email y contraseña.',
+        icon:'warning',
+        confirmButtonColor: "#027915"
+      });
     });
   }
 }
