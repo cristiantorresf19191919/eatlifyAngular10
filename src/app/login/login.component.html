@@ -11,10 +11,27 @@
     <form id="accesspanel" [formGroup]="LoginDaddy" (submit)="login()">
       <h1 id="litheader" class="poweron">LOGIN</h1>
       <div class="inset">
-        <p>
+        <div class="input-group">
           <input type="text" name="email" required formControlName="email"
             [ngClass]="{'is-invalid': Emailgetter.errors?.correoExiste}" id="email" placeholder="Email address">
-        </p>
+        </div>
+        <div *ngIf="
+                  Emailgetter.invalid &&
+                  (Emailgetter.dirty || Emailgetter.touched)
+                " class="form-error-message">
+          <div *ngIf="Emailgetter.errors.tieneArroba" class="animated pulse">
+            <b>Te falto poner Arroba</b>
+          </div>
+          <div *ngIf="Emailgetter.errors.required" class="animated pulse">
+            <b>Ingresa el Email por favor</b>
+          </div>
+          <div *ngIf="Emailgetter.errors?.correoExiste" class="animated pulse">
+            <b style="color:orange; font-size: 15px;">Correo no se encuentra en la base de datos</b>
+          </div>
+          <div *ngIf="Emailgetter.errors?.serverError" class="animated pulse">
+            <b style="color:red">Problemas con el servidor</b>
+          </div>
+        </div>
         <p>
           <input [type]="passwordVisible ? 'text' : 'password'" name="password" formControlName="password" required
             id="password" placeholder="Codigo de Acceso">
@@ -22,25 +39,6 @@
             {{ passwordVisible ? 'visibility_off' : 'visibility' }}
           </i>
         </p>
-        <div *ngIf="
-                  Emailgetter.invalid &&
-                  (Emailgetter.dirty || Emailgetter.touched)
-                ">
-          <div *ngIf="Emailgetter.errors.tieneArroba" class="animated pulse">
-            <b>Te falto poner Arroba</b>
-          </div>
-          <div *ngIf="Emailgetter.errors.required" class="animated pulse">
-            <b>Ingresa el Email por favor</b>
-
-          </div>
-          <div *ngIf="Emailgetter.errors?.correoExiste" class="animated pulse">
-            <b style="color:orange; font-size: 15px;">Correo no se encuentra en la base de datos</b>
-
-          </div>
-          <div *ngIf="Emailgetter.errors?.serverError" class="animated pulse">
-            <b style="color:red">Problemas con el servidor</b>
-          </div>
-        </div>
         <div style="text-align: center;">
 
         </div>

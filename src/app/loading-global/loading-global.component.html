@@ -1,13 +1,8 @@
-<div class="loading-backdrop">
+<div *ngIf="loadingState" class="loading-backdrop">
   <div class="loading-spinner">
-    <div class="loading-animation">
-      <svg width="120" height="120" viewBox="0 0 120 120">
-        <circle cx="60" cy="60" r="50" stroke="#4caf50" stroke-width="8" fill="none" />
-        <circle cx="60" cy="60" r="35" stroke="#81c784" stroke-width="4" fill="none" />
-      </svg>
-    </div>
+    <span class="loader"></span>
     <div class="loading-text">
-      Inicializando sistema Eatlify...
+      {{ loadingMessage || 'Inicializando sistema Eatlify...' }}
     </div>
   </div>
 </div>

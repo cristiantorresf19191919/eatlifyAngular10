@@ -485,3 +485,41 @@ label:hover~input[type=password] {
   border-radius: 50%;
   padding: 0px;
 }
+
+.input-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+}
+
+.form-error-message {
+  margin-top: 2px;
+  margin-bottom: 0;
+  color: #ff5252;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: left;
+  padding-left: 0;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  font-size: 9px;
+
+  b {
+    color: #ff5252;
+    font-size: 0.95rem;
+    font-weight: 500;
+    font-size: 12px;
+  }
+
+  .animated.pulse {
+    animation-duration: 0.5s;
+    display: inline-block;
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+    background-color: transparent !important;
+  }
+}
