@@ -7,6 +7,8 @@ Eatlify is a restaurant management and point-of-sale (POS) web application built
 ## Overview
 Eatlify was created to streamline restaurant operations, from product and category management to real-time sales tracking and analytics. Its goal is to provide an all-in-one, easy-to-use platform for restaurants to handle daily business, improve efficiency, and gain insights into sales performance.
 
+**Note:** This frontend application depends on a Node.js backend deployed with Azure using a free account. Due to the free cloud service limitations, there may be delays during the first login and general operations. Please be patient during these initial loading times.
+
 ---
 
 ## Features
