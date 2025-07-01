@@ -72,7 +72,6 @@ npm start
 
 ### Contributors
 - [CristianScript](https://github.com/cristianscript) (main developer)
-- *(Add more contributors as needed)*
 
 ### Ways to Contribute
 - Fork the repo, create a feature branch, and submit a pull request.
@@ -80,7 +79,10 @@ npm start
 - Please follow Angular and TypeScript best practices.
 
 ### Visuals
-- *(Add screenshots or GIFs of the dashboard, product management, sales, etc. here. Include alt text for accessibility.)*
+![image](https://github.com/user-attachments/assets/25b38230-231f-4db6-8c9e-24823cf8e766)
+https://www.youtube.com/watch?v=SfyrkdAfeZw
+https://www.youtube.com/watch?v=e3DtIFkjLvg
+
 
 ---
 
